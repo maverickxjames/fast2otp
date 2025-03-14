@@ -12,9 +12,13 @@ function show() {
     echo "Jaykishan";
 }
 
+function generateApiKey(){
+    return bin2hex(random_bytes(32));
+}
+
 function sendOtp($phone,$otp) {
 
- 
+
     $data = [
         "apiKey" => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MmIzZDA5NThmYjUxMGJmYzIxZjgwNiIsIm5hbWUiOiJLaGVsbyBCdWRkeSIsImFwcE5hbWUiOiJBaVNlbnN5IiwiY2xpZW50SWQiOiI2MWMyMjMwNGI5NDY2MzExNzllYzJlM2QiLCJhY3RpdmVQbGFuIjoiTk9ORSIsImlhdCI6MTczMDg4NjkyMX0.Si7iobbX6sGC2A8ydbMYEj0hCrqxg3WiU9pwFu6Eho0",
         "campaignName" => "app_auth",

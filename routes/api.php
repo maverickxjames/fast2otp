@@ -15,8 +15,11 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
+Route::post('/login', [UserController::class, 'login'])->name('api.login');
 Route::post('/send-otp', [OTPController::class, 'sendOtp'])->name('sendotp');
+Route::get('apikey', function(){
+    return generateApiKey();
+});
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/settings', [AdminController::class, 'getSettings']);
     Route::post('/settings', [AdminController::class, 'updateSettings']);
