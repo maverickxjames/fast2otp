@@ -43,6 +43,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment-billings', function () {
         return view('payment');
     })->name('payment-billings');
+
+    Route::get('support-feedback', function () {
+        return view('support');
+    })->name('support-feedback');
+
+    Route::get('/alerts', function () {
+        return view('alerts');
+    })->name('alerts');
+
+    Route::get('/terms-conditions', function () {
+        return view('terms-conditions');
+    })->name('terms-conditions');
 });
 
 require __DIR__.'/auth.php';
