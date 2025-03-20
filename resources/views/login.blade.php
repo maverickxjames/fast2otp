@@ -2,17 +2,16 @@
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-vertical-style="overlay" class="light" data-header-styles="light" data-menu-styles="light">
 
     <head>
-
         <!-- META DATA -->
-		<meta charset="UTF-8">
+        <meta charset="UTF-8">
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="Description" content="Tailwind Responsive Admin Web Dashboard Template">
-        <meta name="Author" content="Spruko Technologies Private Limited">
+        <meta name="Description" content="Laravel Tailwind Responsive Admin Web Dashboard Template">
+        <meta name="Author" content="Fast2OTP Private Limited">
         <meta name="keywords" content="template admin, dashboard, laravel template, admin panel laravel, admin dashboard template, template dashboard, laravel, laravel vite, admin, laravel framework, tailwind css, laravel dashboard, dashboard admin template, laravel tailwind, tailwind admin template, dashboard tailwind, tailwind dashboard, tailwind dashboard template">
 
         <!-- TITLE -->
-		<title> Xintra - Laravel Tailwind CSS Premium Admin & Dashboard Template </title>
+        <title> Fast2OTP | Bulk OTP Provider </title>
 
         <!-- FAVICON -->
         <link rel="icon" href="build/assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -89,7 +88,7 @@
                                         <button class="ti-btn ti-btn-primary">Sign In</button>
                                     </div>
                                     <div class="text-center">
-                                        <p class="text-textmuted dark:text-textmuted/50 mt-3 mb-0">Dont have an account? <a href="signup-basic.html" class="text-primary">Sign Up</a></p>
+                                        <p class="text-textmuted dark:text-textmuted/50 mt-3 mb-0">Dont have an account? <a href="/register" class="text-primary">Sign Up</a></p>
                                     </div>
                                     <div class="btn-list text-center mt-3">
                                         <button class="ti-btn ti-btn-icon btn-wave ti-btn-soft-primary">

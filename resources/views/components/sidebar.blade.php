@@ -36,7 +36,7 @@
 
                     <!-- Start::slide -->
                     <li class="slide has-sub">
-                        <a href="javascript:void(0);" class="side-menu__item">
+                        <a href="/dashboard" class="side-menu__item">
                             {{-- <i class="ri-arrow-down-s-line side-menu__angle"></i> --}}
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 side-menu__icon" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"></path></svg>
                             <span class="side-menu__label">Overview</span>
@@ -278,7 +278,7 @@
 
                     <!-- Start::slide -->
                     <li class="slide">
-                        <a href="widgets.html" class="side-menu__item">
+                        <a href="/pricing" class="side-menu__item">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 side-menu__icon" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"></path>
                             </svg>
@@ -290,7 +290,7 @@
 
                     <!-- Start::slide -->
                     <li class="slide">
-                        <a href="widgets.html" class="side-menu__item">
+                        <a href="/rate-limits" class="side-menu__item">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 side-menu__icon" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(162, 166, 185, 1);transform: ;msFilter:;"><path d="M12 4C6.486 4 2 8.486 2 14a9.89 9.89 0 0 0 1.051 4.445c.17.34.516.555.895.555h16.107c.379 0 .726-.215.896-.555A9.89 9.89 0 0 0 22 14c0-5.514-4.486-10-10-10zm7.41 13H4.59A7.875 7.875 0 0 1 4 14c0-4.411 3.589-8 8-8s8 3.589 8 8a7.875 7.875 0 0 1-.59 3z"></path><path d="M10.939 12.939a1.53 1.53 0 0 0 0 2.561 1.53 1.53 0 0 0 2.121-.44l3.962-6.038a.034.034 0 0 0 0-.035.033.033 0 0 0-.045-.01l-6.038 3.962z"></path></svg>
                             <span class="side-menu__label">Rate Limit</span>
                         </a>
@@ -299,7 +299,7 @@
 
                     <!-- Start::slide -->
                     <li class="slide">
-                        <a href="widgets.html" class="side-menu__item">
+                        <a href="https://developers.fast2otp.com/" class="side-menu__item">
                             <svg class="w-6 h-6 side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(162, 166, 185, 1);transform: ;msFilter:;"><path d="m7.375 16.781 1.25-1.562L4.601 12l4.024-3.219-1.25-1.562-5 4a1 1 0 0 0 0 1.562l5 4zm9.25-9.562-1.25 1.562L19.399 12l-4.024 3.219 1.25 1.562 5-4a1 1 0 0 0 0-1.562l-5-4zm-1.649-4.003-4 18-1.953-.434 4-18z"></path></svg>
                             <span class="side-menu__label">Developer</span>
                         </a>
@@ -307,12 +307,22 @@
                     <!-- End::slide -->
 
                     <li class="slide">
-                        <a href="widgets.html" class="side-menu__item">
+                        <a href="payment-billings" class="side-menu__item">
                             <svg class="w-6 h-6 side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(162, 166, 185, 1);transform: ;msFilter:;"><path d="M20 7V5c0-1.103-.897-2-2-2H5C3.346 3 2 4.346 2 6v12c0 2.201 1.794 3 3 3h15c1.103 0 2-.897 2-2V9c0-1.103-.897-2-2-2zm-2 9h-2v-4h2v4zM5 7a1.001 1.001 0 0 1 0-2h13v2H5z"></path></svg>
                             <span class="side-menu__label">Payment & Billing</span>
                         </a>
                     </li>
                     <!-- End::slide -->
+
+                    <li class="slide">
+                        <a href="/transactions" class="side-menu__item">
+                            <svg class="w-6 h-6 side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(162, 166, 185, 1);">
+                                <path d="M21 7h-6V3H9v4H3a1 1 0 0 0-1 1v10a3 3 0 0 0 3 3h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zM9 5h6v2H9V5zm10 14H5a1 1 0 0 1-1-1V9h16v9a1 1 0 0 1-1 1zm-7-5h4a1 1 0 0 1 0 2h-4v1a1 1 0 0 1-2 0v-1H6a1 1 0 0 1 0-2h4v-1a1 1 0 0 1 2 0v1z"></path>
+                            </svg>
+                            <span class="side-menu__label">Transactions</span>
+                        </a>
+                    </li>
+                    
 
                     <li class="slide">
                         <a href="widgets.html" class="side-menu__item">
@@ -323,7 +333,7 @@
                     <!-- End::slide -->
 
                     <li class="slide">
-                        <a href="widgets.html" class="side-menu__item">
+                        <a href="/settings" class="side-menu__item">
                             <svg class="w-6 h-6 side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(162, 166, 185, 1);transform: ;msFilter:;"><path d="m2.344 15.271 2 3.46a1 1 0 0 0 1.366.365l1.396-.806c.58.457 1.221.832 1.895 1.112V21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1.598a8.094 8.094 0 0 0 1.895-1.112l1.396.806c.477.275 1.091.11 1.366-.365l2-3.46a1.004 1.004 0 0 0-.365-1.366l-1.372-.793a7.683 7.683 0 0 0-.002-2.224l1.372-.793c.476-.275.641-.89.365-1.366l-2-3.46a1 1 0 0 0-1.366-.365l-1.396.806A8.034 8.034 0 0 0 15 4.598V3a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v1.598A8.094 8.094 0 0 0 7.105 5.71L5.71 4.904a.999.999 0 0 0-1.366.365l-2 3.46a1.004 1.004 0 0 0 .365 1.366l1.372.793a7.683 7.683 0 0 0 0 2.224l-1.372.793c-.476.275-.641.89-.365 1.366zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4z"></path></svg>
                             <span class="side-menu__label">Settings</span>
                         </a>
