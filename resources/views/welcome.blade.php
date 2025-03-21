@@ -47,76 +47,7 @@
 
     <body class="landing-body">
 
-        <!-- SWITCHER -->
-        <div id="hs-overlay-switcher" class="hs-overlay hidden ti-offcanvas ti-offcanvas-right" tabindex="-1">
-            <div class="ti-offcanvas-header border-defaultborder dark:border-defaultborder/10">
-                <h5 class="ti-offcanvas-title">
-                    Switcher
-                </h5>
-                <button type="button" class="ti-btn flex-shrink-0 p-0 transition-none text-defaulttextcolor dark:text-defaulttextcolor/70 hover:text-gray-700 focus:ring-gray-400 focus:ring-offset-white  dark:hover:text-white/80 dark:focus:ring-white/10 dark:focus:ring-offset-white/10" data-hs-overlay="#hs-overlay-switcher">
-                    <span class="sr-only">Close modal</span>
-                    <i class="ri-close-circle-line leading-none text-lg"></i>
-                </button>
-            </div>
-            <div class="ti-offcanvas-body !p-0" id="switcher-body">
-                <div>
-                    <div>
-                        <p class="switcher-style-head">Theme Color Mode:</p>
-                        <div class="grid grid-cols-3 gap-6 switcher-style">
-                            <div class="flex">
-                                <input type="radio" name="theme-style" class="ti-form-radio" id="switcher-light-theme" checked="">
-                                <label for="switcher-light-theme" class="text-xs text-defaulttextcolor dark:text-defaulttextcolor/70 font-semibold ms-2 ">Light</label>
-                            </div>
-                            <div class="flex">
-                                <input type="radio" name="theme-style" class="ti-form-radio" id="switcher-dark-theme">
-                                <label for="switcher-dark-theme" class="text-xs text-defaulttextcolor dark:text-defaulttextcolor/70 font-semibold ms-2 ">Dark</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="switcher-style-head">Directions:</p>
-                        <div class="grid grid-cols-3 gap-6 switcher-style">
-                            <div class="flex">
-                                <input type="radio" name="direction" class="ti-form-radio" id="switcher-ltr" checked="">
-                                <label for="switcher-ltr" class="text-xs font-semibold text-defaulttextcolor dark:text-defaulttextcolor/70 ms-2 ">LTR</label>
-                            </div>
-                            <div class="flex">
-                                <input type="radio" name="direction" class="ti-form-radio" id="switcher-rtl">
-                                <label for="switcher-rtl" class="text-xs font-semibold text-defaulttextcolor dark:text-defaulttextcolor/70 ms-2 ">RTL</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="theme-colors">
-                        <p class="switcher-style-head">Theme Primary:</p>
-                        <div class="flex switcher-style space-x-3 rtl:space-x-reverse">
-                            <div class="ti-form-radio switch-select">
-                                <input class="ti-form-radio color-input color-primary-1" type="radio" name="theme-primary" id="switcher-primary">
-                            </div>
-                            <div class="ti-form-radio switch-select">
-                                <input class="ti-form-radio color-input color-primary-2" type="radio" name="theme-primary" id="switcher-primary1">
-                            </div>
-                            <div class="ti-form-radio switch-select">
-                                <input class="ti-form-radio color-input color-primary-3" type="radio" name="theme-primary" id="switcher-primary2">
-                            </div>
-                            <div class="ti-form-radio switch-select">
-                                <input class="ti-form-radio color-input color-primary-4" type="radio" name="theme-primary" id="switcher-primary3">
-                            </div>
-                            <div class="ti-form-radio switch-select">
-                                <input class="ti-form-radio color-input color-primary-5" type="radio" name="theme-primary" id="switcher-primary4">
-                            </div>
-                            <div class="ti-form-radio switch-select ps-0 mt-1 color-primary-light">
-                                <div class="theme-container-primary"></div>
-                                <div class="pickr-container-primary"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="ti-offcanvas-footer sm:flex justify-between">
-                <a href="javascript:void(0);" id="reset-all" class="w-full ti-btn ti-btn-danger m-1">Reset</a>
-            </div>
-        </div>
-        <!-- END SWITCHER -->
+      
 
         <!-- PAGE -->
 		<div class="landing-page-wrapper relative">
@@ -168,7 +99,11 @@
                             <!-- Start::header-link|switcher-icon -->
                             <div class="ti-btn-list lg:hidden flex">
                                 <a href="/register" class="ti-btn ti-btn-soft-primary1">
-                                    Sign Up
+                                    Register
+                                </a>
+                                <a href="/login" class="ti-btn ti-btn-soft-primary1">
+                                    Login
+
                                 </a>
                                 {{-- <a aria-label="anchor" href="javascript:void(0);" class="ti-btn m-0 p-2 px-3 ti-btn-primary ti-btn-icon  btn-wave" data-hs-overlay="#hs-overlay-switcher"><i class="ri-settings-3-line animate-spin-slow"></i></a> --}}
                             </div>
@@ -301,7 +236,10 @@
                             <div class="lg:flex hidden">
                                 <div class="ti-btn-list ti-btn-sm lg:flex hidden mt-lg-2 mt-xl-0 mt-0">
                                     <a href="/register" class="ti-btn btn-wave bg-primarytint1color text-white">
-                                        Sign Up
+                                         Register
+                                    </a>
+                                    <a href="/login" class="ti-btn btn-wave bg-primarytint1color text-white">
+                                        Login
                                     </a>
                                     {{-- <a aria-label="anchor" href="javascript:void(0);" class="ti-btn m-0 p-2 px-3 ti-btn-primary ti-btn-icon btn-wave !font-medium" data-hs-overlay="#hs-overlay-switcher"><i class="ri-settings-3-line animate-spin-slow"></i></a> --}}
                                 </div>
@@ -329,12 +267,17 @@
                             <div class="xxl:col-span-7 xl:col-span-7 lg:col-span-7 md:col-span-8 col-span-12">
                                 <div class="pt-lg-5 pb-4">
                                     <div class="mb-3">
-                                        <h6 class="font-medium text-white opacity-90">Optimized and Accessible</h6>
+                                        <h6 class="font-medium text-white opacity-90">Fast2OTP — Simple, Reliable, Scalable</h6>
                                     </div>
-                                    <p class="landing-banner-heading mb-3 !text-white">Fast & Secure WhatsApp OTP Verification
+                                    {{-- <p class="landing-banner-heading mb-3 !text-white">Fast & Secure WhatsApp OTP Verification
                                         Explore <span class="font-semibold text-warning">fast2otp</span> 
+                                    </p> --}}
+                                    <p class="landing-banner-heading mb-3 !text-white">
+                                        Deliver OTPs Instantly on WhatsApp<br>
+                                        <span class="font-semibold text-warning">Fast2OTP</span> — The Future of User Verification
                                     </p>
-                                    <div class="text-base mb-[3rem] text-white opacity-70">Easily integrate our API to verify users via WhatsApp.
+                                    <div class="text-base mb-[3rem] text-white opacity-70"> Secure your platform and enhance user trust with quick and easy WhatsApp-based OTP delivery.
+                                        No SMS delays, no hassles — just real-time, encrypted delivery.
                                     </div>
                                     <div class="flex items-center flex-wrap gap-2">
                                         <a href="#features" class="m-1 ti-btn ti-btn-lg bg-white/10 text-white">
@@ -342,7 +285,7 @@
                                             <i class="ri-eye-line ms-2 align-middle"></i>
                                         </a>
                                         <a href="#pricing" class="m-1 ti-btn ti-btn-lg bg-primarytint1color text-white btn-wave waves-effect waves-light">
-                                            Get Started
+                                            Get Started Now
                                             <i class="ri-arrow-right-line ms-2 align-middle"></i>
                                         </a>
                                     </div>
@@ -360,7 +303,7 @@
             <!-- End::Home Content -->
 
             <!-- Start:: Section-2 -->
-            <section class="section" id="about">
+            {{-- <section class="section" id="about">
                 <div class="container relative">
                     <div class="text-center">
                         <p class="text-xs font-medium text-success mb-1"><span class="landing-section-heading text-primary">GLANCE</span>
@@ -428,11 +371,85 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> --}}
+
+            <!-- Start:: Section-2 -->
+<section class="section" id="about">
+    <div class="container relative">
+        <div class="text-center">
+            <p class="text-xs font-medium text-success mb-1"><span class="landing-section-heading text-primary">GLANCE</span></p>
+            <h4 class="!font-semibold mb-1 mt-4">Why choose us?</h4>
+            <div class="">
+                <div class="xl:col-span-7 col-span-12">
+                    <p class="text-textmuted dark:text-textmuted/50 text-[14px] mb-[3rem] font-normal">
+                        Our mission is to empower your business with secure, affordable, and reliable solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-12 gap-x-6">
+            <!-- Reliable API -->
+            <div class="xl:col-span-4 col-span-12">
+                <div class="box landing-card border shadow-none text-center border-defaultborder dark:border-defaultborder/10">
+                    <div class="box-body !p-[2rem]">
+                        <div class="mb-4">
+                            <span class="avatar avatar-lg bg-primary/10 svg-primary avatar-rounded border-4 border-primary/50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 24 24">
+                                    <path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h16v6H4v-6zm2 2v2h2v-2H6z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <h6 class="font-semibold">Reliable API</h6>
+                        <p class="text-textmuted dark:text-textmuted/50 mb-4">Fast and dependable OTP delivery via WhatsApp.</p>
+                        <a href="javascript:void(0);" class="font-medium ti-btn ti-btn-sm ti-btn-primary">Read More<i class="ti ti-arrow-narrow-right text-base align-bottom"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flexible Pricing -->
+            <div class="xl:col-span-4 col-span-12">
+                <div class="box landing-card border shadow-none text-center border-defaultborder dark:border-defaultborder/10">
+                    <div class="box-body !p-[2rem]">
+                        <div class="mb-4">
+                            <span class="avatar avatar-lg bg-primarytint1color/10 svg-primarytint1color avatar-rounded border-4 border-primarytint1color/50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 24 24">
+                                    <path d="M12 1L3 5v6c0 5.25 3.75 10.44 9 12 5.25-1.56 9-6.75 9-12V5l-9-4zm0 2.18L18.09 6 12 9.82 5.91 6 12 3.18zM5 8.64l6.27 3.64v7.45C7.84 17.88 5 13.72 5 11V8.64zm8.73 11.09v-7.45L20 8.64V11c0 2.72-2.84 6.88-6.27 8.73z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <h6 class="font-semibold">Flexible Pricing</h6>
+                        <p class="text-textmuted dark:text-textmuted/50 mb-4">Only pay for what you use, with full control via admin.</p>
+                        <a href="#pricing" class="font-medium ti-btn ti-btn-sm ti-btn-primary">Read More<i class="ti ti-arrow-narrow-right text-base align-bottom"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secure & Scalable -->
+            <div class="xl:col-span-4 col-span-12">
+                <div class="box landing-card border shadow-none text-center border-defaultborder dark:border-defaultborder/10">
+                    <div class="box-body !p-[2rem]">
+                        <div class="mb-4">
+                            <span class="avatar avatar-lg bg-primarytint2color/10 svg-primarytint2color avatar-rounded border-4 border-primarytint2color/50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 24 24">
+                                    <path d="M12 1C9.24 1 7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v9c0 2.21 1.79 4 4 4h8c2.21 0 4-1.79 4-4v-9c0-1.1-.9-2-2-2h-1V6c0-2.76-2.24-5-5-5zm0 2c1.66 0 3 1.34 3 3v2H9V6c0-1.66 1.34-3 3-3zm-6 7h12v9c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2v-9z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <h6 class="font-semibold">Secure & Scalable</h6>
+                        <p class="text-textmuted dark:text-textmuted/50 mb-4">End-to-end encryption with flexible scalability for your growth.</p>
+                        <a href="javascript:void(0);" class="font-medium ti-btn ti-btn-sm ti-btn-primary">Read More<i class="ti ti-arrow-narrow-right text-base align-bottom"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End:: Section-2 -->
+
             <!-- End:: Section-2 -->
 
             <!-- Start:: Section-3 -->
-            <section class="section section-bg" id="expectations">
+            {{-- <section class="section section-bg" id="expectations">
                 <div class="container">
                     <div class="grid grid-cols-12 gap-x-6 mx-0">
                         <div class="xl:col-span-5 col-span-12">
@@ -509,11 +526,88 @@
                         </div>
                     </div>
                 </div>
+            </section> --}}
+            <section class="section section-bg" id="expectations">
+                <div class="container">
+                    <div class="grid grid-cols-12 gap-x-6 mx-0">
+                        <div class="xl:col-span-5 col-span-12">
+                            <div class="home-proving-image">
+                                <img src="build/assets/images/media/landing/2.png" alt="Fast2OTP WhatsApp OTP Delivery" class="img-fluid about-image hidden xl:block">
+                            </div>
+                            <div class="proving-pattern-1"></div>
+                        </div>
+                        <div class="xl:col-span-7 col-span-12 my-auto">
+                            <div class="heading-section text-start mb-4">
+                                <p class="text-xs font-medium text-start text-success mb-1">
+                                    <span class="landing-section-heading text-primary">ABOUT US</span>
+                                </p>
+                                <h4 class="mt-3 !font-semibold mb-2">Fast2OTP — The Future of User Verification</h4>
+                                <div class="heading-description text-[14px]">
+                                    Fast2OTP is built to simplify and secure user verification with real-time OTP delivery on WhatsApp. No more SMS delays or reliability issues — just instant, encrypted, and seamless communication that scales with your business.
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-12 gap-x-6 gap-y-3 mb-0">
+                                <div class="xl:col-span-12 col-span-12">
+                                    <div class="flex items-top">
+                                        <div class="me-2 home-prove-svg">
+                                            <i class="ri-focus-2-fill align-middle text-primary inline-block"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-[14px]">
+                                                <strong>Instant Delivery:</strong> Our system ensures OTPs reach users in real-time via WhatsApp, eliminating delays and boosting trust.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="xl:col-span-12 col-span-12">
+                                    <div class="flex items-top">
+                                        <div class="me-2 home-prove-svg">
+                                            <i class="ri-focus-2-fill align-middle text-green-500 inline-block"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-[14px]">
+                                                <strong>Reliable & Scalable Infrastructure:</strong> Whether you're a startup or enterprise, Fast2OTP scales with your needs — handling large volumes without a hitch.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="xl:col-span-12 col-span-12">
+                                    <div class="flex items-top">
+                                        <div class="me-2 home-prove-svg">
+                                            <i class="ri-focus-2-fill align-middle text-blue-500 inline-block"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-[14px]">
+                                                <strong>Secure & Encrypted:</strong> We prioritize security. All OTP communications are end-to-end encrypted to protect your users and your platform.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="xl:col-span-12 col-span-12">
+                                    <div class="flex items-top">
+                                        <div class="me-2 home-prove-svg">
+                                            <i class="ri-focus-2-fill align-middle text-purple-500 inline-block"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-[14px]">
+                                                <strong>24/7 Support:</strong> Our dedicated support team is always here — ensuring smooth operations around the clock, every day of the year.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <a href="#features" class="px-6 py-2 bg-primary text-white rounded-full hover:bg-primary/90 transition">View Features</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
+            
             <!-- End:: Section-3 -->
 
             <!-- Start:: Section-4 -->
-            <section class="section" id="services">
+            {{-- <section class="section" id="services">
                 <div class="container">
                     <div class="text-center">
                         <p class="text-xs font-medium text-success mb-1"><span class="landing-section-heading text-primary">SERVICES</span>
@@ -687,7 +781,85 @@
                         </div>
                     </div>
                 </div>
+            </section> --}}
+            <section class="section" id="services">
+                <div class="container">
+                    <div class="text-center">
+                        <p class="text-xs font-medium text-success mb-1"><span class="landing-section-heading text-primary">SERVICES</span></p>
+                        <h4 class="!font-semibold mt-3 mb-2">What You Get from Fast2OTP</h4>
+                        <div class="">
+                            <p class="text-textmuted dark:text-textmuted/50 text-[14px] mb-5 font-normal">Fast, reliable, and secure OTP solutions for your business and personal use.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-x-6">
+                        <div class="xl:col-span-3 col-span-12">
+                            <div class="box landing-card">
+                                <div class="box-body text-center !p-[2rem]">
+                                    <div class="mb-4">
+                                        <div class="p-2 border inline-block border-primary/20 bg-primary/10 rounded-full">
+                                            <span class="avatar avatar-lg avatar-rounded bg-primary svg-white">
+                                                <i class="fa-solid fa-paper-plane text-3xl"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <h6 class="!font-semibold mb-2">Instant OTP Delivery</h6>
+                                    <p class="text-textmuted dark:text-textmuted/50 mb-0">Deliver OTPs to your users within seconds across SMS, WhatsApp, or voice call.</p>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="xl:col-span-3 col-span-12">
+                            <div class="box landing-card">
+                                <div class="box-body text-center !p-[2rem]">
+                                    <div class="mb-4">
+                                        <div class="p-2 border inline-block border-success/20 bg-success/10 rounded-full">
+                                            <span class="avatar avatar-lg avatar-rounded bg-success svg-white">
+                                                <i class="fa-solid fa-shield-halved text-3xl"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <h6 class="!font-semibold mb-2">High Security</h6>
+                                    <p class="text-textmuted dark:text-textmuted/50 mb-0">All OTP transmissions are encrypted with best-in-class security measures.</p>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="xl:col-span-3 col-span-12">
+                            <div class="box landing-card">
+                                <div class="box-body text-center !p-[2rem]">
+                                    <div class="mb-4">
+                                        <div class="p-2 border inline-block border-info/20 bg-info/10 rounded-full">
+                                            <span class="avatar avatar-lg avatar-rounded bg-info svg-white">
+                                                <i class="fa-solid fa-plug text-3xl"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <h6 class="!font-semibold mb-2">Simple API Integration</h6>
+                                    <p class="text-textmuted dark:text-textmuted/50 mb-0">Easily integrate Fast2OTP with your website or app using our developer-friendly APIs.</p>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="xl:col-span-3 col-span-12">
+                            <div class="box landing-card">
+                                <div class="box-body text-center !p-[2rem]">
+                                    <div class="mb-4">
+                                        <div class="p-2 border inline-block border-warning/20 bg-warning/10 rounded-full">
+                                            <span class="avatar avatar-lg avatar-rounded bg-warning svg-white">
+                                                <i class="fa-solid fa-headphones text-3xl"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <h6 class="!font-semibold mb-2">24/7 Support</h6>
+                                    <p class="text-textmuted dark:text-textmuted/50 mb-0">Our team is always available to assist you with setup, issues, or questions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
+            
+            
             <!-- End:: Section-4 -->
 
             <!-- Start:: Section-5 -->
@@ -716,6 +888,8 @@
                     </div>
                 </div>
             </section>
+        
+            
             <!-- End:: Section-5 -->
 
             <!-- Start:: Section-6 -->
@@ -2400,9 +2574,9 @@
 
             <!-- FOOTER -->
             <div class="text-center landing-main-footer py-3">
-                <span class="text-textmuted dark:text-textmuted/50 text-[15px]"> Copyright © <span id="year"></span> <a href="javascript:void(0);" class="text-primary font-medium"><u>Xintra</u></a>.
-                    Designed with <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0);" class="text-primary font-medium"><u>
-                            Spruko</u>
+                <span class="text-textmuted dark:text-textmuted/50 text-[15px]"> Copyright © <span id="year"></span> <a href="javascript:void(0);" class="text-primary font-medium"><u>fats2otp</u></a>.
+                    {{-- Designed with <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0);" class="text-primary font-medium"><u>
+                            Spruko</u> --}}
                     </a> All
                     rights
                     reserved
