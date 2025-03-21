@@ -332,7 +332,7 @@
                                         <h6 class="font-medium text-white opacity-90">Optimized and Accessible</h6>
                                     </div>
                                     <p class="landing-banner-heading mb-3 !text-white">Fast & Secure WhatsApp OTP Verification
-                                        {{-- Explore <span class="font-semibold text-warning">Xintra</span> Template. --}}
+                                        Explore <span class="font-semibold text-warning">fast2otp</span> 
                                     </p>
                                     <div class="text-base mb-[3rem] text-white opacity-70">Easily integrate our API to verify users via WhatsApp.
                                     </div>

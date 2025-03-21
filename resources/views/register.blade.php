@@ -52,11 +52,11 @@
                                 </div>
                                 <div class="xl:col-span-12 col-span-12">
                                     <label for="register-email" class="form-label text-defaulttextcolor">Email<sup class="text-xs text-danger">*</sup></label>
-                                    <input type="text" class="form-control" id="register-email" placeholder="full name">
+                                    <input type="text" class="form-control" id="register-email" placeholder="email">
                                 </div>
                                 <div class="xl:col-span-12 col-span-12">
                                     <label for="register-phone" class="form-label text-defaulttextcolor">phone<sup class="text-xs text-danger">*</sup></label>
-                                    <input type="text" class="form-control" id="register-phone" placeholder="full name">
+                                    <input type="text" class="form-control" id="register-phone" placeholder="phone">
                                 </div>
                                 <div class="xl:col-span-12 col-span-12">
                                     <label for="register-password" class="form-label text-defaulttextcolor">Password<sup class="text-xs text-danger">*</sup></label>
@@ -84,7 +84,7 @@
                                 <button class="ti-btn ti-btn-primary">Create Account</button>
                             </div>
                             <div class="text-center">
-                                <p class="text-textmuted dark:text-textmuted/50 mt-3 mb-0">Already have an account? <a href="signin-basic.html" class="text-primary">Sign In</a></p>
+                                <p class="text-textmuted dark:text-textmuted/50 mt-3 mb-0">Already have an account? <a href="/login" class="text-primary">Sign In</a></p>
                             </div>
                             {{-- <div class="btn-list text-center mt-3">
                                 <button class="ti-btn ti-btn-icon btn-wave ti-btn-soft-primary">
