@@ -81,55 +81,111 @@
                  
 
                   <!-- Start:: row-2 -->
-                  <div class="grid grid-cols-12 gap-x-6 items-center justify-center">
-                      {{-- <div class="xl:col-span-6 col-span-12"> </div> --}}
+                  <div class="">
+                    <div class="max-w-[100%] mx-auto">
+                        <div class="box">
+                            <ul class="nav nav-tabs tab-style-8 scaleX rounded m-4 profile-settings-tab gap-2 flex flex-wrap" id="myTab5" role="tablist">
+                                <li class="nav-item me-1" role="presentation">
+                                    <button class="nav-link !px-6 text-primary rounded-md bg-primary/10 active" data-hs-tab="#balance-alert-tab" role="tab">Balance Alerts</button>
+                                </li>
+                                <li class="nav-item me-1" role="presentation">
+                                    <button class="nav-link !px-6 text-primary rounded-md bg-primary/10" data-hs-tab="#usage-alert-tab" role="tab">Usage & Consumption</button>
+                                </li>
+                                <li class="nav-item me-1" role="presentation">
+                                    <button class="nav-link !px-6 text-primary rounded-md bg-primary/10" data-hs-tab="#billing-alert-tab" role="tab">Billing Alerts</button>
+                                </li>
+                                <li class="nav-item me-1" role="presentation">
+                                    <button class="nav-link !px-6 text-primary rounded-md bg-primary/10" data-hs-tab="#system-status-tab" role="tab">System & Status</button>
+                                </li>
+                                <li class="nav-item me-1" role="presentation">
+                                    <button class="nav-link !px-6 text-primary rounded-md bg-primary/10" data-hs-tab="#security-alert-tab" role="tab">Security</button>
+                                </li>
+                            </ul>
+                            <div class="p-4 border-b border-t border-dashed border-defaultborder dark:border-defaultborder/10 tab-content">
 
-                        <div class="max-w-[75%] xxl:col-span-8 lg:col-span-6 col-span-12">
-                            <div class="box">
-                                <div class="box-body">
-                                    <div class="text-center">
-                                        <div class="mb-2">
-                                            <span class="avatar avatar-xl avatar-rounded online">
-                                                <img src="build/assets/images/faces/9.jpg" alt="">
-                                            </span>
-                                        </div>
-                                        <div class="main-profile-info">
-                                            <h6 class="font-semibold mb-1">Daniel David
-                                                <div class="hs-tooltip ti-main-tooltip">
-                                                    <span class="text-primarytint2color text-[14px]">
-                                                        <i class="bi bi-check-circle-fill"></i>
-                                                        <span class="hs-tooltip-content  ti-main-tooltip-content !border-black py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm " role="tooltip">
-                                                            Verified User
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                            </h6>
-                                                <p class="text-textmuted dark:text-textmuted/50 mb-2">Web Designer</p>
-                                                <p class="mb-2">Sed ut perspiciatis unde omnis iste natus error sit
-                                                    voluptatem accusantium doloremque laudan accusant. </p>
-                                        </div>
-                                        <div class="flex gap-1 justify-center mb-2 items-center">
-                                            <i class="ri-facebook-line text-primary border rounded-full align-middle leading-none p-2 border-primary/25 me-1 inline-block text-[17px] bg-primary/10"></i>
-                                            <i class="ri-twitter-x-line text-primarytint1color border rounded-full align-middle leading-none p-2 border-primarytint1color/25 me-1 inline-block text-[17px] bg-primarytint1color/10"></i>
-                                            <i class="ri-linkedin-line text-primarytint2color border rounded-full align-middle leading-none p-2 border-primarytint2color/25 me-1 inline-block text-[17px] bg-primarytint2color/10"></i>
-                                            <i class="ri-github-line text-primarytint3color border rounded-full align-middle leading-none p-2 border-primarytint3color/25 me-1 inline-block text-[17px] bg-primarytint3color/10"></i>
-                                        </div>
-                                        <div class="flex gap-2 mb-0 flex-wrap flex-xxl-nowrap">
-                                            <div class="ti-btn ti-btn-primary ti-btn-sm mb-0 flex-auto">
-                                                Message
+                                <!-- BALANCE ALERTS -->
+                                <div class="tab-pane show active overflow-hidden p-0 border-0" id="balance-alert-tab" role="tabpanel">
+                                    <div class="font-semibold block text-[18px] mb-4">Balance Alerts</div>
+                                    <div class="grid grid-cols-12 gap-4">
+                                        <div class="xl:col-span-6 col-span-12">
+                                            <div class="box custom-box p-4">
+                                                <h4 class="font-medium mb-2">Low Balance Warning</h4>
+                                                <p>Get notified when your balance drops below a specific threshold.</p>
+                                                <p>Threshold: <span class="text-danger">₹500</span></p>
+                                                <button class="ti-btn ti-btn-primary">Update Threshold</button>
                                             </div>
-                                            <div class="ti-btn ti-btn-secondary ti-btn-sm mb-0 flex-auto">
-                                                Follow
+                                        </div>
+                                        <div class="xl:col-span-6 col-span-12">
+                                            <div class="box custom-box p-4">
+                                                <h4 class="font-medium mb-2">Insufficient Balance Alert</h4>
+                                                <p>Receive alerts if you don’t have enough balance to send OTPs.</p>
+                                                <p>Status: <span class="text-success">Enabled</span></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            
+                                <!-- USAGE & CONSUMPTION ALERTS -->
+                                <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="usage-alert-tab" role="tabpanel">
+                                    <div class="font-semibold block text-[18px] mb-4">Usage & Consumption Alerts</div>
+                                    <div class="grid grid-cols-12 gap-4">
+                                        <div class="xl:col-span-6 col-span-12">
+                                            <div class="box custom-box p-4">
+                                                <h4 class="font-medium mb-2">OTP Usage Limit</h4>
+                                                <p>Get notified when you reach 80%, 90%, or 100% of your monthly OTP limit.</p>
+                                                <p>Current Usage: <span class="text-warning">85%</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="xl:col-span-6 col-span-12">
+                                            <div class="box custom-box p-4">
+                                                <h4 class="font-medium mb-2">Daily Usage Report</h4>
+                                                <p>Receive a daily report of OTPs sent and remaining balance.</p>
+                                                <p>Status: <span class="text-success">Enabled</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <!-- BILLING ALERTS -->
+                                <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="billing-alert-tab" role="tabpanel">
+                                    <div class="font-semibold block text-[18px] mb-4">Payment & Billing Alerts</div>
+                                    <div class="grid grid-cols-12 gap-4">
+                                        <div class="xl:col-span-6 col-span-12">
+                                            <div class="box custom-box p-4">
+                                                <h4 class="font-medium mb-2">Payment Reminders</h4>
+                                                <p>Get notified for upcoming payments or overdue bills.</p>
+                                                <p>Next Payment: <span class="text-primary">April 25, 2025</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="xl:col-span-6 col-span-12">
+                                            <div class="box custom-box p-4">
+                                                <h4 class="font-medium mb-2">Successful Transactions</h4>
+                                                <p>Receive confirmations for successful payments.</p>
+                                                <p>Status: <span class="text-success">Enabled</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <!-- SYSTEM & SERVICE STATUS -->
+                                <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="system-status-tab" role="tabpanel">
+                                    <div class="font-semibold block text-[18px] mb-4">System & Service Status</div>
+                                    <p>💡 Get real-time notifications for service interruptions, maintenance, or downtime.</p>
+                                    <p>Status: <span class="text-success">All Systems Operational</span></p>
+                                </div>
+                            
+                                <!-- SECURITY ALERTS -->
+                                <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="security-alert-tab" role="tabpanel">
+                                    <div class="font-semibold block text-[18px] mb-4">Security Alerts</div>
+                                    <p>🔐 Get notified for suspicious logins, 2FA prompts, and unauthorized access attempts.</p>
+                                    <p>Recent Activity: <span class="text-warning">New login from unknown device</span></p>
+                                </div>
+                            
                             </div>
+                            
                         </div>
-                     
-                     
-                      <div class="xl:col-span-1 col-span-12"></div>
-                  </div>
+                    </div>
+                </div>
                   <!-- End:: row-2 -->
 
               </div>
