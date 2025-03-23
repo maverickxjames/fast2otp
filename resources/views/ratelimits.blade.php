@@ -93,14 +93,23 @@
                         <div class="box custom box">
                             <div class="box-header justify-between">
                                 <div class="box-title">
-                                    Rate Limits
+                                    Rate Limits & OTP Costs
                                 </div>
                                 {{-- <div class="box-action">
                                     <a href="javascript:void(0);" class="btn btn-default btn-sm">View All</a>
                                 </div> --}}
                             </div>
                             <div class="box-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus commodi dolor delectus libero saepe repudiandae numquam ea vel sunt iure.</p>
+                                <p class="mb-4">
+                                    Below are the detailed rate limits and pricing plans based on the number of OTPs sent. 
+                                    Fast2OTP offers flexible pricing to meet your business needs, ensuring you get the 
+                                    best value with predictable costs.
+                                </p>
+                                <ul class="ti-list-group">
+                                    <li class="ti-list-group-item"><strong>Rate Limits:</strong> Maximum OTPs allowed per month/year based on your plan.</li>
+                                    <li class="ti-list-group-item"><strong>Cost per OTP:</strong> Transparent pricing for both monthly and annual plans.</li>
+                                    <li class="ti-list-group-item"><strong>Usage Insights:</strong> View your current and remaining quota.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -113,7 +122,7 @@
                         <div class="box custom-box">
                             <div class="box-header justify-between">
                                 <div class="box-title">
-                                    Bordered Primary
+                                    Monthly Plan Overview
                                 </div>
                                 
                             </div>
@@ -122,65 +131,39 @@
                                     <table class="ti-custom-table ti-custom-table-head">
                                         <thead>
                                             <tr class="border-b border-primary/30">
-                                                <th scope="col" class="text-start">Order</th>
-                                                <th scope="col" class="text-start">Date</th>
-                                                <th scope="col" class="text-start">Customer</th>
-                                                <th scope="col" class="text-start">Action</th>
+                                                <th scope="col" class="text-start">Plan</th>
+                                                <th scope="col" class="text-start">Max OTPs</th>
+                                                <th scope="col" class="text-start">Cost/OTP</th>
+                                                <th scope="col" class="text-start">Total Cost</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="border-b border-primary/30">
-                                                <th scope="row" class="text-start">
-                                                    #0007
-                                                </th>
-                                                <td>
-                                                    <span class="badge bg-light text-dark">26-04-2022</span>
-                                                </td>
-                                                <td>
-                                                    <div class="flex items-center">
-                                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                                            <img src="build/assets/images/faces/3.jpg" alt="img">
-                                                        </span>Mayor Kelly
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-primary/10 text-primary">Booked</span></td>
+                                                <td>Basic</td>
+                                                <td>1,000 OTPs</td>
+                                                <td>₹0.50</td>
+                                                <td>₹500</td>
                                             </tr>
                                             <tr class="border-b border-primary/30">
-                                                <th scope="row" class="text-start">
-                                                    #0008
-                                                </th>
-                                                <td>
-                                                    <span class="badge bg-light text-dark">15-02-2022</span>
-                                                </td>
-                                                <td>
-                                                    <div class="flex items-center">
-                                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                                            <img src="build/assets/images/faces/6.jpg" alt="img">
-                                                        </span>Wicky Kross
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-primary/10 text-primary">Booked</span></td>
+                                                <td>Standard</td>
+                                                <td>5,000 OTPs</td>
+                                                <td>₹0.45</td>
+                                                <td>₹2,250</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row" class="text-start">
-                                                    #0009
-                                                </th>
-                                                <td>
-                                                    <span class="badge bg-light text-dark">23-05-2022</span>
-                                                </td>
-                                                <td>
-                                                    <div class="flex items-center">
-                                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                                            <img src="build/assets/images/faces/1.jpg" alt="img">
-                                                        </span>Julia Cam
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-primary/10 text-primary">Booked</span></td>
+                                                <td>Premium</td>
+                                                <td>10,000 OTPs</td>
+                                                <td>₹0.40</td>
+                                                <td>₹4,000</td>
                                             </tr>
 
                                         </tbody>
                                     </table>
+
                                 </div>
+                                <p class="mt-4 text-sm opacity-70">
+                                    💡 <strong>Tip:</strong> Monthly plans are ideal for businesses with regular but fluctuating OTP needs.
+                                </p>
                             </div>
                           
                         </div>
@@ -189,7 +172,7 @@
                         <div class="box custom-box">
                             <div class="box-header justify-between">
                                 <div class="box-title">
-                                    Bordered Success
+                                    Annual Plan Overview
                                 </div>
                                
                             </div>
@@ -198,70 +181,37 @@
                                     <table class="ti-custom-table ti-custom-table-head">
                                         <thead>
                                             <tr class="border-b border-success/30">
-                                                <th scope="col" class="text-start">Order</th>
-                                                <th scope="col" class="text-start">Date</th>
-                                                <th scope="col" class="text-start">Customer</th>
-                                                <th scope="col" class="text-start">Status</th>
+                                                <th scope="col" class="text-start">Plan</th>
+                                                <th scope="col" class="text-start">Max OTPs</th>
+                                                <th scope="col" class="text-start">Cost/OTP</th>
+                                                <th scope="col" class="text-start">Total Cost</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="border-b border-success/30">
-                                                <th scope="row" class="text-start">
-                                                    #0011
-                                                </th>
-                                                <td>
-                                                    <span class="badge bg-light text-dark">07-01-2022</span>
-                                                </td>
-                                                <td>
-                                                    <div class="flex items-center">
-                                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                                            <img src="build/assets/images/faces/10.jpg"
-                                                                alt="img">
-                                                        </span>Helsenky
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-success/10 text-success">Delivered</span>
-                                                </td>
+                                                <td>Basic</td>
+                                                <td>12,000 OTPs</td>
+                                                <td>₹0.45</td>
+                                                <td>₹5,400</td>
                                             </tr>
                                             <tr class="border-b border-success/30">
-                                                <th scope="row" class="text-start">
-                                                    #0012
-                                                </th>
-                                                <td>
-                                                    <span class="badge bg-light text-dark">18-05-2022</span>
-                                                </td>
-                                                <td>
-                                                    <div class="flex items-center">
-                                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                                            <img src="build/assets/images/faces/14.jpg"
-                                                                alt="img">
-                                                        </span>Brodus
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-success/10 text-success">Delivered</span>
-                                                </td>
+                                                <td>Standard</td>
+                                                <td>60,000 OTPs</td>
+                                                <td>₹0.40</td>
+                                                <td>₹24,000</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row" class="text-start">
-                                                    #0013
-                                                </th>
-                                                <td>
-                                                    <span class="badge bg-light text-dark">19-03-2022</span>
-                                                </td>
-                                                <td>
-                                                    <div class="flex items-center">
-                                                        <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                                            <img src="build/assets/images/faces/12.jpg"
-                                                                alt="img">
-                                                        </span>Chikka Alen
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-success/10 text-success">Delivered</span>
-                                                </td>
+                                                <td>Premium</td>
+                                                <td>120,000 OTPs</td>
+                                                <td>₹0.35</td>
+                                                <td>₹42,000</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                                <p class="mt-4 text-sm opacity-70">
+                                    🔥 <strong>Save More:</strong> Annual plans offer lower OTP costs and better long-term value.
+                                </p>
                             </div>
                             
                         </div>

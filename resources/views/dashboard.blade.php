@@ -81,7 +81,7 @@
                 <div class="container-fluid">
 
                     <!-- Start::page-header -->
-                    <div class="flex items-center justify-between page-header-breadcrumb flex-wrap gap-2">
+                    {{-- <div class="flex items-center justify-between page-header-breadcrumb flex-wrap gap-2">
                         <div>
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item">
@@ -109,7 +109,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- End::page-header -->
 
                     <!-- Start::Row-1 -->
