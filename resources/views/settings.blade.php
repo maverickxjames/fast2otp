@@ -51,7 +51,18 @@
 
     <!-- MAIN JS -->
     <script src="build/assets/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+    {{-- csrf --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        input:disabled {
+      
+    cursor: not-allowed;         /* Shows 'not-allowed' cursor */
+    border: 1px solid #d1d5db;   /* Subtle border */
+    opacity: 0.7;      
+        }
+    </style>
 
 
 
@@ -66,6 +77,7 @@
         <img src="build/assets/images/media/loader.svg" alt="">
     </div>
     <!-- LOADER -->
+
 
     <div class="page">
 
@@ -124,57 +136,205 @@
                                 <!-- PERSONAL DETAILS -->
                                 <div class="tab-pane show active overflow-hidden p-0 border-0" id="personal-tab"
                                     role="tabpanel">
-                                    <div class="flex justify-between items-center mb-4 flex-wrap gap-1">
-                                        <div class="font-semibold block text-[15px]">Account Settings :</div>
-                                        <div class="ti-btn ti-btn-primary ti-btn-sm"><i class="ri-loop-left-line leading-none me-2"></i>Restore Changes</div>
-                                    </div>
-                                    <div class="grid grid-cols-12 sm:gap-x-6 gap-y-3">
-                                        <div class="xl:col-span-12 col-span-12">
-                                            <div class="flex items-start flex-wrap gap-4">
-                                                <div>
-                                                    <span class="avatar avatar-xxl">
-                                                        <img src="build/assets/images/faces/9.jpg" alt="">
-                                                    </span>
+                                    <div class="grid grid-cols-12 gap-6">
+                                        <div class="col-span-12">
+                                            <div class="box">
+                                                <div class="box-header">
+                                                    <h5 class="box-title">Account Settings :</h5>
                                                 </div>
-                                                <div>
-                                                    <span class="font-medium block mb-2">Profile Picture</span>
-                                                    <div class="btn-list mb-1">
-                                                        <button class="ti-btn ti-btn-sm ti-btn-primary btn-wave"><i class="ri-upload-2-line me-1"></i>Change Image</button>
-                                                        <button class="ti-btn ti-btn-sm ti-btn-soft-primary1 btn-wave"><i class="ri-delete-bin-line me-1"></i>Remove</button>
+                                                <div class="box-body">
+                                                    <form id="profile-form">
+                                                        @csrf
+                                                        <input type="hidden" name="id"
+                                                            value="{{ $userData->id }}">
+                                                        <input type="hidden" name="profile_pic" id="selected-pic"
+                                                            value="{{ $userData->profile_pic }}">
+
+                                                        <div class="xl:col-span-12 col-span-12 mb-5">
+                                                            <div class="flex items-start flex-wrap gap-4">
+                                                                <div>
+                                                                    <span class="avatar avatar-xxl">
+                                                                        <img id="current-pic"
+                                                                            src="build/assets/images/profile/{{ $userData->profile_pic }}.jpg"
+                                                                            alt="">
+                                                                    </span>
+                                                                </div>
+                                                                <div>
+                                                                    <span class="font-medium block mb-2">Profile
+                                                                        Picture</span>
+                                                                    <div class="btn-list mb-1">
+                                                                        <button type="button"
+                                                                            class="ti-btn ti-btn-sm ti-btn-primary btn-wave"
+                                                                            data-hs-overlay="#hs-vertically-centered-modal">
+                                                                            <i class="ri-upload-2-line me-1"></i>Change
+                                                                            Image
+                                                                        </button>
+                                                                        <button type="button"
+                                                                            class="ti-btn ti-btn-sm ti-btn-soft-primary1 btn-wave"
+                                                                            onclick="removeProfilePic()">
+                                                                            <i
+                                                                                class="ri-delete-bin-line me-1"></i>Remove
+                                                                        </button>
+                                                                    </div>
+                                                                    <span
+                                                                        class="block text-xs text-textmuted dark:text-textmuted/50">
+                                                                        Use JPEG, PNG, or GIF. Best size: 200x200
+                                                                        pixels. Keep it under 5MB
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <!-- Modal -->
+                                                    <div id="hs-vertically-centered-modal"
+                                                        class="hs-overlay hidden ti-modal">
+                                                        <div
+                                                            class="hs-overlay-open:mt-7 ti-modal-box mt-0 ease-out min-h-[calc(100%-3.5rem)] flex items-center">
+                                                            <div class="ti-modal-content w-full max-w-[600px] mx-auto">
+                                                                <div class="ti-modal-header">
+                                                                    <h6 class="modal-title text-[1rem] font-semibold">
+                                                                        Select Profile Picture</h6>
+                                                                    <button type="button"
+                                                                        class="hs-dropdown-toggle ti-modal-close-btn"
+                                                                        data-hs-overlay="#hs-vertically-centered-modal">
+                                                                        <span class="sr-only">Close</span>
+                                                                       <i class="ri-close-line"></i>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="ti-modal-body grid grid-cols-4 gap-4">
+                                                                    @foreach ($profile as $pic)
+                                                                    @if($pic->name!=17)
+                                                                        <div class="border-0 rounded-md p-2 cursor-pointer"
+                                                                            onclick="selectPic('{{ $pic->name }}')"
+                                                                            id="pic-{{ $pic->name }}">
+                                                                            <img src="build/assets/images/profile/{{ $pic->name }}.jpg"
+                                                                                alt="Profile" class="w-full h-auto">
+                                                                        </div>
+                                                                    @endif
+                                                                    @endforeach
+                                                                </div>
+
+                                                                <div class="ti-modal-footer flex justify-end">
+                                                                    <button type="button"
+                                                                        class="ti-btn ti-btn-secondary btn-wave"
+                                                                        data-hs-overlay="#hs-vertically-centered-modal">
+                                                                        Close
+                                                                    </button>
+                                                                    <button type="button"
+                                                                        class="ti-btn ti-btn-primary btn-wave"
+                                                                        onclick="saveProfilePic()">
+                                                                        Save changes
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <span class="block text-xs text-textmuted dark:text-textmuted/50">Use JPEG, PNG, or GIF. Best size: 200x200 pixels. Keep it under 5MB</span>
+
+
+                                                    <form id="user-profile-form" class="ti-validation">
+                                                         @csrf
+                                                        <div class="grid lg:grid-cols-2 gap-6">
+                                                            <div class="space-y-2">
+                                                                <label
+                                                                    class="ti-form-label dark:text-defaulttextcolor/80 mb-0">Full
+                                                                    Name</label>
+                                                                <input type="text"
+                                                                    class="my-auto ti-form-input  rounded-sm "
+                                                                    value="{{ $userData->name ? $userData->name : '' }}"
+                                                                    name="name"
+                                                                    placeholder="Fullname" required="">
+                                                            </div>
+                                                            <div class="space-y-2">
+                                                                <label
+                                                                    class="ti-form-label dark:text-defaulttextcolor/80 mb-0">Phone
+                                                                    Number</label>
+                                                                <input type="tel"
+                                                                    class="my-auto ti-form-input rounded-sm"
+                                                                    value="{{ $userData->phone ? '+91 ' . $userData->phone : '' }}"
+                                                                    placeholder="+91 123-456-789"
+                                                                    pattern="^\[0-9]{10}$" required disabled>
+                                                                   
+
+                                                            </div>
+
+                                                            <div class="space-y-2">
+                                                                <label
+                                                                    class="ti-form-label dark:text-defaulttextcolor/80 mb-0">Email
+                                                                    Address</label>
+                                                                <input type="email"
+                                                                    class="my-auto ti-form-input  rounded-sm"
+                                                                    value="{{ $userData->email ? $userData->email : '' }}"
+                                                                    placeholder="your@site.com" required="" disabled>
+                                                            </div>
+                                                            <div class="space-y-2">
+                                                                <label
+                                                                    class="ti-form-label dark:text-defaulttextcolor/80 mb-0">Date
+                                                                    Of Birth</label>
+                                                                <input type="text" id="dob" name="dob"
+                                                                    class="ti-form-input rounded-sm flatpickr-input"
+                                                                    placeholder="Select your date of birth"
+                                                                    value="{{ $userData->dob ?? '' }}" required>
+                                                            </div>
+                                                           <!-- Gender -->
+        <div class="space-y-2">
+            <label class="ti-form-label dark:text-defaulttextcolor/80 mb-0">Gender</label>
+            <ul class="flex flex-col sm:flex-row">
+
+                <!-- Female -->
+                <li class="ti-list-group w-full gap-x-2.5 flex py-2 px-4">
+                    <div class="relative flex items-start w-full">
+                        <div class="flex items-center h-5">
+                            <input id="gender-female" name="gender" type="radio" class="ti-form-radio"
+                                value="Female" {{ $userData->gender == 'Female' ? 'checked' : '' }}>
+                        </div>
+                        <label for="gender-female" class="ms-3 block w-full text-sm">Female</label>
+                    </div>
+                </li>
+
+                <!-- Male -->
+                <li class="ti-list-group w-full gap-x-2.5 flex py-2 px-4">
+                    <div class="relative flex items-start w-full">
+                        <div class="flex items-center h-5">
+                            <input id="gender-male" name="gender" type="radio" class="ti-form-radio"
+                                value="Male" {{ $userData->gender == 'Male' ? 'checked' : '' }}>
+                        </div>
+                        <label for="gender-male" class="ms-3 block w-full text-sm">Male</label>
+                    </div>
+                </li>
+
+                <!-- Others -->
+                <li class="ti-list-group w-full gap-x-2.5 flex py-2 px-4">
+                    <div class="relative flex items-start w-full">
+                        <div class="flex items-center h-5">
+                            <input id="gender-others" name="gender" type="radio" class="ti-form-radio"
+                                value="Others" {{ $userData->gender == 'Others' ? 'checked' : '' }}>
+                        </div>
+                        <label for="gender-others" class="ms-3 block w-full text-sm">Others</label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+                                                        </div>
+                                                        <div class="box-footer border-t-1 mt-10">
+                                                            <div class="btn-list float-end">
+                                                                <button type="submit" onclick="updateUserProfile(event)"
+                                                                    class="ti-btn ti-btn-primary btn-wave">Save
+                                                                    Changes</button>
+                                                            </div>
+                                                        </div>
+                                                        {{-- <button type="submit" class="ti-btn ti-btn-primary">Submit</button> --}}
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <label for="first-name" class="form-label">First Name:</label>
-                                            <input type="text" class="form-control" id="first-name" placeholder="Enter First Name">
-                                        </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <label for="last-name" class="form-label">Last Name:</label>
-                                            <input type="text" class="form-control" id="last-name" placeholder="Enter Last Name">
-                                        </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <label for="email" class="form-label">Email:</label>
-                                            <input type="email" class="form-control" id="email" placeholder="Enter Email">
-                                        </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <label for="mobile" class="form-label">Mobile:</label>
-                                            <input type="tel" class="form-control" id="mobile" placeholder="Enter Mobile">
-                                        </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <label for="dob" class="form-label">Date of Birth:</label>
-                                            <input type="date" class="form-control" id="dob">
-                                        </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <label for="gender" class="form-label">Gender:</label>
-                                            <select class="form-control" id="gender">
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                                <option>Other</option>
-                                            </select>
-                                        </div>
+
                                     </div>
+
+
                                 </div>
 
                                 <!-- BILLING ADDRESS -->
@@ -207,6 +367,11 @@
                                             <input type="text" class="form-control" placeholder="Enter ZIP">
                                         </div>
                                     </div>
+                                    <div class="box-footer border-t-1 mt-10">
+                                        <div class="btn-list float-end">
+                                            <button class="ti-btn ti-btn-primary btn-wave">Save Changes</button>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- SECURITY -->
@@ -227,6 +392,11 @@
                                     <input type="password" class="form-control" placeholder="Current Password">
                                     <input type="password" class="form-control mt-3" placeholder="New Password">
                                     <input type="password" class="form-control mt-3" placeholder="Confirm Password">
+                                    <div class="box-footer border-t-1 mt-10">
+                                        <div class="btn-list float-end">
+                                            <button class="ti-btn ti-btn-primary btn-wave">Save Changes</button>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- ACCOUNT MANAGEMENT -->
@@ -238,11 +408,7 @@
                                 </div>
 
                             </div>
-                            <div class="box-footer border-t-0">
-                                <div class="btn-list float-end">
-                                    <button class="ti-btn ti-btn-primary btn-wave">Save Changes</button>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -338,8 +504,190 @@
     <!-- CUSTOM-SWITCHER JS -->
     <link rel="modulepreload" href="build/assets/custom-switcher-kd-POPJw.js">
     <script type="module" src="build/assets/custom-switcher-kd-POPJw.js"></script>
+    <link rel="modulepreload" href="build/assets/form-validation-DFOXao1S.js">
+    <script type="module" src="build/assets/form-validation-DFOXao1S.js"></script>
 
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- Add jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script>
+        // Select profile picture
+        function selectPic(fileName) {
+            document.getElementById('selected-pic').value = fileName;
+
+            // Highlight selected image
+            // document.querySelectorAll('.ti-modal-body div').forEach(el => {
+            //     el.classList.remove('border-blue-500');
+            // });
+
+            document.getElementById(`pic-${fileName}`).classList.add('border-4', 'border-dark');
+        }
+
+        // AJAX call to save the selected profile picture
+        function saveProfilePic() {
+    const formData = new FormData(document.getElementById('profile-form'));
+
+    $.ajax({
+        url: "{{ route('update-profile-pic') }}",   // Laravel route
+        method: "POST",
+        data: formData,
+        processData: false,  // Prevent jQuery from processing the data
+        contentType: false,  // Prevent jQuery from setting contentType
+        headers: {
+            "X-CSRF-TOKEN": $('input[name="_token"]').val()  // CSRF token for security
+        },
+        success: function(response) {
+            if (response.success) {
+                // Update current profile image
+                $('#current-pic').attr('src', `build/assets/images/profile/${response.name}.jpg`);
+                document.getElementById(`pic-${response.name}`).classList.remove('border-4', 'border-dark');
+
+                $('#hs-vertically-centered-modal').addClass('hidden');
+
+// ✅ Remove the backdrop manually
+$('#hs-vertically-centered-modal-backdrop').remove();
+
+                // Show success Toastify notification
+                Toastify({
+                    text: "Profile picture updated successfully!",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#00b09b"
+                }).showToast();
+            } else {
+                // Show error Toastify notification
+                $('#hs-vertically-centered-modal').addClass('hidden');
+
+// ✅ Remove the backdrop manually
+$('#hs-vertically-centered-modal-backdrop').remove();
+                Toastify({
+                    text: "Failed to update profile picture",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor:"#ff5f6d"
+                }).showToast();
+            }
+
+            // Close the modal
+            // $('[data-hs-overlay="#hs-vertically-centered-modal"]').click();
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error:', error);
+            Toastify({
+                text: "Something went wrong. Please try again.",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
+            }).showToast();
+        }
+    });
+}
+
+
+function removeProfilePic() {
+    $.ajax({
+        url: "{{ route('remove-profile-pic') }}",  // Your backend route
+        type: "POST",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),  // CSRF token
+            profile_pic: '17'  // Set the default profile picture to 17
+        },
+        success: function(response) {
+            if (response.success) {
+                // ✅ Update the current image to 17.jpg
+                document.getElementById('current-pic').src = 'build/assets/images/profile/17.jpg';
+
+                // ✅ Show Toastify notification
+                Toastify({
+                    text: "Profile picture removed successfully!",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
+                }).showToast();
+            } else {
+                // ❌ Handle error
+                Toastify({
+                    text: "Failed to remove profile picture",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
+                }).showToast();
+            }
+        },
+        error: function() {
+            // ❌ Handle AJAX error
+            Toastify({
+                text: "Something went wrong!",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
+            }).showToast();
+        }
+    });
+}
+
+    </script>
     <!-- END SCRIPTS -->
+
+    <script>
+        function updateUserProfile(event) {
+            event.preventDefault();
+    
+            const formData = new FormData(document.getElementById('user-profile-form'));
+    
+            $.ajax({
+                url: "{{ route('update-user-profile') }}",  // Your route
+                type: "POST",
+                data: formData,
+                processData: false, 
+                contentType: false,
+                headers: {
+                    "X-CSRF-TOKEN": $('input[name="_token"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Show success message
+                        Toastify({
+                            text: "Profile updated successfully!",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#00b09b"
+                        }).showToast();
+                    } else {
+                        // Show error message
+                        Toastify({
+                            text: "Failed to update profile",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#ff5f6d"
+                        }).showToast();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    Toastify({
+                        text: "Error updating profile",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#ff5f6d"
+                    }).showToast();
+                }
+            });
+        }
+    </script>
+    
 </body>
 
 </html>

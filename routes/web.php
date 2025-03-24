@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\SettingController;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,6 +58,27 @@ Route::middleware('auth')->group(function () {
     Route::get('/terms-conditions', function () {
         return view('terms-conditions');
     })->name('terms-conditions');
+
+    Route::get('/test',function(){
+        // insert 1 to 16 num on name field on profile_pic table
+
+        for($i=1;$i<=16;$i++){
+            DB::table('profile_pic')->insert([
+                'name' => $i,
+            ]);
+        }
+        return response()->json(['message'=>'Data inserted successfully']);
+    })->name('test');
+
+
+    // Setting Controller
+    Route::get('/settings',[SettingController::class,'Setting'])->name('settings');
+    Route::post('/update-profile-pic', [SettingController::class, 'updatePic'])->name('update-profile-pic');
+    Route::post('/remove-profile-pic', [SettingController::class, 'removeProfilePic'])->name('remove-profile-pic');
+    Route::post('/update-user-profile', [SettingController::class, 'updateProfile'])->name('update-user-profile');
+
+
+
 });
 
 require __DIR__.'/auth.php';
