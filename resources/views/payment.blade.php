@@ -335,10 +335,7 @@
                                         data-hs-tab="#subscription-plan-tab" role="tab">Subscription &
                                         Plan</button>
                                 </li>
-                                <li class="nav-item me-1" role="presentation">
-                                    <button class="nav-link !px-6 text-primary rounded-md bg-primary/10"
-                                        data-hs-tab="#tax-gst-tab" role="tab">Tax & GST</button>
-                                </li>
+                                
                                 <li class="nav-item me-1" role="presentation">
                                     <button class="nav-link !px-6 text-primary rounded-md bg-primary/10"
                                         data-hs-tab="#support-faq-tab" role="tab">Support & FAQ</button>
@@ -353,50 +350,98 @@
                                     <div class="flex justify-between items-center mb-4 flex-wrap gap-1">
                                         <div class="font-semibold block text-[18px]">Billing Summary</div>
                                     </div>
-                                    <div class="grid grid-cols-12 sm:gap-x-6 gap-y-3">
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">Current Plan</h4>
-                                                <p>Standard (5,000 OTPs/month)</p>
-                                                <p>Price: ₹2,250/month</p>
-                                                <p>Next Billing Date: <span class="text-primary">April 25, 2025</span>
-                                                </p>
+                                    <div class="flex flex-col md:flex-row lg:flex-row gap-6">
+                                        <!-- Current Plan -->
+                                        <div class="w-full lg:w-1/2">
+                                            <div class="box">
+                                                <div class="box-header">
+                                                    <div class="box-title">Current Plan</div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <ul class="ti-list-group list-group-flush mb-2">
+                                                        <li class="ti-list-group-item">Standard (5,000 OTPs/month)</li>
+                                                        <li class="ti-list-group-item">Price: ₹2,250/month</li>
+                                                        <li class="ti-list-group-item">Next Billing Date: <span class="text-primary">April 25, 2025</span></li>
+                                                    </ul>
+                                                    <a href="javascript:void(0);" class="ti-btn ti-btn-primary">Read More</a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">Usage Details</h4>
-                                                <p>Total Sent: <span class="text-success">3,100 OTPs</span></p>
-                                                <p>Remaining: <span class="text-warning">1,900 OTPs</span></p>
+                                    
+                                        <!-- Usage Details -->
+                                        <div class="w-full lg:w-1/2">
+                                            <div class="box">
+                                                <div class="box-header">
+                                                    <div class="box-title">Usage Details</div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <ul class="ti-list-group list-group-flush mb-2">
+                                                        <li class="ti-list-group-item">Total Sent: <span class="text-success">3,100 OTPs</span></li>
+                                                        <li class="ti-list-group-item">Remaining: <span class="text-warning">1,900 OTPs</span></li>
+                                                    </ul>
+                                                    <a href="javascript:void(0);" class="ti-btn ti-btn-primary">Read More</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                  
                                 </div>
 
                                 <!-- PAYMENT METHODS -->
                                 <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="payment-methods-tab"
                                     role="tabpanel">
                                     <div class="font-semibold block text-[18px] mb-4">Payment Methods</div>
-                                    <div class="grid grid-cols-12 gap-4">
-                                        <div class="xl:col-span-4 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">Default Method</h4>
-                                                <p>💳 Visa **** 4321</p>
+                                    <div class="xxl:col-span-3 xl:col-span-6 lg:col-span-6 sm:col-span-6 col-span-12">
+                                        <div class="box ">
+                                            <div class="box-body">
+                                                <p class="mb-0 mt-3 text-xl font-medium leading-none">
+                                                    Default Method
+                                                </p>
                                             </div>
-                                        </div>
-                                        <div class="xl:col-span-4 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">UPI</h4>
-                                                <p>fast2otp@upi</p>
-                                            </div>
-                                        </div>
-                                        <div class="xl:col-span-4 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">Add Payment Method</h4>
-                                                <button class="ti-btn ti-btn-primary">+ Add New Method</button>
+                                            <div class="box-footer">
+                                                <div class="flex flex-col md:flex-row lg:flex-row gap-6">
+                                                    <div class="w-full lg:w-1/2">
+                                                        <div class="text-[15px] font-semibold sm:flex block items-center justify-between mb-3">
+                                                            <div>Saved Cards :</div>
+                                                        </div>
+                                                        <div class="grid grid-cols-12 sm:gap-x-6 gap-y-3">
+                                                            <div class="xl:col-span-6 col-span-12">
+                                                                    <div class="sm:flex block items-center justify-between border border-info p-1 rounded-md">
+                                                                        <div class="me-2 leading-none">
+                                                                            <span class="avatar avatar-md">
+                                                                                <img src="build/assets/images/ecommerce/png/26.png" alt="">
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="saved-card-details">
+                                                                            <p class="mb-0 font-semibold">XXXX - XXXX - XXXX - 7646</p>
+                                                                        </div>
+                                                                    </div>
+                                                                   
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-full lg:w-1/2">
+                                                        <div class="text-[15px] font-semibold sm:flex block items-center justify-between mb-3">
+                                                            <div>UPI :</div>
+                                                        </div>
+                                                        <div class="grid grid-cols-12 sm:gap-x-6 gap-y-3 ">
+                                                            <div class="xl:col-span-6 col-span-12 " >
+                                                                    <div class="sm:flex block items-center justify-between">
+                                                                        <div class="saved-card-details border border-info px-2 py-4 rounded-md">
+                                                                            <p class="mb-0 font-semibold">test@upi</p>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                               
                                             </div>
                                         </div>
                                     </div>
+                                   
                                 </div>
 
                                 <!-- BILLING HISTORY -->
@@ -441,32 +486,40 @@
                                     role="tabpanel">
                                     <div class="font-semibold block text-[18px] mb-4">Subscription & Plan Management
                                     </div>
-                                    <div class="grid grid-cols-12 gap-4">
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">Current Plan</h4>
-                                                <p>Standard (5,000 OTPs/month)</p>
-                                                <p>Price: ₹2,250/month</p>
+                                    <div class="flex flex-col md:flex-row lg:flex-row gap-6">
+                                        <!-- Current Plan -->
+                                        <div class="w-full lg:w-1/2">
+                                            <div class="box">
+                                                <div class="box-header">
+                                                    <div class="box-title">Current Plan</div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <ul class="ti-list-group list-group-flush mb-2">
+                                                        <li class="ti-list-group-item">Standard (5,000 OTPs/month)</li>
+                                                        <li class="ti-list-group-item">Price: ₹2,250/month</li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">Upgrade Options</h4>
-                                                <p>Premium (10,000 OTPs/month) – ₹4,000</p>
-                                                <button class="ti-btn ti-btn-primary">Upgrade Plan</button>
+                                    
+                                        <!-- Usage Details -->
+                                        <div class="w-full lg:w-1/2">
+                                            <div class="box">
+                                                <div class="box-header">
+                                                    <div class="box-title">Upgrade Options</div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <ul class="ti-list-group list-group-flush mb-2">
+                                                        <li class="ti-list-group-item">Premium (10,000 OTPs/month) –<span class="text-success"> ₹4,000 </span></li>
+                                                        <li class="ti-list-group-item"><button class="ti-btn ti-btn-primary">Upgrade Plan</button></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                  
                                 </div>
 
-                                <!-- TAX & GST -->
-                                <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="tax-gst-tab"
-                                    role="tabpanel">
-                                    <div class="font-semibold block text-[18px] mb-4">Tax & GST Information</div>
-                                    <p>GSTIN: <span class="text-primary">27AACCF1234F1Z5</span></p>
-                                    <p>Tax Rate: 18%</p>
-                                    <p>Total (incl. GST): ₹2,655</p>
-                                </div>
 
                                 <!-- SUPPORT & FAQ -->
                                 <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="support-faq-tab"
@@ -478,13 +531,7 @@
                                 </div>
 
                             </div>
-                            <div class="box-footer border-t-0">
-                                <div class="btn-list float-end">
-                                    <button class="ti-btn bg-primarytint2color text-white btn-wave">Deactivate
-                                        Account</button>
-                                    <button class="ti-btn ti-btn-primary btn-wave">Save Changes</button>
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

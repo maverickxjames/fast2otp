@@ -240,8 +240,6 @@
                             </div>
                             <div class="box-footer border-t-0">
                                 <div class="btn-list float-end">
-                                    <button class="ti-btn bg-primarytint2color text-white btn-wave">Deactivate
-                                        Account</button>
                                     <button class="ti-btn ti-btn-primary btn-wave">Save Changes</button>
                                 </div>
                             </div>

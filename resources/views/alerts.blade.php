@@ -106,44 +106,65 @@
                                 <!-- BALANCE ALERTS -->
                                 <div class="tab-pane show active overflow-hidden p-0 border-0" id="balance-alert-tab" role="tabpanel">
                                     <div class="font-semibold block text-[18px] mb-4">Balance Alerts</div>
-                                    <div class="grid grid-cols-12 gap-4">
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">Low Balance Warning</h4>
-                                                <p>Get notified when your balance drops below a specific threshold.</p>
-                                                <p>Threshold: <span class="text-danger">₹500</span></p>
-                                                <button class="ti-btn ti-btn-primary">Update Threshold</button>
+                                    <div class="flex flex-col md:flex-row lg:flex-row gap-6">
+                                        <div class="w-full lg:w-1/2">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <div class="box-title">Low Balance Warning</div>
+                                            </div>
+                                            <div class="box-body">
+                                                <h6 class="box-title font-medium">Get notified when your balance drops below a specific threshold.</h6>
+                                                <p class="card-text mb-4">Threshold: <span class="text-danger">₹500</span></p>
+                                                <a href="javascript:void(0);" class="ti-btn ti-btn-primary">Update Threshold</a>
                                             </div>
                                         </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">Insufficient Balance Alert</h4>
-                                                <p>Receive alerts if you don’t have enough balance to send OTPs.</p>
-                                                <p>Status: <span class="text-success">Enabled</span></p>
+                                        </div>
+                                        <div class="w-full lg:w-1/2">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <div class="box-title">Insufficient Balance Alert</div>
+                                            </div>
+                                            <div class="box-body">
+                                                <h6 class="box-title font-medium">Receive alerts if you don’t have enough balance to send OTPs.</h6>
+                                                <p class="card-text mb-4">Status: <span class="text-success">Enabled</span></p>
+                                                <a href="javascript:void(0);" class="ti-btn ti-btn-primary">Add Credit</a>
                                             </div>
                                         </div>
+                                        </div>
+                                        
                                     </div>
+                                  
                                 </div>
                             
                                 <!-- USAGE & CONSUMPTION ALERTS -->
                                 <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="usage-alert-tab" role="tabpanel">
                                     <div class="font-semibold block text-[18px] mb-4">Usage & Consumption Alerts</div>
-                                    <div class="grid grid-cols-12 gap-4">
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">OTP Usage Limit</h4>
-                                                <p>Get notified when you reach 80%, 90%, or 100% of your monthly OTP limit.</p>
-                                                <p>Current Usage: <span class="text-warning">85%</span></p>
+                                    <div class="flex flex-col md:flex-row lg:flex-row gap-6">
+                                        <div class="w-full lg:w-1/2">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <div class="box-title ">OTP Usage Limit</div>
+                                            </div>
+                                            <div class="box-body">
+                                                <h6 class="box-title font-medium">Get notified when you reach 80%, 90%, or 100% of your monthly OTP limit.</h6>
+                                                <p class="card-text mb-4">Current Usage: <span class="text-warning">85%</span></p>
                                             </div>
                                         </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <div class="box custom-box p-4">
-                                                <h4 class="font-medium mb-2">Daily Usage Report</h4>
-                                                <p>Receive a daily report of OTPs sent and remaining balance.</p>
-                                                <p>Status: <span class="text-success">Enabled</span></p>
+                                        </div>
+                                        <div class="w-full lg:w-1/2">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <div class="box-title">Daily Usage Report</div>
+                                            </div>
+                                            <div class="box-body">
+                                                <h6 class="box-title font-medium">Receive a daily report of OTPs sent and remaining balance.</h6>
+                                                <p class="card-text mb-4">Status: <span class="text-success">Enabled</span></p>
                                             </div>
                                         </div>
+                                        </div>
+                                        
                                     </div>
+                                 
                                 </div>
                             
                                 <!-- BILLING ALERTS -->
