@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,15 @@ Route::middleware('guest')->group(function () {
         return view('register');
     });
 });
+
+// User Controller
+    
+Route::post('/send-reset-otp', [UserController::class, 'sendResetOTP'])->name('send-reset-otp');
+Route::get('/verify-otp', [UserController::class, 'showOtpVerificationPage'])->name('verify-otp-page');
+Route::post('/verify-otp', [UserController::class, 'verifyOtp'])->name('verify-otp');
+Route::post('/reset-update-password', [UserController::class, 'resetUpdatePassword'])->name('reset-update-password'); 
+
+Route::get('/reset-password', [UserController::class, 'resetPassword'])->name('reset-password');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
@@ -80,6 +90,9 @@ Route::middleware('auth')->group(function () {
     Route::get('change-password', [SettingController::class, 'changePassword'])->name('change-password');
     // Handle password update
 Route::post('/update-password', [SettingController::class, 'updatePassword'])->name('update-password');
+
+
+
 
 
 
