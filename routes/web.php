@@ -76,6 +76,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/update-profile-pic', [SettingController::class, 'updatePic'])->name('update-profile-pic');
     Route::post('/remove-profile-pic', [SettingController::class, 'removeProfilePic'])->name('remove-profile-pic');
     Route::post('/update-user-profile', [SettingController::class, 'updateProfile'])->name('update-user-profile');
+    Route::post('/billing/save', [SettingController::class, 'saveBillingAddress'])->name('billing.save');
+    Route::get('change-password', [SettingController::class, 'changePassword'])->name('change-password');
+    // Handle password update
+Route::post('/update-password', [SettingController::class, 'updatePassword'])->name('update-password');
+
 
 
 

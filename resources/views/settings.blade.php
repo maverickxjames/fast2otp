@@ -57,10 +57,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         input:disabled {
-      
-    cursor: not-allowed;         /* Shows 'not-allowed' cursor */
-    border: 1px solid #d1d5db;   /* Subtle border */
-    opacity: 0.7;      
+
+            cursor: not-allowed;
+            /* Shows 'not-allowed' cursor */
+            border: 1px solid #d1d5db;
+            /* Subtle border */
+            opacity: 0.7;
         }
     </style>
 
@@ -199,20 +201,21 @@
                                                                         class="hs-dropdown-toggle ti-modal-close-btn"
                                                                         data-hs-overlay="#hs-vertically-centered-modal">
                                                                         <span class="sr-only">Close</span>
-                                                                       <i class="ri-close-line"></i>
+                                                                        <i class="ri-close-line"></i>
                                                                     </button>
                                                                 </div>
 
                                                                 <div class="ti-modal-body grid grid-cols-4 gap-4">
                                                                     @foreach ($profile as $pic)
-                                                                    @if($pic->name!=17)
-                                                                        <div class="border-0 rounded-md p-2 cursor-pointer"
-                                                                            onclick="selectPic('{{ $pic->name }}')"
-                                                                            id="pic-{{ $pic->name }}">
-                                                                            <img src="build/assets/images/profile/{{ $pic->name }}.jpg"
-                                                                                alt="Profile" class="w-full h-auto">
-                                                                        </div>
-                                                                    @endif
+                                                                        @if ($pic->name != 17)
+                                                                            <div class="border-0 rounded-md p-2 cursor-pointer"
+                                                                                onclick="selectPic('{{ $pic->name }}')"
+                                                                                id="pic-{{ $pic->name }}">
+                                                                                <img src="build/assets/images/profile/{{ $pic->name }}.jpg"
+                                                                                    alt="Profile"
+                                                                                    class="w-full h-auto">
+                                                                            </div>
+                                                                        @endif
                                                                     @endforeach
                                                                 </div>
 
@@ -234,7 +237,7 @@
 
 
                                                     <form id="user-profile-form" class="ti-validation">
-                                                         @csrf
+                                                        @csrf
                                                         <div class="grid lg:grid-cols-2 gap-6">
                                                             <div class="space-y-2">
                                                                 <label
@@ -243,8 +246,8 @@
                                                                 <input type="text"
                                                                     class="my-auto ti-form-input  rounded-sm "
                                                                     value="{{ $userData->name ? $userData->name : '' }}"
-                                                                    name="name"
-                                                                    placeholder="Fullname" required="">
+                                                                    name="name" placeholder="Fullname"
+                                                                    required="">
                                                             </div>
                                                             <div class="space-y-2">
                                                                 <label
@@ -255,7 +258,7 @@
                                                                     value="{{ $userData->phone ? '+91 ' . $userData->phone : '' }}"
                                                                     placeholder="+91 123-456-789"
                                                                     pattern="^\[0-9]{10}$" required disabled>
-                                                                   
+
 
                                                             </div>
 
@@ -266,7 +269,8 @@
                                                                 <input type="email"
                                                                     class="my-auto ti-form-input  rounded-sm"
                                                                     value="{{ $userData->email ? $userData->email : '' }}"
-                                                                    placeholder="your@site.com" required="" disabled>
+                                                                    placeholder="your@site.com" required=""
+                                                                    disabled>
                                                             </div>
                                                             <div class="space-y-2">
                                                                 <label
@@ -277,51 +281,68 @@
                                                                     placeholder="Select your date of birth"
                                                                     value="{{ $userData->dob ?? '' }}" required>
                                                             </div>
-                                                           <!-- Gender -->
-        <div class="space-y-2">
-            <label class="ti-form-label dark:text-defaulttextcolor/80 mb-0">Gender</label>
-            <ul class="flex flex-col sm:flex-row">
+                                                            <!-- Gender -->
+                                                            <div class="space-y-2">
+                                                                <label
+                                                                    class="ti-form-label dark:text-defaulttextcolor/80 mb-0">Gender</label>
+                                                                <ul class="flex flex-col sm:flex-row">
 
-                <!-- Female -->
-                <li class="ti-list-group w-full gap-x-2.5 flex py-2 px-4">
-                    <div class="relative flex items-start w-full">
-                        <div class="flex items-center h-5">
-                            <input id="gender-female" name="gender" type="radio" class="ti-form-radio"
-                                value="Female" {{ $userData->gender == 'Female' ? 'checked' : '' }}>
-                        </div>
-                        <label for="gender-female" class="ms-3 block w-full text-sm">Female</label>
-                    </div>
-                </li>
+                                                                    <!-- Female -->
+                                                                    <li
+                                                                        class="ti-list-group w-full gap-x-2.5 flex py-2 px-4">
+                                                                        <div class="relative flex items-start w-full">
+                                                                            <div class="flex items-center h-5">
+                                                                                <input id="gender-female"
+                                                                                    name="gender" type="radio"
+                                                                                    class="ti-form-radio"
+                                                                                    value="Female"
+                                                                                    {{ $userData->gender == 'Female' ? 'checked' : '' }}>
+                                                                            </div>
+                                                                            <label for="gender-female"
+                                                                                class="ms-3 block w-full text-sm">Female</label>
+                                                                        </div>
+                                                                    </li>
 
-                <!-- Male -->
-                <li class="ti-list-group w-full gap-x-2.5 flex py-2 px-4">
-                    <div class="relative flex items-start w-full">
-                        <div class="flex items-center h-5">
-                            <input id="gender-male" name="gender" type="radio" class="ti-form-radio"
-                                value="Male" {{ $userData->gender == 'Male' ? 'checked' : '' }}>
-                        </div>
-                        <label for="gender-male" class="ms-3 block w-full text-sm">Male</label>
-                    </div>
-                </li>
+                                                                    <!-- Male -->
+                                                                    <li
+                                                                        class="ti-list-group w-full gap-x-2.5 flex py-2 px-4">
+                                                                        <div class="relative flex items-start w-full">
+                                                                            <div class="flex items-center h-5">
+                                                                                <input id="gender-male" name="gender"
+                                                                                    type="radio"
+                                                                                    class="ti-form-radio"
+                                                                                    value="Male"
+                                                                                    {{ $userData->gender == 'Male' ? 'checked' : '' }}>
+                                                                            </div>
+                                                                            <label for="gender-male"
+                                                                                class="ms-3 block w-full text-sm">Male</label>
+                                                                        </div>
+                                                                    </li>
 
-                <!-- Others -->
-                <li class="ti-list-group w-full gap-x-2.5 flex py-2 px-4">
-                    <div class="relative flex items-start w-full">
-                        <div class="flex items-center h-5">
-                            <input id="gender-others" name="gender" type="radio" class="ti-form-radio"
-                                value="Others" {{ $userData->gender == 'Others' ? 'checked' : '' }}>
-                        </div>
-                        <label for="gender-others" class="ms-3 block w-full text-sm">Others</label>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                                                                    <!-- Others -->
+                                                                    <li
+                                                                        class="ti-list-group w-full gap-x-2.5 flex py-2 px-4">
+                                                                        <div class="relative flex items-start w-full">
+                                                                            <div class="flex items-center h-5">
+                                                                                <input id="gender-others"
+                                                                                    name="gender" type="radio"
+                                                                                    class="ti-form-radio"
+                                                                                    value="Others"
+                                                                                    {{ $userData->gender == 'Others' ? 'checked' : '' }}>
+                                                                            </div>
+                                                                            <label for="gender-others"
+                                                                                class="ms-3 block w-full text-sm">Others</label>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
 
 
                                                         </div>
                                                         <div class="box-footer border-t-1 mt-10">
                                                             <div class="btn-list float-end">
-                                                                <button type="submit" onclick="updateUserProfile(event)"
+                                                                <button type="submit"
+                                                                    onclick="updateUserProfile(event)"
                                                                     class="ti-btn ti-btn-primary btn-wave">Save
                                                                     Changes</button>
                                                             </div>
@@ -341,38 +362,70 @@
                                 <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="billing-tab"
                                     role="tabpanel">
                                     <div class="font-semibold block text-[18px] mb-4">Billing Address</div>
-                                    <div class="grid grid-cols-12 gap-4">
-                                        <div class="xl:col-span-12 col-span-12">
-                                            <label class="form-label">Company Name:</label>
-                                            <input type="text" class="form-control" placeholder="Optional">
+
+                                    <form id="billing-form" class="airstrike-form">
+                                        @csrf
+                                        <div class="grid grid-cols-12 gap-4">
+
+                                            <!-- Company Name (Optional) -->
+                                            <div class="xl:col-span-12 col-span-12">
+                                                <label class="form-label">Company Name: <span
+                                                        class="text-gray-500">(Optional)</span></label>
+                                                <input type="text" class="form-control" name="company"
+                                                    placeholder="Enter Company Name" value="{{ $billing->company_name? $billing->company_name : '' }}">
+                                            </div>
+
+                                            <!-- Address Line 1 (Required) -->
+                                            <div class="xl:col-span-6 col-span-12">
+                                                <label class="form-label">Address Line 1<span class="text-red-500">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" name="address1"
+                                                    placeholder="Enter Address 2" value="{{ $billing->address1? $billing->address1 : '' }}" required>
+                                            </div>
+
+                                            <!-- Address Line 2 (Optional) -->
+                                            <div class="xl:col-span-6 col-span-12">
+                                                <label class="form-label">Address Line 2 <span
+                                                        class="text-gray-500">(Optional)</span></label>
+                                                <input type="text" class="form-control" name="address2" value="{{ $billing->address2? $billing->address2 : '' }}"
+                                                    placeholder="Enter Address 2">
+                                            </div>
+
+                                            <!-- City (Required) -->
+                                            <div class="xl:col-span-4 col-span-12">
+                                                <label class="form-label">City <span class="text-red-500">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" name="city"
+                                                    placeholder="Enter City" value="{{ $billing->city? $billing->city : '' }}" required>
+                                            </div>
+
+                                            <!-- State (Required) -->
+                                            <div class="xl:col-span-4 col-span-12">
+                                                <label class="form-label">State <span class="text-red-500">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" name="state"
+                                                    placeholder="Enter State" value="{{ $billing->state? $billing->state : '' }}" required>
+                                            </div>
+
+                                            <!-- ZIP Code (Required) -->
+                                            <div class="xl:col-span-4 col-span-12">
+                                                <label class="form-label">ZIP Code <span class="text-red-500">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" name="zip"
+                                                    placeholder="Enter ZIP" value="{{ $billing->zip? $billing->zip : '' }}" required pattern="^[0-9]{5,6}$">
+                                            </div>
                                         </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <label class="form-label">Address Line 1:</label>
-                                            <input type="text" class="form-control" placeholder="Enter Address">
+
+                                        <div class="box-footer border-t-1 mt-10">
+                                            <div class="btn-list float-end">
+                                                <button type="submit" onclick="saveBillingAddress(event)"
+                                                    class="ti-btn ti-btn-primary btn-wave">Save
+                                                    Changes</button>
+                                            </div>
                                         </div>
-                                        <div class="xl:col-span-6 col-span-12">
-                                            <label class="form-label">Address Line 2:</label>
-                                            <input type="text" class="form-control" placeholder="Optional">
-                                        </div>
-                                        <div class="xl:col-span-4 col-span-12">
-                                            <label class="form-label">City:</label>
-                                            <input type="text" class="form-control" placeholder="Enter City">
-                                        </div>
-                                        <div class="xl:col-span-4 col-span-12">
-                                            <label class="form-label">State:</label>
-                                            <input type="text" class="form-control" placeholder="Enter State">
-                                        </div>
-                                        <div class="xl:col-span-4 col-span-12">
-                                            <label class="form-label">ZIP Code:</label>
-                                            <input type="text" class="form-control" placeholder="Enter ZIP">
-                                        </div>
-                                    </div>
-                                    <div class="box-footer border-t-1 mt-10">
-                                        <div class="btn-list float-end">
-                                            <button class="ti-btn ti-btn-primary btn-wave">Save Changes</button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
+
 
                                 <!-- SECURITY -->
                                 <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="security-tab"
@@ -385,19 +438,23 @@
                                     </div>
                                 </div>
 
-                                <!-- PASSWORD -->
-                                <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="password-tab"
-                                    role="tabpanel">
-                                    <div class="font-semibold block text-[18px] mb-4">Change Password</div>
-                                    <input type="password" class="form-control" placeholder="Current Password">
-                                    <input type="password" class="form-control mt-3" placeholder="New Password">
-                                    <input type="password" class="form-control mt-3" placeholder="Confirm Password">
-                                    <div class="box-footer border-t-1 mt-10">
-                                        <div class="btn-list float-end">
-                                            <button class="ti-btn ti-btn-primary btn-wave">Save Changes</button>
-                                        </div>
-                                    </div>
-                                </div>
+                               <!-- PASSWORD SECTION -->
+<div class="tab-pane overflow-hidden p-0 border-0 hidden" id="password-tab" role="tabpanel">
+    <div class="font-semibold block text-[18px] mb-4">Password</div>
+
+    <!-- Display Hidden Password -->
+    <input type="password" class="form-control" value="********" disabled>
+    
+    <div class="box-footer border-t-1 mt-10">
+        <div class="btn-list float-end">
+            <!-- Button to Open Password Change Page -->
+            <a href="" class="ti-btn ti-btn-primary btn-wave">
+                Change Password
+            </a>
+        </div>
+    </div>
+</div>
+
 
                                 <!-- ACCOUNT MANAGEMENT -->
                                 <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="account-tab"
@@ -510,7 +567,7 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- Add jQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     <script>
@@ -528,127 +585,127 @@
 
         // AJAX call to save the selected profile picture
         function saveProfilePic() {
-    const formData = new FormData(document.getElementById('profile-form'));
+            const formData = new FormData(document.getElementById('profile-form'));
 
-    $.ajax({
-        url: "{{ route('update-profile-pic') }}",   // Laravel route
-        method: "POST",
-        data: formData,
-        processData: false,  // Prevent jQuery from processing the data
-        contentType: false,  // Prevent jQuery from setting contentType
-        headers: {
-            "X-CSRF-TOKEN": $('input[name="_token"]').val()  // CSRF token for security
-        },
-        success: function(response) {
-            if (response.success) {
-                // Update current profile image
-                $('#current-pic').attr('src', `build/assets/images/profile/${response.name}.jpg`);
-                document.getElementById(`pic-${response.name}`).classList.remove('border-4', 'border-dark');
+            $.ajax({
+                url: "{{ route('update-profile-pic') }}", // Laravel route
+                method: "POST",
+                data: formData,
+                processData: false, // Prevent jQuery from processing the data
+                contentType: false, // Prevent jQuery from setting contentType
+                headers: {
+                    "X-CSRF-TOKEN": $('input[name="_token"]').val() // CSRF token for security
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Update current profile image
+                        $('#current-pic').attr('src', `build/assets/images/profile/${response.name}.jpg`);
+                        document.getElementById(`pic-${response.name}`).classList.remove('border-4',
+                            'border-dark');
 
-                $('#hs-vertically-centered-modal').addClass('hidden');
+                        $('#hs-vertically-centered-modal').addClass('hidden');
 
-// ✅ Remove the backdrop manually
-$('#hs-vertically-centered-modal-backdrop').remove();
+                        // ✅ Remove the backdrop manually
+                        $('#hs-vertically-centered-modal-backdrop').remove();
 
-                // Show success Toastify notification
-                Toastify({
-                    text: "Profile picture updated successfully!",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    backgroundColor: "#00b09b"
-                }).showToast();
-            } else {
-                // Show error Toastify notification
-                $('#hs-vertically-centered-modal').addClass('hidden');
+                        // Show success Toastify notification
+                        Toastify({
+                            text: "Profile picture updated successfully!",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#00b09b"
+                        }).showToast();
+                    } else {
+                        // Show error Toastify notification
+                        $('#hs-vertically-centered-modal').addClass('hidden');
 
-// ✅ Remove the backdrop manually
-$('#hs-vertically-centered-modal-backdrop').remove();
-                Toastify({
-                    text: "Failed to update profile picture",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    backgroundColor:"#ff5f6d"
-                }).showToast();
-            }
+                        // ✅ Remove the backdrop manually
+                        $('#hs-vertically-centered-modal-backdrop').remove();
+                        Toastify({
+                            text: "Failed to update profile picture",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#ff5f6d"
+                        }).showToast();
+                    }
 
-            // Close the modal
-            // $('[data-hs-overlay="#hs-vertically-centered-modal"]').click();
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error:', error);
-            Toastify({
-                text: "Something went wrong. Please try again.",
-                duration: 3000,
-                gravity: "top",
-                position: "right",
-                backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
-            }).showToast();
+                    // Close the modal
+                    // $('[data-hs-overlay="#hs-vertically-centered-modal"]').click();
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', error);
+                    Toastify({
+                        text: "Something went wrong. Please try again.",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
+                    }).showToast();
+                }
+            });
         }
-    });
-}
 
 
-function removeProfilePic() {
-    $.ajax({
-        url: "{{ route('remove-profile-pic') }}",  // Your backend route
-        type: "POST",
-        data: {
-            _token: $('meta[name="csrf-token"]').attr('content'),  // CSRF token
-            profile_pic: '17'  // Set the default profile picture to 17
-        },
-        success: function(response) {
-            if (response.success) {
-                // ✅ Update the current image to 17.jpg
-                document.getElementById('current-pic').src = 'build/assets/images/profile/17.jpg';
+        function removeProfilePic() {
+            $.ajax({
+                url: "{{ route('remove-profile-pic') }}", // Your backend route
+                type: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
+                    profile_pic: '17' // Set the default profile picture to 17
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // ✅ Update the current image to 17.jpg
+                        document.getElementById('current-pic').src = 'build/assets/images/profile/17.jpg';
 
-                // ✅ Show Toastify notification
-                Toastify({
-                    text: "Profile picture removed successfully!",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
-                }).showToast();
-            } else {
-                // ❌ Handle error
-                Toastify({
-                    text: "Failed to remove profile picture",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
-                }).showToast();
-            }
-        },
-        error: function() {
-            // ❌ Handle AJAX error
-            Toastify({
-                text: "Something went wrong!",
-                duration: 3000,
-                gravity: "top",
-                position: "right",
-                backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
-            }).showToast();
+                        // ✅ Show Toastify notification
+                        Toastify({
+                            text: "Profile picture removed successfully!",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
+                        }).showToast();
+                    } else {
+                        // ❌ Handle error
+                        Toastify({
+                            text: "Failed to remove profile picture",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
+                        }).showToast();
+                    }
+                },
+                error: function() {
+                    // ❌ Handle AJAX error
+                    Toastify({
+                        text: "Something went wrong!",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
+                    }).showToast();
+                }
+            });
         }
-    });
-}
-
     </script>
     <!-- END SCRIPTS -->
 
     <script>
         function updateUserProfile(event) {
             event.preventDefault();
-    
+
             const formData = new FormData(document.getElementById('user-profile-form'));
-    
+
             $.ajax({
-                url: "{{ route('update-user-profile') }}",  // Your route
+                url: "{{ route('update-user-profile') }}", // Your route
                 type: "POST",
                 data: formData,
-                processData: false, 
+                processData: false,
                 contentType: false,
                 headers: {
                     "X-CSRF-TOKEN": $('input[name="_token"]').val()
@@ -686,8 +743,40 @@ function removeProfilePic() {
                 }
             });
         }
+
+        function saveBillingAddress() {
+            event.preventDefault();
+            const formData = new FormData(document.getElementById('billing-form'));
+            console.log(formData);
+
+
+            $.ajax({
+                url: "{{ route('billing.save') }}",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                success: function(response) {
+                    if (response.success) {
+                        Toastify({
+                            text: response.message,
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)"
+                        }).showToast();
+                    }
+                },
+                error: function(xhr) {
+                    console.error("Error:", xhr);
+                }
+            });
+        }
     </script>
-    
+
 </body>
 
 </html>
