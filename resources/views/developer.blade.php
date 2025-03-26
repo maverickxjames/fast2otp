@@ -418,14 +418,18 @@
                                                     <div class="mb-4">
                                                         <label class="block text-gray-600">Webhook URL:</label>
                                                         <div class="flex items-center gap-2">
+                                                            
                                                             <input id="webhookUrl" type="text" value="{{ $user->webhook_url ?? '' }}" 
                                                                 placeholder="Enter your webhook URL"
                                                                 class="w-full p-2 border rounded">
                                                             
                                                             <!-- Copy Button -->
                                                             <button onclick="copyWebhookUrl()" 
-                                                                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition">
-                                                                📋 Copy
+                                                                class="bg-blue-500 hover:bg-blue-600 flex gap-2 text-light px-4 py-2 rounded-lg shadow-md transition">
+                                                                {{-- copy icon --}}
+
+                                                                <i class="bi bi-clipboard"></i>
+                                                                Copy
                                                             </button>
                                                         </div>
                                                     </div>
@@ -433,13 +437,18 @@
                                                     <!-- Actions -->
                                                     <div class="flex justify-between items-center mt-4">
                                                         <button onclick="updateWebhookUrl()"
-                                                            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition">
-                                                            💾 Save
+                                                            class="bg-green-500 hover:bg-green-600 flex gap-2 text-light px-4 py-2 rounded-lg shadow-md transition">
+                                                            {{-- save icon --}}
+
+                                                            <i class="bi bi-save"></i>
+                                                             Save
                                                         </button>
                                 
                                                         <button onclick="testWebhook()"
-                                                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition">
-                                                            🚀 Test Webhook
+                                                            class="bg-yellow-500 hover:bg-yellow-600 flex gap-2 text-light px-4 py-2 rounded-lg shadow-md transition">
+                                                            {{-- test icon --}}
+                                                            <i class="bi bi-emoji-smile"></i>
+                                                             Test Webhook
                                                         </button>
                                                     </div>
                                                 </div>
@@ -472,51 +481,29 @@
                                 <!-- BILLING HISTORY -->
                                 <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="security-tab"
                                     role="tabpanel">
-                                    <div class="font-semibold block text-[18px] mb-4">Billing History</div>
-                                    <div class="table-responsive">
-                                        <table class="ti-custom-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Invoice #</th>
-                                                    <th>Date</th>
-                                                    <th>Amount</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>INV-001234</td>
-                                                    <td>15-Mar-2025</td>
-                                                    <td>₹2,250</td>
-                                                    <td><span class="badge bg-success">Paid</span></td>
-                                                    <td><button class="ti-btn ti-btn-primary">Download PDF</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>INV-001233</td>
-                                                    <td>15-Feb-2025</td>
-                                                    <td>₹2,250</td>
-                                                    <td><span class="badge bg-success">Paid</span></td>
-                                                    <td><button class="ti-btn ti-btn-primary">Download PDF</button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="font-semibold block text-[18px] mb-4">IP Listing</div>
+                                    <div class="flex flex-col md:flex-row lg:flex-row gap-6">
+                                        <!-- Left Section (Form) -->
+                                        <div class="w-full lg:w-1/2">
+                                            <div class="box p-6 rounded-lg shadow-lg">
+                                                <div class="box-header">
+                                                    <div class="box-title text-xl font-semibold">IP Listing </div>
+                                                </div>
+
+                                                <div class="box-body ">
+                                                   ...
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                     
                                     </div>
+                                    
                                 </div>
 
 
 
 
-                                <!-- SUPPORT & FAQ -->
-                                <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="support-faq-tab"
-                                    role="tabpanel">
-                                    <div class="font-semibold block text-[18px] mb-4">Support & FAQ</div>
-                                    <p>💬 Need help? Contact <a href="#">Billing Support</a></p>
-                                    <p>❓ How to download invoices?</p>
-                                    <p>❓ What happens if a payment fails?</p>
-                                </div>
 
                             </div>
 

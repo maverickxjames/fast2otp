@@ -44,42 +44,5 @@ class WebhookController extends Controller
         ]);
     }
 
-    /**
-     * Send a test webhook.
-     */
-    public function sendTest()
-    {
-        $user = auth()->user();
-        $webhookUrl = $user->webhook_url;
-
-        if (!$webhookUrl) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Webhook URL not set!'
-            ], 400);
-        }
-
-        // Sample test payload
-        $payload = [
-            'event' => 'test_event',
-            'timestamp' => now(),
-            'message' => 'This is a test webhook payload.'
-        ];
-
-        // Send the test webhook
-        try {
-            $response = Http::post($webhookUrl, $payload);
-
-            return response()->json([
-                'status' => 'success',
-                'response_code' => $response->status(),
-                'response_body' => $response->body()
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to send test webhook: ' . $e->getMessage()
-            ], 500);
-        }
-    }
+   
 }
