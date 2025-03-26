@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebhookController;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -70,7 +72,8 @@ Route::middleware('auth')->group(function () {
     })->name('terms-conditions');
 
     Route::get('/developer', function () {
-        return view('developer');
+        $user=Auth::user();
+        return view('developer',compact('user'));
     })->name('developer');
 
     Route::get('/test',function(){
@@ -83,6 +86,13 @@ Route::middleware('auth')->group(function () {
         }
         return response()->json(['message'=>'Data inserted successfully']);
     })->name('test');
+
+
+    // Routes
+Route::post('webhook-status', [WebhookController::class, 'updateStatus'])->name('webhook-status');
+Route::post('update-webhook', [WebhookController::class, 'updateUrl'])->name('update-webhook');
+Route::get('test-webhook', [WebhookController::class, 'sendTest'])->name('test-webhook');
+
 
 
     // Setting Controller

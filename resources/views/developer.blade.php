@@ -51,6 +51,85 @@
 
     <!-- MAIN JS -->
     <script src="build/assets/main.js"></script>
+    {{-- scrf --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <style>
+        /* Toggle Switch Style */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 4px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #4caf50;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(18px);
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 768px) {
+            .box-body {
+                flex-direction: column;
+            }
+
+            .box-body input,
+            .box-body button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .box-body .flex {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* @media (max-width: 768px) {
+            .flex.items-center.gap-4 {
+                flex-direction: column;
+            }
+
+            .flex.items-center.gap-4 input,
+            .flex.items-center.gap-4 button {
+                width: 100%;
+            }
+        } */
+    </style>
 
 
 
@@ -203,14 +282,14 @@
 
                                                     <div class="mt-4">
                                                         <div class="text-lg font-bold mb-2">Overall URL:</div>
-                                                         <!-- URL container with copy button placed outside the pre tag -->
+                                                        <!-- URL container with copy button placed outside the pre tag -->
                                                         <div class="flex items-center gap-2">
                                                             <pre id="overallUrl" class="p-4 bg-dark rounded-lg text-light overflow-auto flex-1">
                                                                 https://api.fast2otp.com/send-otp
                                                             </pre>
-                                                            
+
                                                             <!-- Copy button placed outside for visibility -->
-                                                            <button onclick="copyToClipboard()" 
+                                                            <button onclick="copyToClipboard()"
                                                                 class="bg-dark text-light px-4 py-4 rounded-lg shadow-md transition">
                                                                 {{-- copy icon --}}
 
@@ -230,103 +309,162 @@
                                 <!-- PAYMENT METHODS -->
                                 <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="api-key-tab"
                                     role="tabpanel">
-                                    <div class="font-semibold block text-[18px] mb-4">Api Key</div>
-                                    <div class="xxl:col-span-3 xl:col-span-6 lg:col-span-6 sm:col-span-6 col-span-12">
-                                        <div class="box ">
-                                            <div class="box-body">
-                                                <p class="mb-0 mt-3 text-xl font-medium leading-none">
-                                                    Default Method
-                                                </p>
-                                            </div>
-                                            <div class="box-footer">
-                                                <div class="flex flex-col md:flex-row lg:flex-row gap-6">
-                                                    <div class="w-full lg:w-1/2">
-                                                        <div
-                                                            class="text-[15px] font-semibold sm:flex block items-center justify-between mb-3">
-                                                            <div>Saved Cards :</div>
-                                                        </div>
-                                                        <div class="grid grid-cols-12 sm:gap-x-6 gap-y-3">
-                                                            <div class="xl:col-span-6 col-span-12">
-                                                                <div
-                                                                    class="sm:flex block items-center justify-between border border-info p-1 rounded-md">
-                                                                    <div class="me-2 leading-none">
-                                                                        <span class="avatar avatar-md">
-                                                                            <img src="build/assets/images/ecommerce/png/26.png"
-                                                                                alt="">
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="saved-card-details">
-                                                                        <p class="mb-0 font-semibold">XXXX - XXXX -
-                                                                            XXXX - 7646</p>
-                                                                    </div>
-                                                                </div>
+                                    <div class="block text-2xl font-semibold mb-4">API Key</div>
 
-                                                            </div>
-                                                        </div>
+                                    <div class="flex flex-col md:flex-row lg:flex-row gap-6">
+
+                                        <!-- API Key Box -->
+                                        <div class="w-full">
+                                            <div class="box">
+                                                <div class="box-header flex justify-between items-center">
+                                                    <div class="box-title text-xl font-semibold">Your API Key</div>
+                                                    <form>
+                                                        @csrf
+
+                                                 
+                                                    <div class="flex items-center gap-2">
+                                                        <span id="apiStatusText" class="text-dark font-semibold">Status: <span
+                                                                class="font-bold {{ $user->api_status=='on'?'text-success':'text-danger' }}">{{ $user->api_status }}</span></span>
+                                                        <label class="switch">
+                                                            <input type="checkbox" id="apiStatusToggle"
+                                                                onclick="toggleApiStatus()" {{ $user->api_status=='on'?'checked':'' }}>
+                                                            <span class="slider round"></span>
+                                                        </label>
                                                     </div>
-                                                    <div class="w-full lg:w-1/2">
-                                                        <div
-                                                            class="text-[15px] font-semibold sm:flex block items-center justify-between mb-3">
-                                                            <div>UPI :</div>
-                                                        </div>
-                                                        <div class="grid grid-cols-12 sm:gap-x-6 gap-y-3 ">
-                                                            <div class="xl:col-span-6 col-span-12 ">
-                                                                <div
-                                                                    class="sm:flex block items-center justify-between">
-                                                                    <div
-                                                                        class="saved-card-details border border-info px-2 py-4 rounded-md">
-                                                                        <p class="mb-0 font-semibold">test@upi</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                </form>
                                                 </div>
 
+                                                <div class="box-body">
 
+                                                    <div class="flex items-center gap-4">
+
+                                                        <!-- API Key Input Field -->
+                                                        <div class="w-full lg:w-[70%]">
+                                                            <input id="apiKey" type="password"
+                                                                value={{ $user->api_key }}
+                                                                class="w-full p-2 border rounded" readonly>
+                                                        </div>
+
+                                                        <div
+                                                            class="flex items-center gap-2 justify-center w-full lg:w-[30%] ">
+                                                            <!-- Show/Hide Button -->
+                                                            <button onclick="toggleKeyVisibility()"
+                                                                class="w-full bg-gray-500 text-dark px-4 py-2 hover:bg-gray-800 rounded-lg shadow-md transition">
+                                                                👁️ Show
+                                                            </button>
+
+                                                            <!-- Copy Button -->
+                                                            <button onclick="copyApiKey()"
+                                                                class="w-full bg-dark text-light px-4 py-2 rounded-lg shadow-md transition">
+                                                                <i class="bi bi-clipboard"></i>
+                                                                Copy Key
+                                                            </button>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <!-- Generate New Key -->
+                                                    <div class="mt-4">
+                                                        <button onclick="generateNewApiKey()"
+                                                            class="bg-green-500 hover:bg-green-600 text-dark px-4 py-2 rounded-lg shadow-md transition">
+                                                            🔑 Generate New Key
+                                                        </button>
+
+                                                    </div>
+
+
+
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
 
                                 </div>
+
                                 <!-- SUBSCRIPTION & PLAN MANAGEMENT -->
                                 <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="api-webhook-tab"
                                     role="tabpanel">
-                                    <div class="font-semibold block text-[18px] mb-4">Api Webhook
+                                    <div class="font-semibold block text-[18px] mb-4">API Webhook
                                     </div>
                                     <div class="flex flex-col md:flex-row lg:flex-row gap-6">
-                                        <!-- Current Plan -->
-                                        <div class="w-full lg:w-1/2">
-                                            <div class="box">
-                                                <div class="box-header">
-                                                    <div class="box-title">Current Plan</div>
-                                                </div>
-                                                <div class="box-body">
-                                                    <ul class="ti-list-group list-group-flush mb-2">
-                                                        <li class="ti-list-group-item">Standard (5,000 OTPs/month)</li>
-                                                        <li class="ti-list-group-item">Price: ₹2,250/month</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <!-- Usage Details -->
+                                        <!-- Webhook Management -->
                                         <div class="w-full lg:w-1/2">
                                             <div class="box">
-                                                <div class="box-header">
-                                                    <div class="box-title">Upgrade Options</div>
+                                                <div class="box-header flex justify-between items-center">
+                                                    <div class="box-title text-xl font-semibold">Webhook Management</div>
+                                                    <form>
+                                                        @csrf
+                                                        <div class="flex items-center gap-2">
+                                                            <span id="webhookStatusText" class="text-dark font-semibold">Status: 
+                                                                <span class="font-bold {{ $user->webhook_status == 'on' ? 'text-success' : 'text-danger' }}">
+                                                                    {{ $user->webhook_status }}
+                                                                </span>
+                                                            </span>
+                                                            <label class="switch">
+                                                                <input type="checkbox" id="webhookStatusToggle" 
+                                                                    onclick="toggleWebhookStatus()" 
+                                                                    {{ $user->webhook_status == 'on' ? 'checked' : '' }}>
+                                                                <span class="slider round"></span>
+                                                            </label>
+                                                        </div>
+                                                    </form>
                                                 </div>
+                                
                                                 <div class="box-body">
-                                                    <ul class="ti-list-group list-group-flush mb-2">
-                                                        <li class="ti-list-group-item">Premium (10,000 OTPs/month)
-                                                            –<span class="text-success"> ₹4,000 </span></li>
-                                                        <li class="ti-list-group-item"><button
-                                                                class="ti-btn ti-btn-primary">Upgrade Plan</button>
-                                                        </li>
-                                                    </ul>
+                                                    <!-- Webhook URL -->
+                                                    <div class="mb-4">
+                                                        <label class="block text-gray-600">Webhook URL:</label>
+                                                        <div class="flex items-center gap-2">
+                                                            <input id="webhookUrl" type="text" value="{{ $user->webhook_url ?? '' }}" 
+                                                                placeholder="Enter your webhook URL"
+                                                                class="w-full p-2 border rounded">
+                                                            
+                                                            <!-- Copy Button -->
+                                                            <button onclick="copyWebhookUrl()" 
+                                                                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                                                                📋 Copy
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <!-- Actions -->
+                                                    <div class="flex justify-between items-center mt-4">
+                                                        <button onclick="updateWebhookUrl()"
+                                                            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition">
+                                                            💾 Save
+                                                        </button>
+                                
+                                                        <button onclick="testWebhook()"
+                                                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition">
+                                                            🚀 Test Webhook
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                
+                                        <!-- Webhook Logs -->
+                                        <div class="w-full lg:w-1/2">
+                                            <div class="box">
+                                                <div class="box-header flex justify-between items-center">
+                                                    <div class="box-title text-xl font-semibold">Webhook Logs</div>
+                                                    <button onclick="clearWebhookLogs()"
+                                                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition">
+                                                        🗑️ Clear Logs
+                                                    </button>
+                                                </div>
+                                
+                                                <div class="box-body max-h-[400px] overflow-y-auto">
+                                                    <div id="webhookLogs">
+                                                        <p class="text-gray-500">No logs available...</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                
                                     </div>
 
                                 </div>
@@ -478,38 +616,325 @@
     <!-- CUSTOM-SWITCHER JS -->
     <link rel="modulepreload" href="build/assets/custom-switcher-kd-POPJw.js">
     <script type="module" src="build/assets/custom-switcher-kd-POPJw.js"></script>
+      <!-- Add jQuery CDN -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             generateRequest(); // Automatically generate GET request on load
         });
 
-        function copyToClipboard() {
-    const urlElement = document.getElementById("overallUrl");
-    const textToCopy = urlElement.innerText.trim();
-    
-    // Create a temporary textarea to copy text
-    const textarea = document.createElement("textarea");
-    textarea.value = textToCopy;
-    document.body.appendChild(textarea);
-    
-    // Select and copy the text
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
 
-    // Show success message
+        /*
+        // api webhook
+        */
+
+        // 🟢 Toggle Webhook Status
+function toggleWebhookStatus() {
+    const toggle = document.getElementById("webhookStatusToggle");
+    const statusText = document.getElementById("webhookStatusText");
+
+    $.ajax({
+        url: '{{ route("webhook-status") }}',
+        method: 'POST',
+        data: {
+            status: toggle.checked ? 'on' : 'off',
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(response) {
+            if (response.status === 'success') {
+                const webhookStatus = response.webhook_status;
+                statusText.innerHTML = `Status: <span class="font-bold ${webhookStatus === 'on' ? 'text-success' : 'text-danger'}">${webhookStatus}</span>`;
+                Toastify({
+                    text: `Webhook Status turned ${webhookStatus.toUpperCase()}!`,
+                    duration: 3000,
+                    backgroundColor: webhookStatus === 'on' ? "#4CAF50" : "#F44336"
+                }).showToast();
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error:", error);
+            toggle.checked = !toggle.checked;  // Revert on error
+            Toastify({
+                text: "Failed to update webhook status!",
+                duration: 3000,
+                backgroundColor: "#F44336"
+            }).showToast();
+        }
+    });
+}
+
+// 🟢 Copy Webhook URL
+function copyWebhookUrl() {
+    const urlInput = document.getElementById("webhookUrl");
+    urlInput.select();
+    document.execCommand("copy");
     Toastify({
-        text: "URL copied to clipboard!",
-        duration: 3000,
-        newWindow: true,
-        close: true,
-        gravity: "top",
-        position: "right",
-        backgroundColor: "info",
-        stopOnFocus: true,
+        text: "Webhook URL copied!",
+        duration: 2000,
+        backgroundColor: "#4CAF50"
     }).showToast();
 }
+
+// 🟢 Update Webhook URL
+function updateWebhookUrl() {
+    const url = document.getElementById("webhookUrl").value;
+
+    $.ajax({
+        url: '{{ route("update-webhook") }}',
+        method: 'POST',
+        data: {
+            webhook_url: url,
+            _token: '{{ csrf_token() }}'
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                Toastify({
+                    text: "Webhook URL updated!",
+                    duration: 3000,
+                    backgroundColor: "#4CAF50"
+                }).showToast();
+            }
+        },
+        error: function(xhr) {
+            console.error("Error:", xhr);
+            Toastify({
+                text: "Failed to update webhook URL!",
+                duration: 3000,
+                backgroundColor: "#F44336"
+            }).showToast();
+        }
+    });
+}
+
+// 🟢 Test Webhook
+function testWebhook() {
+    $.ajax({
+        url: '{{ route("test-webhook") }}',
+        method: 'GET',
+        success: function(response) {
+            Toastify({
+                text: "Webhook test sent!",
+                duration: 3000,
+                backgroundColor: "#4CAF50"
+            }).showToast();
+        },
+        error: function(xhr) {
+            console.error("Error:", xhr);
+            Toastify({
+                text: "Failed to send test webhook!",
+                duration: 3000,
+                backgroundColor: "#F44336"
+            }).showToast();
+        }
+    });
+}
+
+// 🟢 Clear Webhook Logs
+function clearWebhookLogs() {
+    $('#webhookLogs').html('<p class="text-gray-500">No logs available...</p>');
+    Toastify({
+        text: "Webhook logs cleared!",
+        duration: 3000,
+        backgroundColor: "#4CAF50"
+    }).showToast();
+}
+
+
+        function toggleApiStatus() {
+            const toggle = document.getElementById("apiStatusToggle");
+            const statusText = document.getElementById("apiStatusText");
+
+            const previousState = toggle.checked; // Store previous state
+
+            $.ajax({
+                url:'{{ route("api-status") }}',
+                method:'POST',
+                data:{
+                    status:toggle.checked ? 'on' : 'off',
+                    _token:'{{ csrf_token() }}'
+                },
+                dataType:'json',
+                success:function(response){
+                    if(response.status == 'success'){
+
+                        const apiStatus = response.api_status;  // Use returned status
+                        const isOn = apiStatus === 'on';
+                         // Update the UI with the returned status
+                        toggle.checked = isOn;
+                        statusText.innerHTML = `Status: <span class="font-bold ${isOn ? 'text-success' : 'text-danger'}">${apiStatus}</span>`;
+
+                        Toastify({
+                            text: `API Status turned ${apiStatus.toUpperCase()}!`,
+                            duration: 3000,
+                            newWindow: true,
+                            close: true,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: isOn ? "#4CAF50" : "#F44336",  // Green for ON, Red for OFF
+                            stopOnFocus: true,
+                        }).showToast();
+
+
+                    } else{
+                        console.error("Failed to update status:", response.message);
+
+                        // Restore previous state on failure
+                        toggle.checked = previousState;
+
+                        // Error toast
+                        Toastify({
+                            text: "Failed to update status!",
+                            duration: 3000,
+                            newWindow: true,
+                            close: true,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#F44336",
+                            stopOnFocus: true,
+                        }).showToast();
+                    }
+                },
+                error:function(xhr,status,error){
+                    console.error("Error:", error);
+
+                    // Restore the previous state on error
+                    toggle.checked = previousState;
+
+                    // Display error toast
+                    Toastify({
+                        text: "Error updating API status!",
+                        duration: 3000,
+                        newWindow: true,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#F44336",
+                        stopOnFocus: true,
+                    }).showToast();
+                }
+
+
+            })
+
+          
+        }
+
+        // Toggle API Key Visibility
+        function toggleKeyVisibility() {
+            const apiKeyInput = document.getElementById("apiKey");
+            const button = event.target;
+
+            if (apiKeyInput.type === "password") {
+                apiKeyInput.type = "text";
+                button.textContent = "🙈 Hide";
+            } else {
+                apiKeyInput.type = "password";
+                button.textContent = "👁️ Show";
+            }
+        }
+
+        // Copy API Key to Clipboard
+        function copyApiKey() {
+            const apiKeyInput = document.getElementById("apiKey");
+
+            // Create a temporary textarea element to copy content
+            const textarea = document.createElement("textarea");
+            textarea.value = apiKeyInput.value;
+            document.body.appendChild(textarea);
+
+            // Select and copy the content
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+
+            Toastify({
+                text: "API Key copied to clipboard!",
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "info",
+                stopOnFocus: true,
+            }).showToast();
+        }
+
+        // Generate New API Key (AJAX)
+        function generateNewApiKey() {
+
+            // AJAX request to the backend to generate new API key
+            $.ajax({
+                url: '{{ route("apikey") }}',    // Replace with your actual API route
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+
+                    // Assuming the new API key is returned in the response
+                    
+                    const newKey = response.api_key;
+
+                    // Update the displayed API key
+                    document.getElementById("apiKey").value = newKey;
+
+                    // Show success toast
+                    Toastify({
+                        text: "New API Key generated!",
+                        duration: 3000,
+                        newWindow: true,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#4CAF50", // Green success color
+                        stopOnFocus: true,
+                    }).showToast();
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error:", error);
+
+                    // Show error toast
+                    Toastify({
+                        text: "Failed to generate API Key!",
+                        duration: 3000,
+                        newWindow: true,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#F44336", // Red error color
+                        stopOnFocus: true,
+                    }).showToast();
+                }
+            });
+        }
+
+
+        function copyToClipboard() {
+            const urlElement = document.getElementById("overallUrl");
+            const textToCopy = urlElement.innerText.trim();
+
+            // Create a temporary textarea to copy text
+            const textarea = document.createElement("textarea");
+            textarea.value = textToCopy;
+            document.body.appendChild(textarea);
+
+            // Select and copy the text
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+
+            // Show success message
+            Toastify({
+                text: "URL copied to clipboard!",
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "info",
+                stopOnFocus: true,
+            }).showToast();
+        }
 
 
         function generateRequest() {
