@@ -69,6 +69,10 @@ Route::middleware('auth')->group(function () {
         return view('terms-conditions');
     })->name('terms-conditions');
 
+    Route::get('/developer', function () {
+        return view('developer');
+    })->name('developer');
+
     Route::get('/test',function(){
         // insert 1 to 16 num on name field on profile_pic table
 
