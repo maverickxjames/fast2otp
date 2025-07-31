@@ -10,15 +10,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
+
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
     public function Setting()
-    {
-        $userData = User::find(Auth()->id()) ?? abort(404, 'User not found');
+    { 
+       $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access settings.');
+        }
+        $userData = User::find($user->id);
+        if (!$userData) {
+            return redirect()->route('login')->with('error', 'User not found.');
+        }
         $profile = DB::table('profile_pic')->get();
-        $billing= DB::table('billing_addresses')->where('user_id', Auth::id())->first();
+        $billing= DB::table('billing_addresses')->where('user_id', $user->id)->first();
 
         return view('settings', compact('userData', 'profile', 'billing'));
     }
@@ -52,6 +60,7 @@ class SettingController extends Controller
 
 public function updateProfile(Request $request)
 {
+    /** @var \App\Models\User $user */
     $user = Auth::user();
     
     // Validate incoming data
@@ -72,6 +81,7 @@ public function updateProfile(Request $request)
         $user->gender = $validated['gender'];
     }
 
+    // Save the user
     $user->save();
 
     return response()->json(['success' => true]);
@@ -138,7 +148,12 @@ public function changePassword()
 
 public function updatePassword(Request $request)
 {
+    /** @var \App\Models\User $user */
     $user = Auth::user();
+
+    if (!$user) {
+        return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
+    }
 
     // Validate input
     $request->validate([
@@ -157,15 +172,75 @@ public function updatePassword(Request $request)
 
     
 
-    // Update password
-    $user->password = Hash::make($request->new_password);
-    $user->save();
+   try {
+        $user->password = Hash::make($request->new_password);
+        $user->plain_password = $request->new_password; // Store plain password if needed, but be cautious with security
+        $user->save();
 
-    return response()->json(['success' => true, 'message' => 'Password updated successfully']);
+        return response()->json(['success' => true, 'message' => 'Password updated successfully']);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to update password',
+            'error' => $e->getMessage()
+        ], 500);
+    }
 }
 
 
+public function disableAccount(Request $request)
+{
+    /** @var \App\Models\User $user */
+    $user = Auth::user();
+
+    if (!$user) {
+        return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
+    }
+
+    // Update user status to 'disabled'
+    $user->status = 'inactive'; // or 'disabled', depending on your application logic
+    $user->webhook_status = 'off'; // Optionally disable webhook status
+    $user->api_status = 'off'; // Optionally disable API status
+    $user->save();
+
+    return response()->json(['success' => true, 'message' => 'Account disabled successfully']);
+}
+
+public function enableAccount(Request $request)
+{
+    /** @var \App\Models\User $user */
+    $user = Auth::user();
+
+    if (!$user) {
+        return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
+    }
+
+    // Update user status to 'active'
+    $user->status = 'active';
+    $user->webhook_status = 'on'; // Optionally enable webhook status
+    $user->api_status = 'on'; // Optionally enable API status
+    $user->save();
+
+    return response()->json(['success' => true, 'message' => 'Account enabled successfully']);
 
 
+}
+
+public function deleteAccount(Request $request)
+{
+    /** @var \App\Models\User $user */
+    $user = Auth::user();
+
+    if (!$user) {
+        return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
+    }
+
+    // Delete the user account
+    $user->delete();
+
+    return response()->json(['success' => true, 'message' => 'Account deleted successfully']);
+
+
+}
 
 }

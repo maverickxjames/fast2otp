@@ -104,6 +104,9 @@ Route::get('test-webhook', [WebhookController::class, 'sendTest'])->name('test-w
     Route::get('change-password', [SettingController::class, 'changePassword'])->name('change-password');
     // Handle password update
 Route::post('/update-password', [SettingController::class, 'updatePassword'])->name('update-password');
+Route::post('/disable-account', [SettingController::class, 'disableAccount'])->name('disable-account');
+Route::post('/enable-account', [SettingController::class, 'enableAccount'])->name('enable-account');
+Route::post('/delete-account', [SettingController::class, 'deleteAccount'])->name('delete-account');
 
 
 

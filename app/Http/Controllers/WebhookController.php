@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class WebhookController extends Controller
 {
@@ -10,7 +13,8 @@ class WebhookController extends Controller
     public function updateStatus(Request $request)
     {
         // Get the current authenticated user
-        $user = auth()->user();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
 
         // Validate the status value
         $status = $request->status === 'on' ? 'on' : 'off';
@@ -34,7 +38,8 @@ class WebhookController extends Controller
             'webhook_url' => 'required|url'
         ]);
 
-        $user = auth()->user();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
         $user->webhook_url = $request->webhook_url;
         $user->save();
 

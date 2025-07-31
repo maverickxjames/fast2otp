@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -16,13 +16,13 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
     function generateUniqueApiKey()
-{
-    do {
-        $apiKey = hash('sha256', Str::random(60));
-    } while (User::where('api_key', $apiKey)->exists());
+    {
+        do {
+            $apiKey = hash('sha256', Str::random(60));
+        } while (User::where('api_key', $apiKey)->exists());
 
-    return $apiKey;
-}
+        return $apiKey;
+    }
     public function register(Request $request)
     {
         $request->validate([
@@ -31,25 +31,37 @@ class UserController extends Controller
             'phone' => 'required|string|unique:users|min:10|max:15',
             'password' => 'required|string|min:6|confirmed',
         ]);
-      
-        $randomNumber = rand(1, 100);
+
+        $randomNumber = rand(1, 17);
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => bcrypt($request->password),
             'plain_password' => $request->password,
-            'profile_pic' => 2,
+            'profile_pic' => $randomNumber,
             'api_key' => $this->generateUniqueApiKey(),
             'api_status' => 'off',
-             'webhook_url' => '',
+            'webhook_url' => '',
             'webhook_status' => 'off',
             'kyc_status' => 'pending',
             'role' => 'user',
             'status' => 'active',
 
         ]);
-    
+
+        // store userid on billing_addresses table
+        DB::table('billing_addresses')->insert([
+            'user_id' => $user->id,
+            'company_name' => '',
+            'address1' => '',
+            'address2' => '',
+            'city' => '',
+            'state' => '',
+            'zip' => '',
+        ]);
+
         return response()->json([
             'status' => 'success',
             'message' => 'User registered successfully!',
@@ -65,6 +77,7 @@ class UserController extends Controller
         ]);
 
         if (Auth::attempt($request->only('email', 'password'))) {
+            /** @var \App\Models\User $user */
             $user = Auth::user();
             $token = $user->createToken('API Token')->plainTextToken;
 
@@ -89,84 +102,84 @@ class UserController extends Controller
         ], 200);
     }
 
-     // Send OTP to the user's email
-     public function sendResetOTP(Request $request)
-     {
+    // Send OTP to the user's email
+    public function sendResetOTP(Request $request)
+    {
         // return $request;
-         $email = $request->email;
-         $user = User::where('email', $email)->first();
- 
-         if (!$user) {
-             return response()->json(['success' => false, 'message' => 'User not authenticated']);
-         }
- 
-         // Generate OTP
-         $otp = rand(100000, 999999);
+        $email = $request->email;
+        $user = User::where('email', $email)->first();
 
-           // Store OTP in the users table
-    $user->email_otp = $otp;  
-    $user->save();
-         
-         
-         // Store OTP in session
-         Session::put('password_reset_otp', $otp);
-         Session::put('password_reset_email', $user->email);
-         
-         
-         // Send OTP to email
-         Mail::raw("Your OTP for password reset is: $otp", function ($message) use ($user) {
-             $message->to($user->email)
-                 ->subject('Password Reset OTP');
-         });
- 
-         return response()->json(['success' => true, 'message' => 'OTP sent to your email']);
-     }
- 
-     // Show OTP verification page
-     public function showOtpVerificationPage()
-     {
-        $email = Session::get('password_reset_email');
+        if (!$user) {
+            return response()->json(['success' => false, 'message' => 'User not authenticated']);
+        }
 
-    if (!$email) {
-        // Redirect back or show an error if no email is found
-        return redirect()->route('login')->with('error', 'No email found for verification.');
+        // Generate OTP
+        $otp = rand(100000, 999999);
+
+        // Store OTP in the users table
+        $user->email_otp = $otp;
+        $user->save();
+
+
+        // Store OTP in session
+        Session::put('password_reset_otp', $otp);
+        Session::put('password_reset_email', $user->email);
+
+
+        // Send OTP to email
+        Mail::raw("Your OTP for password reset is: $otp", function ($message) use ($user) {
+            $message->to($user->email)
+                ->subject('Password Reset OTP');
+        });
+
+        return response()->json(['success' => true, 'message' => 'OTP sent to your email']);
     }
 
-    return view('verify-otp', compact('email'));
-     }
- 
-     // Verify OTP
-     public function verifyOtp(Request $request)
-     {
-         $email = $request->email;
+    // Show OTP verification page
+    public function showOtpVerificationPage()
+    {
+        $email = Session::get('password_reset_email');
 
-         
-         // Get the OTP from the form (combine digits into one string)
-         $otp = $request->otp;
-     
-         $user = User::where('email', $email)->first();
-     
-         if (!$user) {
-             return back()->with('error', 'Invalid user.');
-         }
-     
-         // Validate OTP
-         if ($user->email_otp == $otp) {
-             // Clear OTP session
-             Session::forget('password_reset_otp');
-             
-             // Redirect to password reset page with email
-             return  response()->json(['success' => true, 'message' => 'OTP verified successfully']);
-         }
-     
-         return response()->json(['success' => false, 'message' => 'Invalid OTP']);
-     }
+        if (!$email) {
+            // Redirect back or show an error if no email is found
+            return redirect()->route('login')->with('error', 'No email found for verification.');
+        }
 
-     public function resetPassword(Request $request)
+        return view('verify-otp', compact('email'));
+    }
+
+    // Verify OTP
+    public function verifyOtp(Request $request)
+    {
+        $email = $request->email;
+
+
+        // Get the OTP from the form (combine digits into one string)
+        $otp = $request->otp;
+
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return back()->with('error', 'Invalid user.');
+        }
+
+        // Validate OTP
+        if ($user->email_otp == $otp) {
+            // Clear OTP session
+            Session::forget('password_reset_otp');
+
+            // Redirect to password reset page with email
+            return  response()->json(['success' => true, 'message' => 'OTP verified successfully']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Invalid OTP']);
+    }
+
+    public function resetPassword(Request $request)
     {
         // Get the email from the URL parameter
 
-        
+
         $email = $request->query('email');
 
         // Check if email is provided
@@ -174,7 +187,7 @@ class UserController extends Controller
             return redirect('/')->with('error', 'No email provided.');
         }
 
-        $user=User::where('email',$email)->first();
+        $user = User::where('email', $email)->first();
         if (!$user) {
             return redirect('/')->with('error', 'User not found.');
         }
@@ -183,7 +196,7 @@ class UserController extends Controller
         return view('reset-password', compact('user'));
     }
 
- 
+
 
 
     public function resetUpdatePassword(Request $request)
@@ -204,12 +217,10 @@ class UserController extends Controller
         }
 
         $user->password = Hash::make($password);
-    $user->plain_password = $password;  // Store plain password for reference
-    $user->email_otp = null;  // Clear the OTP
-    $user->save();
+        $user->plain_password = $password;  // Store plain password for reference
+        $user->email_otp = null;  // Clear the OTP
+        $user->save();
 
-    return response()->json(['success' => true, 'message' => 'Password updated successfully']);
+        return response()->json(['success' => true, 'message' => 'Password updated successfully']);
     }
-    
-    
 }

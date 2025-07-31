@@ -55,6 +55,7 @@
 
     {{-- csrf --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <style>
         input:disabled {
 
@@ -372,7 +373,8 @@
                                                 <label class="form-label">Company Name: <span
                                                         class="text-gray-500">(Optional)</span></label>
                                                 <input type="text" class="form-control" name="company"
-                                                    placeholder="Enter Company Name" value="{{ $billing->company_name? $billing->company_name : '' }}">
+                                                    placeholder="Enter Company Name"
+                                                    value="{{ $billing->company_name ? $billing->company_name : '' }}">
                                             </div>
 
                                             <!-- Address Line 1 (Required) -->
@@ -380,14 +382,17 @@
                                                 <label class="form-label">Address Line 1<span class="text-red-500">
                                                         *</span></label>
                                                 <input type="text" class="form-control" name="address1"
-                                                    placeholder="Enter Address 2" value="{{ $billing->address1? $billing->address1 : '' }}" required>
+                                                    placeholder="Enter Address 2"
+                                                    value="{{ $billing->address1 ? $billing->address1 : '' }}"
+                                                    required>
                                             </div>
 
                                             <!-- Address Line 2 (Optional) -->
                                             <div class="xl:col-span-6 col-span-12">
                                                 <label class="form-label">Address Line 2 <span
                                                         class="text-gray-500">(Optional)</span></label>
-                                                <input type="text" class="form-control" name="address2" value="{{ $billing->address2? $billing->address2 : '' }}"
+                                                <input type="text" class="form-control" name="address2"
+                                                    value="{{ $billing->address2 ? $billing->address2 : '' }}"
                                                     placeholder="Enter Address 2">
                                             </div>
 
@@ -396,7 +401,8 @@
                                                 <label class="form-label">City <span class="text-red-500">
                                                         *</span></label>
                                                 <input type="text" class="form-control" name="city"
-                                                    placeholder="Enter City" value="{{ $billing->city? $billing->city : '' }}" required>
+                                                    placeholder="Enter City"
+                                                    value="{{ $billing->city ? $billing->city : '' }}" required>
                                             </div>
 
                                             <!-- State (Required) -->
@@ -404,7 +410,8 @@
                                                 <label class="form-label">State <span class="text-red-500">
                                                         *</span></label>
                                                 <input type="text" class="form-control" name="state"
-                                                    placeholder="Enter State" value="{{ $billing->state? $billing->state : '' }}" required>
+                                                    placeholder="Enter State"
+                                                    value="{{ $billing->state ? $billing->state : '' }}" required>
                                             </div>
 
                                             <!-- ZIP Code (Required) -->
@@ -412,7 +419,9 @@
                                                 <label class="form-label">ZIP Code <span class="text-red-500">
                                                         *</span></label>
                                                 <input type="text" class="form-control" name="zip"
-                                                    placeholder="Enter ZIP" value="{{ $billing->zip? $billing->zip : '' }}" required pattern="^[0-9]{5,6}$">
+                                                    placeholder="Enter ZIP"
+                                                    value="{{ $billing->zip ? $billing->zip : '' }}" required
+                                                    pattern="^[0-9]{5,6}$">
                                             </div>
                                         </div>
 
@@ -438,30 +447,53 @@
                                     </div>
                                 </div>
 
-                               <!-- PASSWORD SECTION -->
-<div class="tab-pane overflow-hidden p-0 border-0 hidden" id="password-tab" role="tabpanel">
-    <div class="font-semibold block text-[18px] mb-4">Password</div>
+                                <!-- PASSWORD SECTION -->
+                                <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="password-tab"
+                                    role="tabpanel">
+                                    <div class="font-semibold block text-[18px] mb-4">Change Password</div>
+                                    <form id="password-form" class="ti-validation">
+                                          @csrf
+                                        <div class="grid grid-cols-12 gap-6">
+                                            <div class="col-span-12">
+                                                <label for="current_password" class="ti-form-label dark:text-defaulttextcolor/80 mb-0">Current
+                                                    Password</label>
+                                                <input type="password" name="current_password" id="current_password"
+                                                    class="my-auto ti-form-input rounded-sm" placeholder="**********"
+                                                    required>
+                                            </div>
+                                            <div class="col-span-12">
+                                                <label for="new_password" class="ti-form-label dark:text-defaulttextcolor/80 mb-0">New
+                                                    Password</label>
+                                                <input type="password" name="new_password" id="new_password"
+                                                    class="my-auto ti-form-input rounded-sm" placeholder="**********"
+                                                    required>
+                                            </div>
+                                            <div class="col-span-12">
+                                                <label for="confirm_password" class="ti-form-label dark:text-defaulttextcolor/80 mb-0">Confirm
+                                                    New Password</label>
+                                                <input type="password" name="confirm_password" id="confirm_password"
+                                                    class="my-auto ti-form-input rounded-sm"
+                                                    placeholder="**********" required>
+                                            </div>
+                                        </div>
 
-    <!-- Display Hidden Password -->
-    <input type="password" class="form-control" value="********" disabled>
-    
-    <div class="box-footer border-t-1 mt-10">
-        <div class="btn-list float-end">
-            <!-- Button to Open Password Change Page -->
-            <a href="" class="ti-btn ti-btn-primary btn-wave">
-                Change Password
-            </a>
-        </div>
-    </div>
-</div>
+                                    <div class="box-footer border-t-1 mt-10">
+                                        <div class="btn-list float-end">
+                                            <!-- Button to Open Password Change Page -->
+                                            <button type="submit"  class="ti-btn ti-btn-primary btn-wave">
+                                                Change Password
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
 
 
                                 <!-- ACCOUNT MANAGEMENT -->
                                 <div class="tab-pane overflow-hidden p-0 border-0 hidden" id="account-tab"
                                     role="tabpanel">
                                     <div class="font-semibold block text-[18px] mb-4">Account Management</div>
-                                    <button class="ti-btn ti-btn-danger">Disable Account</button>
-                                    <button class="ti-btn ti-btn-danger">Delete Account</button>
+                                    <button onclick="accountAction('{{ $userData->status=='active' ? 'disable' : 'enable' }}')" class="ti-btn ti-btn-danger">{{ $userData->status=='active' ? 'Disable' : 'Enable' }} Account</button>
+                                    <button onclick="accountAction('delete')" class="ti-btn ti-btn-danger">Delete Account</button>
                                 </div>
 
                             </div>
@@ -550,6 +582,11 @@
 
 
 
+    {{-- jQuery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    {{-- toastify --}}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <!-- STICKY JS -->
     <script src="build/assets/sticky.js"></script>
@@ -570,7 +607,105 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
+
     <script>
+
+        document.getElementById('password-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const currentPassword = document.getElementById('current_password').value;
+            const newPassword = document.getElementById('new_password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+
+            if(currentPassword === ''){
+                Toastify({
+                    text: "Current password is required.",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#ff5f6d"
+                }).showToast();
+                return;
+            }
+
+            if(newPassword === '') {
+                Toastify({
+                    text: "New password is required.",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#ff5f6d"
+                }).showToast();
+                return;
+            }
+
+            if(confirmPassword === '') {
+                Toastify({
+                    text: "Confirm password is required.",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#ff5f6d"
+                }).showToast();
+                return;
+            }
+
+
+
+            if (newPassword !== confirmPassword) {
+                Toastify({
+                    text: "New password and confirmation do not match.",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#ff5f6d"
+                }).showToast();
+                return;
+            }
+
+            // AJAX call to update password
+            $.ajax({
+                url: "{{ route('update-password') }}", // Your backend route
+                type: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
+                    current_password: currentPassword,
+                    new_password: newPassword,
+                    confirm_password: confirmPassword
+                },
+                success: function(response) {
+                    if (response?.success) {
+                        Toastify({
+                            text: "Password updated successfully!",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#00b09b"
+                        }).showToast();
+                        $('#password-form')[0].reset(); // Reset the form
+                        // Optionally, you can redirect or perform other actions
+
+                    } else {
+                        Toastify({
+                            text: response?.message || "Failed to update password",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#ff5f6d"
+                        }).showToast();
+                    }
+                },
+                error: function(response) {
+                    Toastify({
+                        text: response.responseJSON?.message || "Something went wrong. Please try again.",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#ff5f6d"
+                    }).showToast();
+                }
+            });
+        });
         // Select profile picture
         function selectPic(fileName) {
             document.getElementById('selected-pic').value = fileName;
@@ -582,6 +717,8 @@
 
             document.getElementById(`pic-${fileName}`).classList.add('border-4', 'border-dark');
         }
+
+
 
         // AJAX call to save the selected profile picture
         function saveProfilePic() {
@@ -695,7 +832,100 @@
     </script>
     <!-- END SCRIPTS -->
 
+    
+
     <script>
+        function accountAction(action) {
+            if (action === 'disable') {
+                // Disable account logic
+                $.ajax({
+                    url: "{{ route('disable-account') }}", // Your route
+                    type: "POST",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Toastify({
+                            text: response.message || "Account disabled successfully!",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#00b09b"
+                        }).showToast();
+
+                        // refresh page
+                        location.reload();
+
+                        
+                    },
+                    error: function(xhr, status, error) {
+                        Toastify({
+                            text: "Error disabling account",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#ff5f6d"
+                        }).showToast();
+                    }
+                });
+            } else if(action == 'enable') {
+                // Enable account logic
+                $.ajax({
+                    url: "{{ route('enable-account') }}", // Your route
+                    type: "POST",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Toastify({
+                            text: response.message || "Account enabled successfully!",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#00b09b"
+                        }).showToast();
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        Toastify({
+                            text: "Error enabling account",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#ff5f6d"
+                        }).showToast();
+                    }
+                });
+
+            }else if (action === 'delete') {
+                // Delete account logic
+                $.ajax({
+                    url: "{{ route('delete-account') }}", // Your route
+                    type: "POST",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Toastify({
+                            text: response.message || "Account deleted successfully!",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#00b09b"
+                        }).showToast();
+                    },
+                    error: function(xhr, status, error) {
+                        Toastify({
+                            text: "Error deleting account",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            backgroundColor: "#ff5f6d"
+                        }).showToast();
+                    }
+                });
+            }
+        }
         function updateUserProfile(event) {
             event.preventDefault();
 
@@ -775,6 +1005,7 @@
                 }
             });
         }
+
     </script>
 
 </body>
