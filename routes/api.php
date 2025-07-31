@@ -14,7 +14,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 
-Route::post('/register', [UserController::class, 'register']);
+Route::post('/register', [UserController::class, 'register'])->name('api.register');
 Route::post('/login', [UserController::class, 'login'])->name('api.login');
 Route::post('/send-otp', [OTPController::class, 'sendOtp'])->name('sendotp');
 Route::get('apikey', [APIKeyController::class, 'generateApiKey'])->name('apikey');

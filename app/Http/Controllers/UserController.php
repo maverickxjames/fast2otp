@@ -9,11 +9,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Str;
 
 
 
 class UserController extends Controller
 {
+    function generateUniqueApiKey()
+{
+    do {
+        $apiKey = hash('sha256', Str::random(60));
+    } while (User::where('api_key', $apiKey)->exists());
+
+    return $apiKey;
+}
     public function register(Request $request)
     {
         $request->validate([
@@ -22,15 +31,27 @@ class UserController extends Controller
             'phone' => 'required|string|unique:users|min:10|max:15',
             'password' => 'required|string|min:6|confirmed',
         ]);
-    
+      
+        $randomNumber = rand(1, 100);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => bcrypt($request->password),
+            'plain_password' => $request->password,
+            'profile_pic' => 2,
+            'api_key' => $this->generateUniqueApiKey(),
+            'api_status' => 'off',
+             'webhook_url' => '',
+            'webhook_status' => 'off',
+            'kyc_status' => 'pending',
+            'role' => 'user',
+            'status' => 'active',
+
         ]);
     
         return response()->json([
+            'status' => 'success',
             'message' => 'User registered successfully!',
             'user' => $user,
         ], 201);
