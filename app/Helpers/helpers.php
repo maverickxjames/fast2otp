@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+
 
 if (!function_exists('getSetting')) {
     function getSetting($key) {
@@ -16,7 +18,7 @@ function generateApiKey(){
     return bin2hex(random_bytes(32));
 }
 
-function sendOtp($phone,$otp) {
+function whatsappSendOtp($phone,$otp) {
 
 
     $data = [
@@ -54,4 +56,51 @@ function sendOtp($phone,$otp) {
     // }
 
     return $response;
+}
+
+function sendOtp($number, $otp, $route = 'otp', $apikey = null, $gateway = null) {
+
+    if($gateway == 'fast2sms'){
+
+        if($route == 'khelobuddy'){
+            $template = DB::table('dlt_details')
+                ->where('id', '4')
+                ->first();
+        }else{
+            $template = DB::table('dlt_details')
+            ->where('id', '1')
+            ->first();
+        }
+            
+
+    if (!$template) {
+        return ['error' => 'Template not found'];
+    }
+
+    // Replace {#VAR#} in the message with actual OTP
+    $message = str_replace('{#VAR#}', $otp, $template->content);
+
+    $response = Http::withHeaders([
+        'authorization' => 'ZakGjMyszUGNOucV4rmzOJtR7AdkVTXiBwFQTR2HZtPtSAroZ6MQiqKBCgmx',
+        'Content-Type' => 'application/json',
+    ])->post('https://www.fast2sms.com/dev/bulkV2', [
+        'route'       => 'dlt_manual',
+        'sender_id'   => $template->header,
+        'entity_id'   => $template->entity_id,
+        'template_id' => $template->content_id,
+        'message'     => $message,
+        'flash'       => 0,
+        'numbers'     => $number,
+    ]);
+
+    return $response->json();
+    }elseif($gateway == '2factor'){
+
+    }elseif($gateway == 'whatsappAuth'){
+        whatsappSendOtp($number, $otp);
+    }
+
+
+    // Fetch your template details from DB
+
 }

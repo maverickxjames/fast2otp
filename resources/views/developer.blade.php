@@ -930,18 +930,18 @@ function clearWebhookLogs() {
             const otpValue = document.getElementById("otpValue").value || "123456"; // Default value
             const phoneNumber = document.getElementById("phoneNumber").value || "9876543210"; // Default value
 
-            const apiKey = "YOUR_API_KEY"; // Replace with your actual key
+            const apiKey = "{{ Auth::user()->api_key }}"; // Replace with your actual key
 
             let apiRequest = "";
             let overallUrl = "";
 
             if (method === "GET") {
-                overallUrl = `https://api.fast2otp.com/send-otp?route=${route}&otp=${otpValue}&numbers=${phoneNumber}`;
+                overallUrl = `https://api.fast2otp.com/api/v1/sendOtp?route=${route}&otp=${otpValue}&apikey=${apiKey}&numbers=${phoneNumber}`;
                 apiRequest = `
 GET ${overallUrl}
-Authorization: Bearer ${apiKey}
 Query Parameters:
     route: ${route}
+    apikey: ${apiKey}
     otp: ${otpValue}
     numbers: ${phoneNumber}
         `;
@@ -951,15 +951,15 @@ Query Parameters:
                 // document.getElementById("apiRequest").classList.add("text-success");
 
             } else {
-                overallUrl = `https://api.fast2otp.com/send-otp`;
+                overallUrl = `https://api.fast2otp.com/api/v1/sendOtp`;
                 apiRequest = `
 POST ${overallUrl}
-Authorization: Bearer ${apiKey}
 Content-Type: application/json
 Body:
 {
     "route": "${route}",
-    "otp": "${otpValue}",
+    "apikey": "${apiKey}",
+    "value": "${otpValue}",
     "numbers": "${phoneNumber}"
 }
         `;

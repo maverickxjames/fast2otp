@@ -38,7 +38,7 @@
                     </p>
 
                     <!-- Wallet Amount (Single element, visible always) -->
-                    <p class="text-xl font-bold mt-1">₹5,000</p>
+                    <p class="text-xl font-bold mt-1">₹ {{ Auth::user()->wallet_balance }}</p>
 
                     <!-- Add Credit Button -->
                     <button
