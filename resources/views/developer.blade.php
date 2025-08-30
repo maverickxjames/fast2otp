@@ -285,7 +285,7 @@
                                                         <!-- URL container with copy button placed outside the pre tag -->
                                                         <div class="flex items-center gap-2">
                                                             <pre id="overallUrl" class="p-4 bg-dark rounded-lg text-light overflow-auto flex-1">
-                                                                https://api.fast2otp.com/send-otp
+                                                                https://fast2otp.com/send-otp
                                                             </pre>
 
                                                             <!-- Copy button placed outside for visibility -->
@@ -519,20 +519,7 @@
         <!-- MAIN-CONTENT -->
 
         <!-- FOOTER -->
-        <footer
-            class="mt-auto py-4 bg-white dark:bg-bodybg text-center border-t border-defaultborder dark:border-defaultborder/10">
-            <div class="container">
-                <span class="text-textmuted dark:text-textmuted/50">
-                    Copyright © <span id="year"></span>
-                    <a href="javascript:void(0);" class="text-dark font-medium">Xintra</a>.
-                    Designed with <span class="text-danger">&#10084;</span> by
-                    <a href="javascript:void(0);">
-                        <span class="font-medium text-primary">Spruko</span>
-                    </a>
-                    All rights reserved
-                </span>
-            </div>
-        </footer>
+<x-footer />
 
         <!-- header-search-modal -->
         <div class="hs-overlay ti-modal hidden" id="header-responsive-search" tabindex="-1"
@@ -936,7 +923,7 @@ function clearWebhookLogs() {
             let overallUrl = "";
 
             if (method === "GET") {
-                overallUrl = `https://api.fast2otp.com/api/v1/sendOtp?route=${route}&otp=${otpValue}&apikey=${apiKey}&numbers=${phoneNumber}`;
+                overallUrl = `https://fast2otp.com/api/v1/sendOtp?route=${route}&value=${otpValue}&apikey=${apiKey}&numbers=${phoneNumber}`;
                 apiRequest = `
 GET ${overallUrl}
 Query Parameters:
@@ -951,7 +938,7 @@ Query Parameters:
                 // document.getElementById("apiRequest").classList.add("text-success");
 
             } else {
-                overallUrl = `https://api.fast2otp.com/api/v1/sendOtp`;
+                overallUrl = `https://fast2otp.com/api/v1/sendOtp`;
                 apiRequest = `
 POST ${overallUrl}
 Content-Type: application/json

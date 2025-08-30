@@ -6,12 +6,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OTPController;
 use App\Http\Controllers\APIKeyController;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
 
 
 Route::post('/register', [UserController::class, 'register'])->name('api.register');

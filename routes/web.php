@@ -12,6 +12,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Admin Dashboard
+Route::middleware(['auth','admin'])->group(function () {
+    Route::get('/admin', function () {
+        return "JK";
+    })->name('admin.dashboard');
+});
+
 
 Route::middleware('guest')->group(function () {
 
