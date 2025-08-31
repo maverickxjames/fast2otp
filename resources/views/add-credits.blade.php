@@ -1,5 +1,5 @@
 @php
-    $user=Auth::user();
+    $user = Auth::user();
 @endphp
 
 <!DOCTYPE html>
@@ -81,12 +81,52 @@
             border-radius: 0.5rem;
         }
 
+        .active_row {
+    /* box-shadow: 0 2px 8px rgba(21,101,192, 0.10);
+    border-left: 3px solid #50d050;
+    background-color: #f2f7fb; */
+
+    background-color: #eaf6f4; /* very light teal */
+    box-shadow: inset 4px 0 0 0 #00897b; /* teal inset border */
+    font-weight: 600;
+}
+
         .heading {
             /* background-color: rgb(54, 54, 219); */
-            padding: 20px 10px;
+            /* padding: 20px 10px; */
             border-top-right-radius: 20px;
             border-top-left-radius: 20px;
             margin-bottom: 40px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table th:first-child {
+            border-top-left-radius: 12px;
+            /* top-left corner */
+        }
+
+        table th:last-child {
+            border-top-right-radius: 12px;
+            /* top-right corner */
+        }
+
+        /* To make radius visible add background */
+        table th {
+            /* background: #f5f5f5; */
+            padding: 12px;
+        }
+
+        .control{
+                position: relative;
+    width: 1%;
+    min-width: 0px;
+    flex-shrink: 1;
+    flex-grow: 1;
+    flex-basis: auto;
         }
     </style>
 
@@ -132,7 +172,7 @@
                             <div
                                 class="p-4 border-b border-t border-dashed border-defaultborder dark:border-defaultborder/10 tab-content">
 
-                                <div class="font-semibold bg-gray-600 heading block text-[18px] text-center">Select Plan</div>
+                                <div class="font-semibold heading block text-xl text-center">Select Plan</div>
                                 <div class="flex flex-col md:flex-row lg:flex-row gap-6">
                                     <!-- Left Section (Form) -->
                                     <div class="w-full left-section">
@@ -147,10 +187,10 @@
                                                         class="ti-form-label text-[.875rem] text-black text-xl font-semibold">Amount
                                                         <span class="text-red-500">*</span></label>
                                                     <div class="input-group">
-                                                        <div class="input-group-text bg:gray-900">₹
+                                                        <div class="input-group-text bg:gray-900 font-semibold text-xl">₹
                                                         </div>
                                                         <input type="text"
-                                                            class="form-control w-full p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
+                                                            class="control w-full p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
                                                             id="amount" placeholder="Enter amount" value="100"
                                                             onchange="updateSelectedPlan(this.value)">
                                                     </div>
@@ -160,25 +200,25 @@
                                                 <div
                                                     class="space-y-4 mt-2 w-full md:w-1/2 lg:w-1/2 mx-auto px-2 md:px-10">
                                                     <!-- DLS SMS Volume -->
-                                                    <div class="flex justify-between items-center text-lg">
+                                                    <div class="flex justify-between items-center text-base font-medium">
                                                         <p>DLS SMS Volume</p>
                                                         <p id="dlsSmsVolume">100</p>
                                                     </div>
 
                                                     <!-- DLS SMS Cost -->
-                                                    <div class="flex justify-between items-center text-lg">
+                                                    <div class="flex justify-between items-center text-base font-medium">
                                                         <p>DLS SMS Cost</p>
                                                         <p id="dlsSmsCost">100</p>
                                                     </div>
 
                                                     <!-- Validity -->
-                                                    <div class="flex justify-between items-center text-lg">
+                                                    <div class="flex justify-between items-center text-base font-medium">
                                                         <p>Validity</p>
                                                         <p id="validity">100</p>
                                                     </div>
 
                                                     <!-- GST -->
-                                                    <div class="flex justify-between items-center text-lg">
+                                                    <div class="flex justify-between items-center text-base font-medium">
                                                         <p>GST (18%)</p>
                                                         <p id="gst">100</p>
                                                     </div>
@@ -208,45 +248,48 @@
                                     <!-- Right Section (API Request Display) -->
                                     <div class="w-full right-section">
                                         <div class="box rounded-lg shadow-lg">
-                                                <table style="border-radius: 20px" class="table min-w-full border rounded-lg border-gray-300 dark:border-gray-700">
-                                                    <thead class="bg-gray-600 rounded-lg dark:bg-gray-800 text-white">
-                                                        <tr>
-                                                            <th scope="col" style="padding: 1rem 1.5rem;font-size:1.2rem;font-weight:600;text-align:center;"
-                                                                class="text-start px-4 py-2 border text-lg font-semibold border-gray-300 dark:border-gray-700">
-                                                                Amount</th>
-                                                            <th scope="col" style="padding: 1rem 1.5rem;font-size:1.2rem;font-weight:600;text-align:center;"
-                                                                class="text-start px-4 py-2 border text-lg font-semibold border-gray-300 dark:border-gray-700">
-                                                                SMS Cost</th>
-                                                            <th scope="col" style="padding: 1rem 1.5rem;font-size:1.2rem;font-weight:600;text-align:center;"
-                                                                class="text-start px-4 py-2 border text-lg font-semibold border-gray-300 dark:border-gray-700">
-                                                                SMS Cost Validity</th>
+                                            <table
+                                                class="min-w-full border border-gray-900 rounded-2xl shadow-md overflow-hidden">
+                                                <thead class="bg-indigo-600 text-white">
+                                                    <tr>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
+                                                            Amount
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
+                                                            SMS Cost
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
+                                                            SMS Cost Validity
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody
+                                                    class=" dark:bg-gray-900 font-semibold">
+                                                    @foreach ($message_plans as $plan)
+                                                        <tr id="plan-{{ $plan->plan_uuid }}"
+                                                            data-min="{{ $plan->min_amount }}"
+                                                            data-max="{{ $plan->max_amount }}"
+                                                            data-cost="{{ $plan->sms_cost }}"
+                                                            data-validity="{{ $plan->validity_months == 0 ? 'Unlimited' : $plan->validity_months . ' Months' }}"
+                                                            class="hover:bg-indigo-50 dark:hover:bg-gray-800 transition-colors">
+
+                                                            <td class="px-6 py-4 text-center border border-gray-600">
+                                                                ₹ {{ $plan->min_amount }} - {{ $plan->max_amount }}
+                                                            </td>
+                                                            <td class="px-6 py-4 text-center border border-gray-600">
+                                                                ₹ {{ $plan->sms_cost }} SMS
+                                                            </td>
+                                                            <td class="px-6 py-4 text-center border border-gray-600">
+                                                                {{ $plan->validity_months == 0 ? 'Unlimited' : $plan->validity_months . ' Months' }}
+                                                            </td>
                                                         </tr>
-                                                    </thead>
-                                                    <tbody class=" dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-                                                        @foreach ($message_plans as $plan)
-                                                            <tr class="" id="plan-{{ $plan->plan_uuid }}"
-                                                                data-min="{{ $plan->min_amount }}"
-                                                                data-max="{{ $plan->max_amount }}"
-                                                                data-cost="{{ $plan->sms_cost }}"
-                                                                data-validity="{{ $plan->validity_months == 0 ? 'Unlimited' : $plan->validity_months . ' Months' }}">
-                                                                >
-                                                                <td style="padding: 1rem 1.25rem"
-                                                                    class="text-start px-4 py-5 border border-gray-300 dark:border-gray-700">
-                                                                    ₹ {{ $plan->min_amount }} -
-                                                                    {{ $plan->max_amount }}
-                                                                </td>
-                                                                <td style="padding: 1rem 1.25rem"
-                                                                    class="text-start px-4 py-5 border border-gray-300 dark:border-gray-700">
-                                                                    ₹ {{ $plan->sms_cost }} SMS
-                                                                </td>
-                                                                <td style="padding: 1rem 1.25rem"
-                                                                    class="text-start px-4 py-5 border border-gray-300 dark:border-gray-700">
-                                                                    {{ $plan->validity_months == 0 ? 'Unlimited' : $plan->validity_months . ' Months' }}
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+
                                         </div>
                                     </div>
                                 </div>
@@ -264,7 +307,7 @@
 
                             <div
                                 class="p-4 border-b border-t border-dashed border-defaultborder dark:border-defaultborder/10 tab-content">
-                                <div class="font-semibold bg-gray-600 heading block text-[18px] text-center">Complete Your Billing
+                                <div class="font-semibold  heading block text-[18px] text-center">Complete Your Billing
                                 </div>
                                 <div class="flex flex-col md:flex-row lg:flex-row gap-6">
                                     <!-- Left Section (Form) -->
@@ -295,7 +338,7 @@
                                                                         class="w-5 h-5 rounded-full border-2 border-gray-400 
                                                                           peer-checked:border-blue-600 peer-checked:bg-blue-600 mr-2"
                                                                         type="radio" name="creditType"
-                                                                        value="sms" class="peer" checked>
+                                                                        value="sms" class="peer" checked onchange="updateSummary()">
                                                                     <span
                                                                         class="font-semibold text-lg text-gray-900">SMS
                                                                         OTP Credits</span>
@@ -318,7 +361,7 @@
                                                                         class="w-5 h-5 rounded-full border-2 border-gray-400 
                                                                                 peer-checked:border-blue-600 peer-checked:bg-blue-600 mr-2"
                                                                         type="radio" name="creditType"
-                                                                        value="voice" class="hidden peer">
+                                                                        value="voice" class="hidden peer" onchange="updateSummary()">
                                                                     <span
                                                                         class="font-semibold text-lg text-gray-900">Whatsapp
                                                                         OTP Credits</span>
@@ -342,80 +385,93 @@
 
                                                 <div class="mb-4">
                                                     <label for="billing_number"
-                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">Billing Number
+                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">Billing
+                                                        Number
                                                         <span class="text-red-500">*</span></label>
                                                     <div class="input-group">
                                                         <input type="text"
                                                             class=" w-full bg-gray-100 text-gray-600 p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
-                                                            id="billing_number" placeholder="Enter billing number" value="{{ $user->phone }}" readonly
-                                                           >
+                                                            id="billing_number" placeholder="Enter billing number"
+                                                            value="{{ $user->phone }}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="billing_email"
-                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">Billing Email
+                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">Billing
+                                                        Email
                                                         <span class="text-red-500">*</span></label>
                                                     <div class="input-group">
                                                         <input type="text"
                                                             class=" w-full bg-gray-100 text-gray-600 p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
-                                                            id="billing_email" placeholder="Enter billing email" value="{{ $user->email }}" readonly
-                                                           >
+                                                            id="billing_email" placeholder="Enter billing email"
+                                                            value="{{ $user->email }}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="full_name"
-                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">Your Full Name
+                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">Your
+                                                        Full Name
                                                         <span class="text-red-500">*</span></label>
                                                     <div class="input-group">
                                                         <input type="text"
                                                             class=" w-full bg-gray-100 text-gray-600 p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
-                                                            id="full_name" placeholder="Enter your full name" value="{{ $user->name }}">
+                                                            id="full_name" placeholder="Enter your full name"
+                                                            value="{{ $user->name }}">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="billing_name"
-                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">Billing Name/Company Name
+                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">Billing
+                                                        Name/Company Name
                                                         <span class="text-red-500">*</span></label>
                                                     <div class="input-group">
                                                         <input type="text"
                                                             class=" w-full bg-gray-100 text-gray-600 p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
-                                                            id="billing_name" placeholder="Enter billing name/company name" value="{{ $user->company_name }}">
+                                                            id="billing_name"
+                                                            placeholder="Enter billing name/company name"
+                                                            value="{{ $user->company_name }}">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="billing_address"
-                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">Billing Address
+                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">Billing
+                                                        Address
                                                         <span class="text-red-500">*</span></label>
                                                     <div class="input-group">
                                                         <input type="text"
                                                             class=" w-full bg-gray-100 text-gray-600 p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
-                                                            id="billing_address" placeholder="Enter billing address" value="{{ $user->address1 }}">
+                                                            id="billing_address" placeholder="Enter billing address"
+                                                            value="{{ $user->address1 }}">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="gst_number"
-                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">GST Number (if Available)
+                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">GST
+                                                        Number (if Available)
                                                     </label>
                                                     <div class="input-group">
                                                         <input type="text"
                                                             class=" w-full bg-gray-100 text-gray-600 p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
-                                                            id="gst_number" placeholder="Enter GST number" value="{{ $user->gst_number }}">
+                                                            id="gst_number" placeholder="Enter GST number"
+                                                            value="{{ $user->gst_number }}">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="pan_number"
-                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">PAN Number
+                                                        class="ti-form-label text-[.875rem] text-black text-lg font-semibold">PAN
+                                                        Number
                                                     </label>
                                                     <div class="input-group">
                                                         <input type="text"
                                                             class=" w-full bg-gray-100 text-gray-600 p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
-                                                            id="pan_number" placeholder="Enter PAN number" value="{{ $user->pan_number }}">
+                                                            id="pan_number" placeholder="Enter PAN number"
+                                                            value="{{ $user->pan_number }}">
                                                     </div>
                                                 </div>
-                                                        
-                                                       
 
-                                              
+
+
+
 
 
                                                 <!-- Buttons -->
@@ -432,44 +488,44 @@
 
                                     <!-- Right Section (API Request Display) -->
                                     <div class="w-full right-section">
-                                        <div class="box rounded-lg shadow-lg">
-                                            <div class="box-title text-xl font-semibold">Order Summary</div>
+                                        <div class="box p-2 rounded-lg shadow-lg">
+                                            <div class="box-title heading text-xl font-semibold">Order Summary</div>
                                             <div class="box-content">
                                                 <div
                                                     class="space-y-4 mt-2 w-full md:w-1/2 lg:w-1/2 mx-auto px-2 md:px-10">
                                                     <!-- DLS SMS Volume -->
-                                                    <div class="flex justify-between items-center text-lg">
+                                                    <div class="flex justify-between items-center text-base font-medium">
                                                         <p>DLS SMS Volume</p>
-                                                        <p id="dlsSmsVolume">100</p>
+                                                        <p id="summary_dlsSmsVolume">₹ 0</p>
                                                     </div>
-                                                    <div class="flex justify-between items-center text-lg">
-                                                        <p>DLS SMS Volume</p>
-                                                        <p id="dlsSmsVolume">100</p>
+                                                    <div class="flex justify-between items-center text-base font-medium">
+                                                        <p>Service</p>
+                                                        <p id="summary_service">SMS OTP Service</p>
                                                     </div>
 
                                                     <!-- DLS SMS Cost -->
-                                                    <div class="flex justify-between items-center text-lg">
+                                                    <div class="flex justify-between items-center text-base font-medium">
                                                         <p>DLS SMS Cost</p>
-                                                        <p id="dlsSmsCost">100</p>
+                                                        <p id="summary_dlsSmsCost">₹ 0</p>
                                                     </div>
 
                                                     <!-- Validity -->
-                                                    <div class="flex justify-between items-center text-lg">
+                                                    <div class="flex justify-between items-center text-base font-medium">
                                                         <p>Validity</p>
-                                                        <p id="validity">100</p>
+                                                        <p id="summary_validity">unlimited</p>
                                                     </div>
 
                                                     <!-- GST -->
-                                                    <div class="flex justify-between items-center text-lg">
+                                                    <div class="flex justify-between items-center text-base font-medium">
                                                         <p>GST (18%)</p>
-                                                        <p id="gst">100</p>
+                                                        <p id="summary_gst">₹ 0</p>
                                                     </div>
 
                                                     <!-- Total Payable -->
                                                     <div
                                                         class="flex justify-between items-center text-lg font-semibold border-t pt-4">
                                                         <p>Total Payable</p>
-                                                        <p id="totalPayable">100</p>
+                                                        <p id="summary_totalPayable">₹ 100</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -586,6 +642,13 @@
             const gst = document.getElementById("gst");
             const totalPayable = document.getElementById("totalPayable");
 
+            const summary_dlsSmsVolume = document.getElementById("summary_dlsSmsVolume");
+            const summary_service = document.getElementById("summary_service");
+            const summary_dlsSmsCost = document.getElementById("summary_dlsSmsCost");
+            const summary_validity = document.getElementById("summary_validity");
+            const summary_gst = document.getElementById("summary_gst");
+            const summary_totalPayable = document.getElementById("summary_totalPayable");
+
             messagePlans.forEach(row => {
                 const min = row.min_amount;
                 const max = row.max_amount;
@@ -599,7 +662,7 @@
 
             messagePlans.forEach(row => {
                 const rowEl = document.getElementById("plan-" + row.plan_uuid);
-                rowEl.classList.remove("bg-green-600", "dark:bg-green-800");
+                rowEl.classList.remove("active_row");
             });
 
             if (matchedPlan) {
@@ -611,18 +674,37 @@
                 gst.textContent = `₹ ${(amount * 0.18).toFixed(2)}`;
                 totalPayable.textContent = (amount + parseFloat(amount * 0.18)).toFixed(2);
 
+
+                summary_dlsSmsVolume.textContent = `${(amount / matchedPlan.sms_cost).toFixed(2)} SMS`;
+                summary_dlsSmsCost.textContent = `₹ ${(matchedPlan.sms_cost)}`;
+                summary_validity.textContent =
+                    `${matchedPlan.validity_months === 0 ? "Unlimited" : matchedPlan.validity_months + " Months"}`;
+                summary_gst.textContent = `₹ ${(amount * 0.18).toFixed(2)}`;
+                summary_totalPayable.textContent = (amount + parseFloat(amount * 0.18)).toFixed(2);
+
                 const selectPlanTable = document.getElementById("plan-" + matchedPlan.plan_uuid);
-                selectPlanTable.classList.add("bg-green-600", "dark:bg-green-800");
+                selectPlanTable.classList.add("active_row");
             }
         }
 
         document.querySelectorAll('input[name="creditType"]').forEach(radio => {
-  radio.addEventListener('change', () => {
-    document.querySelectorAll('.active-plan').forEach(card => card.classList.remove('active-plan'));
-    radio.closest('label').classList.add('active-plan');
-  });
-});
+            radio.addEventListener('change', () => {
+                document.querySelectorAll('.active-plan').forEach(card => card.classList.remove(
+                    'active-plan'));
+                radio.closest('label').classList.add('active-plan');
+            });
+        });
 
+        function updateSummary() {
+            const selectedCreditType = document.querySelector('input[name="creditType"]:checked').value;
+            const summary_service = document.getElementById("summary_service");
+
+            if (selectedCreditType === "sms") {
+                summary_service.textContent = "SMS OTP Service";
+            } else if (selectedCreditType === "voice") {
+                summary_service.textContent = "Whatsapp OTP Service";
+            }
+        }
     </script>
 
 
