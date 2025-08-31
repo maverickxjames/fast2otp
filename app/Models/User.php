@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'password','profile_pic', 'plain_password', 'api_key', 'api_status', 'webhook_url', 'webhook_status', 'kyc_status', 'role', 'status'
+        'name', 'email', 'phone', 'password','profile_pic', 'plain_password', 'api_key', 'api_status', 'webhook_url', 'webhook_status', 'kyc_status', 'role', 'status','company_name','address1','address2','city','state','zip'
     ];
 
     /**

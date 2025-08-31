@@ -374,7 +374,7 @@
                                                         class="text-gray-500">(Optional)</span></label>
                                                 <input type="text" class="form-control" name="company"
                                                     placeholder="Enter Company Name"
-                                                    value="{{ $billing->company_name ? $billing->company_name : '' }}">
+                                                    value="{{ $userData->company_name ? $userData->company_name : '' }}">
                                             </div>
 
                                             <!-- Address Line 1 (Required) -->
@@ -383,7 +383,7 @@
                                                         *</span></label>
                                                 <input type="text" class="form-control" name="address1"
                                                     placeholder="Enter Address 2"
-                                                    value="{{ $billing->address1 ? $billing->address1 : '' }}"
+                                                    value="{{ $userData->address1 ? $userData->address1 : '' }}"
                                                     required>
                                             </div>
 
@@ -392,7 +392,7 @@
                                                 <label class="form-label">Address Line 2 <span
                                                         class="text-gray-500">(Optional)</span></label>
                                                 <input type="text" class="form-control" name="address2"
-                                                    value="{{ $billing->address2 ? $billing->address2 : '' }}"
+                                                    value="{{ $userData->address2 ? $userData->address2 : '' }}"
                                                     placeholder="Enter Address 2">
                                             </div>
 
@@ -402,7 +402,7 @@
                                                         *</span></label>
                                                 <input type="text" class="form-control" name="city"
                                                     placeholder="Enter City"
-                                                    value="{{ $billing->city ? $billing->city : '' }}" required>
+                                                    value="{{ $userData->city ? $userData->city : '' }}" required>
                                             </div>
 
                                             <!-- State (Required) -->
@@ -411,7 +411,7 @@
                                                         *</span></label>
                                                 <input type="text" class="form-control" name="state"
                                                     placeholder="Enter State"
-                                                    value="{{ $billing->state ? $billing->state : '' }}" required>
+                                                    value="{{ $userData->state ? $userData->state : '' }}" required>
                                             </div>
 
                                             <!-- ZIP Code (Required) -->
@@ -420,7 +420,7 @@
                                                         *</span></label>
                                                 <input type="text" class="form-control" name="zip"
                                                     placeholder="Enter ZIP"
-                                                    value="{{ $billing->zip ? $billing->zip : '' }}" required
+                                                    value="{{ $userData->zip ? $userData->zip : '' }}" required
                                                     pattern="^[0-9]{5,6}$">
                                             </div>
                                         </div>
