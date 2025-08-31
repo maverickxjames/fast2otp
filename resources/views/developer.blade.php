@@ -129,6 +129,21 @@
                 width: 100%;
             }
         } */
+
+        /* custom.css */
+
+        @media (min-width: 768px) {
+
+            /* md breakpoint */
+            .left-section {
+                width: 40%;
+            }
+
+            .right-section {
+                width: 60%;
+            }
+        }
+        
     </style>
 
 
@@ -199,7 +214,7 @@
                                     </div>
                                     <div class="flex flex-col md:flex-row lg:flex-row gap-6">
                                         <!-- Left Section (Form) -->
-                                        <div class="w-full lg:w-1/2">
+                                        <div class="w-full left-section">
                                             <div class="box p-6 rounded-lg shadow-lg">
                                                 <div class="box-header">
                                                     <div class="box-title text-xl font-semibold">API Integration</div>
@@ -264,19 +279,19 @@
                                         </div>
 
                                         <!-- Right Section (API Request Display) -->
-                                        <div class="w-full lg:w-1/2">
-                                            <div class="box p-6 rounded-lg shadow-lg">
+                                        <div class="w-full right-section">
+                                            <div class="box rounded-lg shadow-lg">
                                                 <div class="box-header">
                                                     <div class="box-title text-xl font-semibold">Generated API Request
                                                     </div>
                                                 </div>
 
-                                                <div class="box-body">
+                                                <div style="padding: 0;" class="box-body">
                                                     <div id="requestType" class="text-lg font-bold mb-2">GET Request
                                                     </div>
 
                                                     <!-- Dynamic API Request -->
-                                                    <pre id="apiRequest" class="p-4 bg-dark rounded-lg text-light overflow-auto">
+                                                    <pre id="apiRequest" class="w-full p-4 bg-dark rounded-lg text-light overflow-auto flex-1">
                                                         Generating API request...
                                                     </pre>
 
@@ -284,7 +299,7 @@
                                                         <div class="text-lg font-bold mb-2">Overall URL:</div>
                                                         <!-- URL container with copy button placed outside the pre tag -->
                                                         <div class="flex items-center gap-2">
-                                                            <pre id="overallUrl" class="p-4 bg-dark rounded-lg text-light overflow-auto flex-1">
+                                                            <pre id="overallUrl" class="w-full p-4 bg-dark rounded-lg text-light overflow-auto flex-1">
                                                                 https://fast2otp.com/send-otp
                                                             </pre>
 
@@ -321,17 +336,19 @@
                                                     <form>
                                                         @csrf
 
-                                                 
-                                                    <div class="flex items-center gap-2">
-                                                        <span id="apiStatusText" class="text-dark font-semibold">Status: <span
-                                                                class="font-bold {{ $user->api_status=='on'?'text-success':'text-danger' }}">{{ $user->api_status }}</span></span>
-                                                        <label class="switch">
-                                                            <input type="checkbox" id="apiStatusToggle"
-                                                                onclick="toggleApiStatus()" {{ $user->api_status=='on'?'checked':'' }}>
-                                                            <span class="slider round"></span>
-                                                        </label>
-                                                    </div>
-                                                </form>
+
+                                                        <div class="flex items-center gap-2">
+                                                            <span id="apiStatusText"
+                                                                class="text-dark font-semibold">Status: <span
+                                                                    class="font-bold {{ $user->api_status == 'on' ? 'text-success' : 'text-danger' }}">{{ $user->api_status }}</span></span>
+                                                            <label class="switch">
+                                                                <input type="checkbox" id="apiStatusToggle"
+                                                                    onclick="toggleApiStatus()"
+                                                                    {{ $user->api_status == 'on' ? 'checked' : '' }}>
+                                                                <span class="slider round"></span>
+                                                            </label>
+                                                        </div>
+                                                    </form>
                                                 </div>
 
                                                 <div class="box-body">
@@ -394,37 +411,41 @@
                                         <div class="w-full lg:w-1/2">
                                             <div class="box">
                                                 <div class="box-header flex justify-between items-center">
-                                                    <div class="box-title text-xl font-semibold">Webhook Management</div>
+                                                    <div class="box-title text-xl font-semibold">Webhook Management
+                                                    </div>
                                                     <form>
                                                         @csrf
                                                         <div class="flex items-center gap-2">
-                                                            <span id="webhookStatusText" class="text-dark font-semibold">Status: 
-                                                                <span class="font-bold {{ $user->webhook_status == 'on' ? 'text-success' : 'text-danger' }}">
+                                                            <span id="webhookStatusText"
+                                                                class="text-dark font-semibold">Status:
+                                                                <span
+                                                                    class="font-bold {{ $user->webhook_status == 'on' ? 'text-success' : 'text-danger' }}">
                                                                     {{ $user->webhook_status }}
                                                                 </span>
                                                             </span>
                                                             <label class="switch">
-                                                                <input type="checkbox" id="webhookStatusToggle" 
-                                                                    onclick="toggleWebhookStatus()" 
+                                                                <input type="checkbox" id="webhookStatusToggle"
+                                                                    onclick="toggleWebhookStatus()"
                                                                     {{ $user->webhook_status == 'on' ? 'checked' : '' }}>
                                                                 <span class="slider round"></span>
                                                             </label>
                                                         </div>
                                                     </form>
                                                 </div>
-                                
+
                                                 <div class="box-body">
                                                     <!-- Webhook URL -->
                                                     <div class="mb-4">
                                                         <label class="block text-gray-600">Webhook URL:</label>
                                                         <div class="flex items-center gap-2">
-                                                            
-                                                            <input id="webhookUrl" type="text" value="{{ $user->webhook_url ?? '' }}" 
+
+                                                            <input id="webhookUrl" type="text"
+                                                                value="{{ $user->webhook_url ?? '' }}"
                                                                 placeholder="Enter your webhook URL"
                                                                 class="w-full p-2 border rounded">
-                                                            
+
                                                             <!-- Copy Button -->
-                                                            <button onclick="copyWebhookUrl()" 
+                                                            <button onclick="copyWebhookUrl()"
                                                                 class="bg-blue-500 hover:bg-blue-600 flex gap-2 text-light px-4 py-2 rounded-lg shadow-md transition">
                                                                 {{-- copy icon --}}
 
@@ -433,7 +454,7 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                
+
                                                     <!-- Actions -->
                                                     <div class="flex justify-between items-center mt-4">
                                                         <button onclick="updateWebhookUrl()"
@@ -441,20 +462,20 @@
                                                             {{-- save icon --}}
 
                                                             <i class="bi bi-save"></i>
-                                                             Save
+                                                            Save
                                                         </button>
-                                
+
                                                         <button onclick="testWebhook()"
                                                             class="bg-yellow-500 hover:bg-yellow-600 flex gap-2 text-light px-4 py-2 rounded-lg shadow-md transition">
                                                             {{-- test icon --}}
                                                             <i class="bi bi-emoji-smile"></i>
-                                                             Test Webhook
+                                                            Test Webhook
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                
+
                                         <!-- Webhook Logs -->
                                         <div class="w-full lg:w-1/2">
                                             <div class="box">
@@ -465,7 +486,7 @@
                                                         🗑️ Clear Logs
                                                     </button>
                                                 </div>
-                                
+
                                                 <div class="box-body max-h-[400px] overflow-y-auto">
                                                     <div id="webhookLogs">
                                                         <p class="text-gray-500">No logs available...</p>
@@ -473,7 +494,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                
+
                                     </div>
 
                                 </div>
@@ -491,14 +512,14 @@
                                                 </div>
 
                                                 <div class="box-body ">
-                                                   ...
+                                                    ...
                                                 </div>
                                             </div>
                                         </div>
 
-                                     
+
                                     </div>
-                                    
+
                                 </div>
 
 
@@ -519,7 +540,7 @@
         <!-- MAIN-CONTENT -->
 
         <!-- FOOTER -->
-<x-footer />
+        <x-footer />
 
         <!-- header-search-modal -->
         <div class="hs-overlay ti-modal hidden" id="header-responsive-search" tabindex="-1"
@@ -590,8 +611,8 @@
     <!-- CUSTOM-SWITCHER JS -->
     <link rel="modulepreload" href="build/assets/custom-switcher-kd-POPJw.js">
     <script type="module" src="build/assets/custom-switcher-kd-POPJw.js"></script>
-      <!-- Add jQuery CDN -->
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Add jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -604,116 +625,117 @@
         */
 
         // 🟢 Toggle Webhook Status
-function toggleWebhookStatus() {
-    const toggle = document.getElementById("webhookStatusToggle");
-    const statusText = document.getElementById("webhookStatusText");
+        function toggleWebhookStatus() {
+            const toggle = document.getElementById("webhookStatusToggle");
+            const statusText = document.getElementById("webhookStatusText");
 
-    $.ajax({
-        url: '{{ route("webhook-status") }}',
-        method: 'POST',
-        data: {
-            status: toggle.checked ? 'on' : 'off',
-            _token: '{{ csrf_token() }}'
-        },
-        dataType: 'json',
-        success: function(response) {
-            if (response.status === 'success') {
-                const webhookStatus = response.webhook_status;
-                statusText.innerHTML = `Status: <span class="font-bold ${webhookStatus === 'on' ? 'text-success' : 'text-danger'}">${webhookStatus}</span>`;
-                Toastify({
-                    text: `Webhook Status turned ${webhookStatus.toUpperCase()}!`,
-                    duration: 3000,
-                    backgroundColor: webhookStatus === 'on' ? "#4CAF50" : "#F44336"
-                }).showToast();
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error("Error:", error);
-            toggle.checked = !toggle.checked;  // Revert on error
+            $.ajax({
+                url: '{{ route('webhook-status') }}',
+                method: 'POST',
+                data: {
+                    status: toggle.checked ? 'on' : 'off',
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        const webhookStatus = response.webhook_status;
+                        statusText.innerHTML =
+                            `Status: <span class="font-bold ${webhookStatus === 'on' ? 'text-success' : 'text-danger'}">${webhookStatus}</span>`;
+                        Toastify({
+                            text: `Webhook Status turned ${webhookStatus.toUpperCase()}!`,
+                            duration: 3000,
+                            backgroundColor: webhookStatus === 'on' ? "#4CAF50" : "#F44336"
+                        }).showToast();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error:", error);
+                    toggle.checked = !toggle.checked; // Revert on error
+                    Toastify({
+                        text: "Failed to update webhook status!",
+                        duration: 3000,
+                        backgroundColor: "#F44336"
+                    }).showToast();
+                }
+            });
+        }
+
+        // 🟢 Copy Webhook URL
+        function copyWebhookUrl() {
+            const urlInput = document.getElementById("webhookUrl");
+            urlInput.select();
+            document.execCommand("copy");
             Toastify({
-                text: "Failed to update webhook status!",
-                duration: 3000,
-                backgroundColor: "#F44336"
+                text: "Webhook URL copied!",
+                duration: 2000,
+                backgroundColor: "#4CAF50"
             }).showToast();
         }
-    });
-}
 
-// 🟢 Copy Webhook URL
-function copyWebhookUrl() {
-    const urlInput = document.getElementById("webhookUrl");
-    urlInput.select();
-    document.execCommand("copy");
-    Toastify({
-        text: "Webhook URL copied!",
-        duration: 2000,
-        backgroundColor: "#4CAF50"
-    }).showToast();
-}
+        // 🟢 Update Webhook URL
+        function updateWebhookUrl() {
+            const url = document.getElementById("webhookUrl").value;
 
-// 🟢 Update Webhook URL
-function updateWebhookUrl() {
-    const url = document.getElementById("webhookUrl").value;
-
-    $.ajax({
-        url: '{{ route("update-webhook") }}',
-        method: 'POST',
-        data: {
-            webhook_url: url,
-            _token: '{{ csrf_token() }}'
-        },
-        success: function(response) {
-            if (response.status === 'success') {
-                Toastify({
-                    text: "Webhook URL updated!",
-                    duration: 3000,
-                    backgroundColor: "#4CAF50"
-                }).showToast();
-            }
-        },
-        error: function(xhr) {
-            console.error("Error:", xhr);
-            Toastify({
-                text: "Failed to update webhook URL!",
-                duration: 3000,
-                backgroundColor: "#F44336"
-            }).showToast();
+            $.ajax({
+                url: '{{ route('update-webhook') }}',
+                method: 'POST',
+                data: {
+                    webhook_url: url,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        Toastify({
+                            text: "Webhook URL updated!",
+                            duration: 3000,
+                            backgroundColor: "#4CAF50"
+                        }).showToast();
+                    }
+                },
+                error: function(xhr) {
+                    console.error("Error:", xhr);
+                    Toastify({
+                        text: "Failed to update webhook URL!",
+                        duration: 3000,
+                        backgroundColor: "#F44336"
+                    }).showToast();
+                }
+            });
         }
-    });
-}
 
-// 🟢 Test Webhook
-function testWebhook() {
-    $.ajax({
-        url: '{{ route("test-webhook") }}',
-        method: 'GET',
-        success: function(response) {
+        // 🟢 Test Webhook
+        function testWebhook() {
+            $.ajax({
+                url: '{{ route('test-webhook') }}',
+                method: 'GET',
+                success: function(response) {
+                    Toastify({
+                        text: "Webhook test sent!",
+                        duration: 3000,
+                        backgroundColor: "#4CAF50"
+                    }).showToast();
+                },
+                error: function(xhr) {
+                    console.error("Error:", xhr);
+                    Toastify({
+                        text: "Failed to send test webhook!",
+                        duration: 3000,
+                        backgroundColor: "#F44336"
+                    }).showToast();
+                }
+            });
+        }
+
+        // 🟢 Clear Webhook Logs
+        function clearWebhookLogs() {
+            $('#webhookLogs').html('<p class="text-gray-500">No logs available...</p>');
             Toastify({
-                text: "Webhook test sent!",
+                text: "Webhook logs cleared!",
                 duration: 3000,
                 backgroundColor: "#4CAF50"
             }).showToast();
-        },
-        error: function(xhr) {
-            console.error("Error:", xhr);
-            Toastify({
-                text: "Failed to send test webhook!",
-                duration: 3000,
-                backgroundColor: "#F44336"
-            }).showToast();
         }
-    });
-}
-
-// 🟢 Clear Webhook Logs
-function clearWebhookLogs() {
-    $('#webhookLogs').html('<p class="text-gray-500">No logs available...</p>');
-    Toastify({
-        text: "Webhook logs cleared!",
-        duration: 3000,
-        backgroundColor: "#4CAF50"
-    }).showToast();
-}
 
 
         function toggleApiStatus() {
@@ -723,21 +745,22 @@ function clearWebhookLogs() {
             const previousState = toggle.checked; // Store previous state
 
             $.ajax({
-                url:'{{ route("api-status") }}',
-                method:'POST',
-                data:{
-                    status:toggle.checked ? 'on' : 'off',
-                    _token:'{{ csrf_token() }}'
+                url: '{{ route('api-status') }}',
+                method: 'POST',
+                data: {
+                    status: toggle.checked ? 'on' : 'off',
+                    _token: '{{ csrf_token() }}'
                 },
-                dataType:'json',
-                success:function(response){
-                    if(response.status == 'success'){
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status == 'success') {
 
-                        const apiStatus = response.api_status;  // Use returned status
+                        const apiStatus = response.api_status; // Use returned status
                         const isOn = apiStatus === 'on';
-                         // Update the UI with the returned status
+                        // Update the UI with the returned status
                         toggle.checked = isOn;
-                        statusText.innerHTML = `Status: <span class="font-bold ${isOn ? 'text-success' : 'text-danger'}">${apiStatus}</span>`;
+                        statusText.innerHTML =
+                            `Status: <span class="font-bold ${isOn ? 'text-success' : 'text-danger'}">${apiStatus}</span>`;
 
                         Toastify({
                             text: `API Status turned ${apiStatus.toUpperCase()}!`,
@@ -746,12 +769,12 @@ function clearWebhookLogs() {
                             close: true,
                             gravity: "top",
                             position: "right",
-                            backgroundColor: isOn ? "#4CAF50" : "#F44336",  // Green for ON, Red for OFF
+                            backgroundColor: isOn ? "#4CAF50" : "#F44336", // Green for ON, Red for OFF
                             stopOnFocus: true,
                         }).showToast();
 
 
-                    } else{
+                    } else {
                         console.error("Failed to update status:", response.message);
 
                         // Restore previous state on failure
@@ -770,7 +793,7 @@ function clearWebhookLogs() {
                         }).showToast();
                     }
                 },
-                error:function(xhr,status,error){
+                error: function(xhr, status, error) {
                     console.error("Error:", error);
 
                     // Restore the previous state on error
@@ -792,7 +815,7 @@ function clearWebhookLogs() {
 
             })
 
-          
+
         }
 
         // Toggle API Key Visibility
@@ -840,13 +863,13 @@ function clearWebhookLogs() {
 
             // AJAX request to the backend to generate new API key
             $.ajax({
-                url: '{{ route("apikey") }}',    // Replace with your actual API route
+                url: '{{ route('apikey') }}', // Replace with your actual API route
                 method: 'GET',
                 dataType: 'json',
                 success: function(response) {
 
                     // Assuming the new API key is returned in the response
-                    
+
                     const newKey = response.api_key;
 
                     // Update the displayed API key
@@ -923,15 +946,17 @@ function clearWebhookLogs() {
             let overallUrl = "";
 
             if (method === "GET") {
-                overallUrl = `https://fast2otp.com/api/v1/sendOtp?route=${route}&value=${otpValue}&apikey=${apiKey}&numbers=${phoneNumber}`;
-                apiRequest = `
+                overallUrl =
+                    `https://fast2otp.com/api/v1/sendOtp?route=${route}&value=${otpValue}&apikey=${apiKey}&numbers=${phoneNumber}`;
+               apiRequest = `
 GET ${overallUrl}
 Query Parameters:
     route: ${route}
     apikey: ${apiKey}
     otp: ${otpValue}
     numbers: ${phoneNumber}
-        `;
+`.trim();
+
 
                 document.getElementById("requestType").innerText = "GET Request";
                 // document.getElementById("apiRequest").classList.remove("text-danger");
@@ -944,12 +969,12 @@ POST ${overallUrl}
 Content-Type: application/json
 Body:
 {
-    "route": "${route}",
-    "apikey": "${apiKey}",
-    "value": "${otpValue}",
-    "numbers": "${phoneNumber}"
+"route": "${route}",
+"apikey": "${apiKey}",
+"value": "${otpValue}",
+"numbers": "${phoneNumber}"
 }
-        `;
+`.trim();
 
                 document.getElementById("requestType").innerText = "POST Request";
                 // document.getElementById("apiRequest").classList.remove("text-success");
@@ -957,7 +982,7 @@ Body:
             }
 
             // Update the UI in real time
-            document.getElementById("apiRequest").innerText = apiRequest;
+            document.getElementById("apiRequest").innerText = apiRequest.trim();
             document.getElementById("overallUrl").innerText = overallUrl;
         }
     </script>
