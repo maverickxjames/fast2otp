@@ -82,14 +82,16 @@
         }
 
         .active_row {
-    /* box-shadow: 0 2px 8px rgba(21,101,192, 0.10);
+            /* box-shadow: 0 2px 8px rgba(21,101,192, 0.10);
     border-left: 3px solid #50d050;
     background-color: #f2f7fb; */
 
-    background-color: #eaf6f4; /* very light teal */
-    box-shadow: inset 4px 0 0 0 #00897b; /* teal inset border */
-    font-weight: 600;
-}
+            background-color: #eaf6f4;
+            /* very light teal */
+            box-shadow: inset 4px 0 0 0 #00897b;
+            /* teal inset border */
+            font-weight: 600;
+        }
 
         .heading {
             /* background-color: rgb(54, 54, 219); */
@@ -120,14 +122,24 @@
             padding: 12px;
         }
 
-        .control{
-                position: relative;
-    width: 1%;
-    min-width: 0px;
-    flex-shrink: 1;
-    flex-grow: 1;
-    flex-basis: auto;
+        .control {
+            position: relative;
+            width: 1%;
+            min-width: 0px;
+            flex-shrink: 1;
+            flex-grow: 1;
+            flex-basis: auto;
         }
+
+        .no-arrow::-webkit-outer-spin-button,
+.no-arrow::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-arrow[type=number] {
+  -moz-appearance: textfield;
+}
     </style>
 
 
@@ -176,143 +188,7 @@
                                 <div class="flex flex-col md:flex-row lg:flex-row gap-6">
                                     <!-- Left Section (Form) -->
                                     <div class="w-full left-section">
-                                        <div class="box py-6 rounded-lg shadow-lg">
-
-
-                                            <div class="box-body ">
-
-                                                <!-- Amount -->
-                                                <div class="mb-4">
-                                                    <label for="amount"
-                                                        class="ti-form-label text-[.875rem] text-black text-xl font-semibold">Amount
-                                                        <span class="text-red-500">*</span></label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-text bg:gray-900 font-semibold text-xl">₹
-                                                        </div>
-                                                        <input type="text"
-                                                            class="control w-full p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
-                                                            id="amount" placeholder="Enter amount" value="100"
-                                                            onchange="updateSelectedPlan(this.value)">
-                                                    </div>
-                                                </div>
-
-
-                                                <div
-                                                    class="space-y-4 mt-2 w-full md:w-1/2 lg:w-1/2 mx-auto px-2 md:px-10">
-                                                    <!-- DLS SMS Volume -->
-                                                    <div class="flex justify-between items-center text-base font-medium">
-                                                        <p>DLS SMS Volume</p>
-                                                        <p id="dlsSmsVolume">100</p>
-                                                    </div>
-
-                                                    <!-- DLS SMS Cost -->
-                                                    <div class="flex justify-between items-center text-base font-medium">
-                                                        <p>DLS SMS Cost</p>
-                                                        <p id="dlsSmsCost">100</p>
-                                                    </div>
-
-                                                    <!-- Validity -->
-                                                    <div class="flex justify-between items-center text-base font-medium">
-                                                        <p>Validity</p>
-                                                        <p id="validity">100</p>
-                                                    </div>
-
-                                                    <!-- GST -->
-                                                    <div class="flex justify-between items-center text-base font-medium">
-                                                        <p>GST (18%)</p>
-                                                        <p id="gst">100</p>
-                                                    </div>
-
-                                                    <!-- Total Payable -->
-                                                    <div
-                                                        class="flex justify-between items-center text-lg font-semibold border-t pt-4">
-                                                        <p>Total Payable</p>
-                                                        <p id="totalPayable">100</p>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <!-- Buttons -->
-                                                <div class="flex justify-center items-center w-full">
-                                                    <button type="button"
-                                                        class="bg-blue-500 text-dark px-8 text-xl py-2 rounded-lg hover:bg-blue-800 transition">
-                                                        Next
-                                                    </button>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Right Section (API Request Display) -->
-                                    <div class="w-full right-section">
-                                        <div class="box rounded-lg shadow-lg">
-                                            <table
-                                                class="min-w-full border border-gray-900 rounded-2xl shadow-md overflow-hidden">
-                                                <thead class="bg-indigo-600 text-white">
-                                                    <tr>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
-                                                            Amount
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
-                                                            SMS Cost
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
-                                                            SMS Cost Validity
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody
-                                                    class=" dark:bg-gray-900 font-semibold">
-                                                    @foreach ($message_plans as $plan)
-                                                        <tr id="plan-{{ $plan->plan_uuid }}"
-                                                            data-min="{{ $plan->min_amount }}"
-                                                            data-max="{{ $plan->max_amount }}"
-                                                            data-cost="{{ $plan->sms_cost }}"
-                                                            data-validity="{{ $plan->validity_months == 0 ? 'Unlimited' : $plan->validity_months . ' Months' }}"
-                                                            class="hover:bg-indigo-50 dark:hover:bg-gray-800 transition-colors">
-
-                                                            <td class="px-6 py-4 text-center border border-gray-600">
-                                                                ₹ {{ $plan->min_amount }} - {{ $plan->max_amount }}
-                                                            </td>
-                                                            <td class="px-6 py-4 text-center border border-gray-600">
-                                                                ₹ {{ $plan->sms_cost }} SMS
-                                                            </td>
-                                                            <td class="px-6 py-4 text-center border border-gray-600">
-                                                                {{ $plan->validity_months == 0 ? 'Unlimited' : $plan->validity_months . ' Months' }}
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!--End::row-1 -->
-                <!-- Start::row-1 -->
-
-                <div class="">
-                    <div class="max-w-[100%] mx-auto">
-                        <div class="box">
-
-                            <div
-                                class="p-4 border-b border-t border-dashed border-defaultborder dark:border-defaultborder/10 tab-content">
-                                <div class="font-semibold  heading block text-[18px] text-center">Complete Your Billing
-                                </div>
-                                <div class="flex flex-col md:flex-row lg:flex-row gap-6">
-                                    <!-- Left Section (Form) -->
-                                    <div class="w-full left-section">
-                                        <div class="box py-6 rounded-lg shadow-lg">
+                                        <div class="box pb-6 rounded-lg shadow-lg">
 
 
                                             <div class="box-body ">
@@ -337,8 +213,9 @@
                                                                     <input
                                                                         class="w-5 h-5 rounded-full border-2 border-gray-400 
                                                                           peer-checked:border-blue-600 peer-checked:bg-blue-600 mr-2"
-                                                                        type="radio" name="creditType"
-                                                                        value="sms" class="peer" checked onchange="updateSummary()">
+                                                                        type="radio" name="creditType" value="rcs"
+                                                                        class="peer" checked
+                                                                        onchange="updateSummary()">
                                                                     <span
                                                                         class="font-semibold text-lg text-gray-900">SMS
                                                                         OTP Credits</span>
@@ -361,7 +238,8 @@
                                                                         class="w-5 h-5 rounded-full border-2 border-gray-400 
                                                                                 peer-checked:border-blue-600 peer-checked:bg-blue-600 mr-2"
                                                                         type="radio" name="creditType"
-                                                                        value="voice" class="hidden peer" onchange="updateSummary()">
+                                                                        value="whatsapp" class="hidden peer"
+                                                                        onchange="updateSummary()">
                                                                     <span
                                                                         class="font-semibold text-lg text-gray-900">Whatsapp
                                                                         OTP Credits</span>
@@ -373,6 +251,223 @@
 
                                                     </div>
                                                 </div>
+
+                                                <!-- Amount -->
+                                                <div class="mb-4" id="rcs_amount">
+                                                    <label for="rcs_amount_input"
+                                                        class="ti-form-label text-[.875rem] text-black text-xl font-semibold">Amount
+                                                        <span class="text-red-500">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-text bg:gray-900 font-semibold text-xl">
+                                                            ₹
+                                                        </div>
+                                                        <input type="number"
+                                                            class="control no-arrow w-full p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
+                                                            id="rcs_amount_input" placeholder="Enter amount"
+                                                            value="100"
+                                                            min="1"
+                                                            maxlength="8"
+                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, ''); 
+                                                            if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                            onkeyup="updateRCSSelectedPlan(this.value)" min="3" max="8">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 hidden" id="whatsapp_amount">
+                                                    <label for="whatsapp_amount_input"
+                                                        class="ti-form-label text-[.875rem] text-black text-xl font-semibold">Amount
+                                                        <span class="text-red-500">*</span></label>
+                                                    <div class="input-group">
+                                                        <div
+                                                            class="input-group-text bg:gray-900 font-semibold text-xl">
+                                                            ₹
+                                                        </div>
+                                                        <input type="text"
+                                                            class="control w-full p-2 border rounded bg-light text-dark text-xl font-bold focus:ring-0 focus:outline-none border-gray-900"
+                                                            id="whatsapp_amount_input" placeholder="Enter amount"
+                                                            value="200"
+                                                            min="1"
+                                                            maxlength="8"
+                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, ''); 
+                                                            if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                            onkeyup="updateWhatsAppSelectedPlan(this.value)">
+                                                    </div>
+                                                </div>
+
+
+                                                <div
+                                                    class="space-y-4 mt-2 w-full md:w-1/2 lg:w-1/2 mx-auto px-2 md:px-10">
+                                                    <!-- DLS SMS Volume -->
+                                                    <div
+                                                        class="flex justify-between items-center text-base font-medium">
+                                                        <p>DLS SMS Volume</p>
+                                                        <p id="dlsSmsVolume">0</p>
+                                                    </div>
+
+                                                    <!-- DLS SMS Cost -->
+                                                    <div
+                                                        class="flex justify-between items-center text-base font-medium">
+                                                        <p>DLS SMS Cost</p>
+                                                        <p id="dlsSmsCost">0</p>
+                                                    </div>
+
+                                                    <!-- Validity -->
+                                                    <div
+                                                        class="flex justify-between items-center text-base font-medium">
+                                                        <p>Validity</p>
+                                                        <p id="validity">0</p>
+                                                    </div>
+
+                                                    <!-- GST -->
+                                                    <div
+                                                        class="flex justify-between items-center text-base font-medium">
+                                                        <p>GST (18%)</p>
+                                                        <p id="gst">0</p>
+                                                    </div>
+
+                                                    <!-- Total Payable -->
+                                                    <div
+                                                        class="flex justify-between items-center text-lg font-semibold border-t pt-4">
+                                                        <p>Total Payable</p>
+                                                        <p id="totalPayable">100</p>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <!-- Buttons -->
+                                                <div class="flex justify-center items-center w-full">
+                                                    <button type="button" onclick="proceedToBillings()"
+                                                        class="bg-blue-500 w-full mt-2 text-white px-8 text-xl py-2 rounded-lg hover:bg-blue-800 transition">
+                                                        Proceed to Billing
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Section (API Request Display) -->
+                                    <div class="w-full right-section" id="rcs_msg">
+                                        <div class="box rounded-lg shadow-lg">
+                                            <div class="box-title heading text-xl font-semibold text-center">SMS OTP
+                                                Available
+                                                Plans</div>
+
+                                            <table
+                                                class="min-w-full border border-gray-900 rounded-2xl shadow-md overflow-hidden">
+                                                <thead class="bg-indigo-600 text-white">
+                                                    <tr>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
+                                                            Amount
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
+                                                            SMS Cost
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
+                                                            SMS Cost Validity
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class=" dark:bg-gray-900 font-semibold">
+                                                    @foreach ($rcs_message_plans as $plan)
+                                                        <tr id="plan-rcs-{{ $plan->plan_uuid }}"
+                                                            data-min="{{ $plan->min_amount }}"
+                                                            data-max="{{ $plan->max_amount }}"
+                                                            data-cost="{{ $plan->sms_cost }}"
+                                                            data-validity="{{ $plan->validity_months == 0 ? 'Unlimited' : $plan->validity_months . ' Months' }}"
+                                                            class="hover:bg-indigo-50 dark:hover:bg-gray-800 transition-colors">
+
+                                                            <td class="px-6 py-4 text-center border border-gray-600">
+                                                                ₹ {{ $plan->min_amount }} - {{ $plan->max_amount }}
+                                                            </td>
+                                                            <td class="px-6 py-4 text-center border border-gray-600">
+                                                                ₹ {{ $plan->sms_cost }} SMS
+                                                            </td>
+                                                            <td class="px-6 py-4 text-center border border-gray-600">
+                                                                {{ $plan->validity_months == 0 ? 'Unlimited' : $plan->validity_months . ' Months' }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="w-full hidden right-section" id="whatsapp_msg">
+                                        <div class="box rounded-lg shadow-lg">
+                                            <div class="box-title heading text-xl font-semibold text-center">WhatsApp
+                                                OTP Available
+                                                Plans</div>
+
+                                            <table
+                                                class="min-w-full border border-gray-900 rounded-2xl shadow-md overflow-hidden">
+                                                <thead class="bg-indigo-600 text-white">
+                                                    <tr>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
+                                                            Amount
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
+                                                            SMS Cost
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-center text-lg font-semibold border border-gray-600">
+                                                            SMS Cost Validity
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class=" dark:bg-gray-900 font-semibold">
+                                                    @foreach ($whatsapp_message_plans as $plan)
+                                                        <tr id="plan-whatsapp-{{ $plan->plan_uuid }}"
+                                                            data-min="{{ $plan->min_amount }}"
+                                                            data-max="{{ $plan->max_amount }}"
+                                                            data-cost="{{ $plan->sms_cost }}"
+                                                            data-validity="{{ $plan->validity_months == 0 ? 'Unlimited' : $plan->validity_months . ' Months' }}"
+                                                            class="hover:bg-indigo-50 dark:hover:bg-gray-800 transition-colors">
+
+                                                            <td class="px-6 py-4 text-center border border-gray-600">
+                                                                ₹ {{ $plan->min_amount }} - {{ $plan->max_amount }}
+                                                            </td>
+                                                            <td class="px-6 py-4 text-center border border-gray-600">
+                                                                ₹ {{ $plan->sms_cost }} SMS
+                                                            </td>
+                                                            <td class="px-6 py-4 text-center border border-gray-600">
+                                                                {{ $plan->validity_months == 0 ? 'Unlimited' : $plan->validity_months . ' Months' }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+                <!-- Start::row-1 -->
+
+                <div class="hidden" id="billing_section">
+                    <div class="max-w-[100%] mx-auto">
+                        <div class="box">
+                            <div
+                                class="p-4 border-b border-t border-dashed border-defaultborder dark:border-defaultborder/10 tab-content">
+                                <div class="font-semibold  heading block text-[18px] text-center">Complete Your Billing
+                                </div>
+                                <div class="flex flex-col md:flex-row lg:flex-row gap-6">
+                                    <!-- Left Section (Form) -->
+                                    <div class="w-full left-section">
+                                        <div class="box py-6 rounded-lg shadow-lg">
+
+
+                                            <div class="box-body ">
+
+
                                                 <div class="mb-6">
                                                     <label
                                                         class="ti-form-label text-[.875rem] text-black text-xl font-semibold">
@@ -477,8 +572,8 @@
                                                 <!-- Buttons -->
                                                 <div class="flex justify-center items-center w-full">
                                                     <button type="button"
-                                                        class="bg-blue-500 text-dark px-8 text-xl py-2 rounded-lg hover:bg-blue-800 transition">
-                                                        Next
+                                                        class="bg-blue-500 w-full text-white px-8 text-xl py-2 rounded-lg hover:bg-blue-800 transition">
+                                                        Processed To Payment
                                                     </button>
 
                                                 </div>
@@ -494,29 +589,34 @@
                                                 <div
                                                     class="space-y-4 mt-2 w-full md:w-1/2 lg:w-1/2 mx-auto px-2 md:px-10">
                                                     <!-- DLS SMS Volume -->
-                                                    <div class="flex justify-between items-center text-base font-medium">
+                                                    <div
+                                                        class="flex justify-between items-center text-base font-medium">
                                                         <p>DLS SMS Volume</p>
                                                         <p id="summary_dlsSmsVolume">₹ 0</p>
                                                     </div>
-                                                    <div class="flex justify-between items-center text-base font-medium">
+                                                    <div
+                                                        class="flex justify-between items-center text-base font-medium">
                                                         <p>Service</p>
                                                         <p id="summary_service">SMS OTP Service</p>
                                                     </div>
 
                                                     <!-- DLS SMS Cost -->
-                                                    <div class="flex justify-between items-center text-base font-medium">
+                                                    <div
+                                                        class="flex justify-between items-center text-base font-medium">
                                                         <p>DLS SMS Cost</p>
                                                         <p id="summary_dlsSmsCost">₹ 0</p>
                                                     </div>
 
                                                     <!-- Validity -->
-                                                    <div class="flex justify-between items-center text-base font-medium">
+                                                    <div
+                                                        class="flex justify-between items-center text-base font-medium">
                                                         <p>Validity</p>
                                                         <p id="summary_validity">unlimited</p>
                                                     </div>
 
                                                     <!-- GST -->
-                                                    <div class="flex justify-between items-center text-base font-medium">
+                                                    <div
+                                                        class="flex justify-between items-center text-base font-medium">
                                                         <p>GST (18%)</p>
                                                         <p id="summary_gst">₹ 0</p>
                                                     </div>
@@ -621,69 +721,143 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        let messagePlans = @json($message_plans);
-        document.addEventListener('DOMContentLoaded', () => {
-            const amountInput = document.getElementById("amount");
-            const amount = parseInt(amountInput.value) || 0;
-            updateSelectedPlan(amount);
+        let rcsMessagePlans = @json($rcs_message_plans);
+        let whatsappMessagePlans = @json($whatsapp_message_plans);
 
-            // Update plan while typing
-            amountInput.addEventListener("input", function() {
-                const amount = parseInt(this.value) || 0;
-                updateSelectedPlan(amount);
-            });
+        document.addEventListener('DOMContentLoaded', () => {
+            const amountInput = document.getElementById("rcs_amount_input");
+            const amount = parseFloat(amountInput.value) || 0;
+            updateRCSSelectedPlan(amount);
         });
 
-        function updateSelectedPlan(amount) {
+        function formatNumber(num, decimals = 0) {
+    return Number(num).toLocaleString("en-IN", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+    });
+}
+
+        function updateRCSSelectedPlan(amount) {
+
+            amount = parseFloat(amount);
+            if (isNaN(amount) || amount <= 0) return;
+
+            const GST_RATE = 0.18;
             let matchedPlan = null;
-            const dlsSmsVolume = document.getElementById("dlsSmsVolume");
-            const dlsSmsCost = document.getElementById("dlsSmsCost");
-            const validity = document.getElementById("validity");
-            const gst = document.getElementById("gst");
-            const totalPayable = document.getElementById("totalPayable");
 
-            const summary_dlsSmsVolume = document.getElementById("summary_dlsSmsVolume");
-            const summary_service = document.getElementById("summary_service");
-            const summary_dlsSmsCost = document.getElementById("summary_dlsSmsCost");
-            const summary_validity = document.getElementById("summary_validity");
-            const summary_gst = document.getElementById("summary_gst");
-            const summary_totalPayable = document.getElementById("summary_totalPayable");
-
-            messagePlans.forEach(row => {
-                const min = row.min_amount;
-                const max = row.max_amount;
+            rcsMessagePlans.forEach(row => {
+                const min = parseFloat(row.min_amount);
+                const max = parseFloat(row.max_amount);
 
                 if (amount >= min && (max === 0 || amount <= max)) {
                     matchedPlan = row;
                 }
-
-
             });
 
-            messagePlans.forEach(row => {
-                const rowEl = document.getElementById("plan-" + row.plan_uuid);
-                rowEl.classList.remove("active_row");
+            rcsMessagePlans.forEach(row => {
+                const rowEl = document.getElementById("plan-rcs-" + row.plan_uuid);
+                if (rowEl) rowEl.classList.remove("active_row");
             });
 
             if (matchedPlan) {
+                const smsCost = parseFloat(matchedPlan.sms_cost);
+                const smsVolume = (amount / smsCost).toFixed(0);
+                const validityText = matchedPlan.validity_months === 0 ?
+                    "Unlimited" :
+                    `${matchedPlan.validity_months} Months`;
+                const gstValue = (amount * GST_RATE).toFixed(2);
+                const total = (amount + amount * GST_RATE).toFixed(2);
 
-                dlsSmsVolume.textContent = `${(amount / matchedPlan.sms_cost).toFixed(2)} SMS`;
-                dlsSmsCost.textContent = `₹ ${(matchedPlan.sms_cost)}`;
-                validity.textContent =
-                    `${matchedPlan.validity_months === 0 ? "Unlimited" : matchedPlan.validity_months + " Months"}`;
-                gst.textContent = `₹ ${(amount * 0.18).toFixed(2)}`;
-                totalPayable.textContent = (amount + parseFloat(amount * 0.18)).toFixed(2);
+                // helper to set text
+                const setText = (id, value) => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = value;
+                };
+
+                // Billing section
+                setText("dlsSmsVolume", `${formatNumber(smsVolume,0)} SMS`);
+                setText("dlsSmsCost", `₹ ${smsCost.toFixed(2)}`);
+                setText("validity", validityText);
+                setText("gst", `₹ ${formatNumber(gstValue,2)}`);
+                setText("totalPayable", `₹ ${formatNumber(total,2)}`);
+
+                // Summary section
+                setText("summary_dlsSmsVolume", `${formatNumber(smsVolume,0)} SMS`);
+                setText("summary_dlsSmsCost", `₹ ${smsCost.toFixed(2)}`);
+                setText("summary_validity", validityText);
+                setText("summary_gst", `₹ ${formatNumber(gstValue,2)}`);
+                setText("summary_totalPayable", `₹ ${formatNumber(total,2)}`);
+
+                // Highlight active row
+                const selectPlanTable = document.getElementById("plan-rcs-" + matchedPlan.plan_uuid);
+                if (selectPlanTable) selectPlanTable.classList.add("active_row");
+
+                // Hide billing section
+                const billingSection = document.getElementById("billing_section");
+                if (billingSection) billingSection.classList.add("hidden");
+            } else {
+                console.warn("⚠️ No matching RCS plan for amount:", amount);
+            }
 
 
-                summary_dlsSmsVolume.textContent = `${(amount / matchedPlan.sms_cost).toFixed(2)} SMS`;
-                summary_dlsSmsCost.textContent = `₹ ${(matchedPlan.sms_cost)}`;
-                summary_validity.textContent =
-                    `${matchedPlan.validity_months === 0 ? "Unlimited" : matchedPlan.validity_months + " Months"}`;
-                summary_gst.textContent = `₹ ${(amount * 0.18).toFixed(2)}`;
-                summary_totalPayable.textContent = (amount + parseFloat(amount * 0.18)).toFixed(2);
+        }
 
-                const selectPlanTable = document.getElementById("plan-" + matchedPlan.plan_uuid);
-                selectPlanTable.classList.add("active_row");
+        function updateWhatsAppSelectedPlan(amount) {
+            amount = parseFloat(amount);
+            if (isNaN(amount) || amount <= 0) return;
+
+            let matchedPlan = null;
+            const GST_RATE = 0.18;
+            whatsappMessagePlans.forEach(row => {
+                const min = parseFloat(row.min_amount);
+                const max = parseFloat(row.max_amount);
+                if (amount >= min && (max === 0 || amount <= max)) {
+                    matchedPlan = row;
+                }
+            });
+
+            // Reset highlight
+            whatsappMessagePlans.forEach(row => {
+                const rowEl = document.getElementById(`plan-whatsapp-${row.plan_uuid}`);
+                if (rowEl) rowEl.classList.remove("active_row");
+            });
+
+            if (matchedPlan) {
+                const smsCost = parseFloat(matchedPlan.sms_cost);
+                const smsVolume = (amount / smsCost).toFixed(2);
+                const validityText = matchedPlan.validity_months === 0 ?
+                    "Unlimited" :
+                    `${matchedPlan.validity_months} Months`;
+                const gstValue = (amount * GST_RATE).toFixed(2);
+                const total = (amount + amount * GST_RATE).toFixed(2);
+
+                // Small helper to set text if element exists
+                const setText = (id, value) => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = value;
+                };
+
+                // Billing section
+                setText("dlsSmsVolume", `${formatNumber(smsVolume,0)} SMS`);
+                setText("dlsSmsCost", `₹ ${smsCost.toFixed(2)}`);
+                setText("validity", validityText);
+                setText("gst", `₹ ${formatNumber(gstValue,2)}`);
+                setText("totalPayable", `₹ ${formatNumber(total,2)}`);
+
+                // Summary section
+                setText("summary_dlsSmsVolume", `${formatNumber(smsVolume,0)} SMS`);
+                setText("summary_dlsSmsCost", `₹ ${smsCost.toFixed(2)}`);
+                setText("summary_validity", validityText);
+                setText("summary_gst", `₹ ${formatNumber(gstValue,2)}`);
+                setText("summary_totalPayable", `₹ ${formatNumber(total,2)}`);
+
+                // Highlight selected row
+                const selectPlanTable = document.getElementById(`plan-whatsapp-${matchedPlan.plan_uuid}`);
+                if (selectPlanTable) selectPlanTable.classList.add("active_row");
+
+                // Hide billing section
+                const billingSection = document.getElementById("billing_section");
+                if (billingSection) billingSection.classList.add("hidden");
             }
         }
 
@@ -698,12 +872,36 @@
         function updateSummary() {
             const selectedCreditType = document.querySelector('input[name="creditType"]:checked').value;
             const summary_service = document.getElementById("summary_service");
+            const rcs_msg = document.getElementById("rcs_msg");
+            const whatsapp_msg = document.getElementById("whatsapp_msg");
+            const rcs_amount = document.getElementById("rcs_amount");
+            const whatsapp_amount = document.getElementById("whatsapp_amount");
+            const rcs_amount_input = document.getElementById("rcs_amount_input");
+            const whatsapp_amount_input = document.getElementById("whatsapp_amount_input");
 
-            if (selectedCreditType === "sms") {
+            if (selectedCreditType === "rcs") {
                 summary_service.textContent = "SMS OTP Service";
-            } else if (selectedCreditType === "voice") {
+                rcs_msg.classList.remove("hidden");
+                whatsapp_msg.classList.add("hidden");
+                rcs_amount.classList.remove("hidden");
+                whatsapp_amount.classList.add("hidden");
+
+                console.log(rcs_amount_input.value)
+                updateRCSSelectedPlan(rcs_amount_input.value);
+            } else if (selectedCreditType === "whatsapp") {
                 summary_service.textContent = "Whatsapp OTP Service";
+                rcs_msg.classList.add("hidden");
+                whatsapp_msg.classList.remove("hidden");
+                rcs_amount.classList.add("hidden");
+                whatsapp_amount.classList.remove("hidden");
+
+
+                updateWhatsAppSelectedPlan(whatsapp_amount_input.value);
             }
+        }
+
+        function proceedToBillings() {
+            document.getElementById("billing_section").classList.remove("hidden");
         }
     </script>
 
